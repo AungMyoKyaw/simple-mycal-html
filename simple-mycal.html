@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/mycal@latest/dist/client/mycal.min.js"></script>
+    <title>Myanmar Calendar</title>
+    <style>
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1rem;
+      }
+      .calendar-cell {
+        background: #fff5e1;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .calendar-cell:hover {
+        background: #ffebcd;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .header div {
+        flex: 1;
+      }
+      .header input {
+        max-width: 200px;
+      }
+      .header button {
+        margin: 0 0.5rem;
+      }
+      .calendar-cell .date {
+        font-weight: bold;
+        color: #4a5568;
+      }
+      .calendar-cell .myanmar-date {
+        font-size: 0.875rem;
+        color: #718096;
+      }
+      .calendar-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      @media (max-width: 640px) {
+        .calendar-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen"
+  >
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl">
+      <div class="header">
+        <button
+          id="prevMonth"
+          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
+          &lt; Prev
+        </button>
+        <div class="flex justify-center items-center">
+          <input type="month" id="monthPicker" class="border rounded p-2" />
+          <button
+            id="goToMonth"
+            class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 ml-2"
+          >
+            Go
+          </button>
+        </div>
+        <button
+          id="nextMonth"
+          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
+          Next &gt;
+        </button>
+      </div>
+      <h1 id="calendarTitle" class="calendar-title"></h1>
+      <div id="calendar" class="calendar-grid"></div>
+    </div>
+
+    <script>
+      const calendarElement = document.getElementById("calendar");
+      const calendarTitle = document.getElementById("calendarTitle");
+      const prevMonthButton = document.getElementById("prevMonth");
+      const nextMonthButton = document.getElementById("nextMonth");
+      const monthPicker = document.getElementById("monthPicker");
+      const goToMonthButton = document.getElementById("goToMonth");
+
+      let currentYear = new Date().getFullYear();
+      let currentMonth = new Date().getMonth();
+
+      monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
+
+      const renderCalendar = (year, month) => {
+        calendarElement.innerHTML = "";
+        const monthNames = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        calendarTitle.innerText = `${monthNames[month]} ${year}`;
+
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDay = new Date(year, month, 1).getDay();
+
+        // Fill initial empty cells
+        for (let i = 0; i < firstDay; i++) {
+          const cell = document.createElement("div");
+          cell.className = "calendar-cell";
+          calendarElement.appendChild(cell);
+        }
+
+        // Fill the days of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+          const cell = document.createElement("div");
+          cell.className = "calendar-cell";
+
+          const date = new Date(year, month, day);
+          const dateString = `${month + 1}/${day}/${year}`;
+          const myanmarDate = new mycal(dateString);
+
+          cell.innerHTML = `
+          <div class="date">${date.getDate()}</div>
+          <div class="myanmar-date">
+            <p class="text-xs">${myanmarDate.month.my}</p>
+            <p class="text-xs">${myanmarDate.day.mp.my}</p>
+            <p class="text-xs">${myanmarDate.day.fd.my}</p>
+            <p class="text-xs">${myanmarDate.year.my}</p>
+          </div>
+        `;
+
+          calendarElement.appendChild(cell);
+        }
+      };
+
+      prevMonthButton.addEventListener("click", () => {
+        currentMonth--;
+        if (currentMonth < 0) {
+          currentMonth = 11;
+          currentYear--;
+        }
+        monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
+        renderCalendar(currentYear, currentMonth);
+      });
+
+      nextMonthButton.addEventListener("click", () => {
+        currentMonth++;
+        if (currentMonth > 11) {
+          currentMonth = 0;
+          currentYear++;
+        }
+        monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
+        renderCalendar(currentYear, currentMonth);
+      });
+
+      goToMonthButton.addEventListener("click", () => {
+        const [year, month] = monthPicker.value.split("-").map(Number);
+        currentYear = year;
+        currentMonth = month - 1;
+        renderCalendar(currentYear, currentMonth);
+      });
+
+      renderCalendar(currentYear, currentMonth);
+    </script>
+  </body>
+</html>
