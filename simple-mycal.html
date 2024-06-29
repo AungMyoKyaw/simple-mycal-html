@@ -34,7 +34,7 @@
     </style>
   </head>
   <body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
-    <main class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl">
+    <main class="bg-white p-6 rounded-lg shadow-lg w-full max-w-6xl">
       <header class="flex flex-row justify-between items-center mb-4">
         <button id="prevMonth" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 mb-2 sm:mb-0 select-none">&lt;</button>
         <div class="flex justify-center items-center mb-2 sm:mb-0 select-none">
@@ -43,6 +43,7 @@
         <button id="nextMonth" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 select-none">&gt;</button>
       </header>
       <h1 id="calendarTitle" class="text-2xl font-bold text-center mb-4 select-none"></h1>
+      <div id="weekdayNames" class="grid grid-cols-7 gap-2 sm:gap-4 text-center font-bold"></div>
       <section id="calendar" class="grid grid-cols-7 gap-2 sm:gap-4 text-center"></section>
       <div class="flex justify-center mt-4">
         <button id="goToToday" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 hidden select-none">Go to Today</button>
@@ -72,6 +73,7 @@
         const closeModal = document.getElementById("closeModal");
         const modalDate = document.getElementById("modalDate");
         const modalMyanmarDate = document.getElementById("modalMyanmarDate");
+        const weekdayNamesElement = document.getElementById("weekdayNames");
 
         let currentYear = new Date().getFullYear();
         let currentMonth = new Date().getMonth();
@@ -86,6 +88,7 @@
           const daysInMonth = new Date(year, month + 1, 0).getDate();
           const firstDay = new Date(year, month, 1).getDay();
 
+          fillWeekdayNames();
           fillInitialEmptyCells(firstDay);
           fillDaysOfMonth(year, month, daysInMonth);
 
@@ -93,6 +96,17 @@
             goToTodayButton.classList.remove("hidden");
           } else {
             goToTodayButton.classList.add("hidden");
+          }
+        }
+
+        function fillWeekdayNames() {
+          const weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+          weekdayNamesElement.innerHTML = "";
+          for (const name of weekdayNames) {
+            const cell = document.createElement("div");
+            cell.className = "p-2";
+            cell.innerText = name;
+            weekdayNamesElement.appendChild(cell);
           }
         }
 
@@ -128,15 +142,13 @@
           const myanmarDate = new mycal(dateString);
 
           cell.innerHTML = `
-        <div class="date text-center text-lg font-bold">${day}</div>
-        <div class="myanmar-date mt-2 leading-loose">
-            <p class="text-xs mb-1">${myanmarDate.month.my}</p>
-            <p class="text-xs mb-1">${myanmarDate.day.mp.my}</p>
-            <p class="text-xs mb-1">${myanmarDate.day.fd.my}</p>
-            <p class="text-xs mb-1">${myanmarDate.weekday.my}</p>
-            <p class="text-xs mb-1">${myanmarDate.year.my}</p>
-        </div>
-      `;
+            <div class="date text-center text-lg font-bold">${day}</div>
+            <div class="myanmar-date mt-2 leading-loose">
+                <p class="text-xs mb-1">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
+                <p class="text-xs mb-1">${myanmarDate.day.fd.my}</p>
+                <p class="text-xs mb-1">${myanmarDate.year.my}</p>
+            </div>
+          `;
 
           cell.addEventListener("click", () => {
             showModal(myanmarDate, dateString);
@@ -148,13 +160,16 @@
         function showModal(myanmarDate, dateString) {
           modalDate.innerText = dateString;
           modalMyanmarDate.innerHTML = `
-        <p>${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my}ရက် ${myanmarDate.weekday.my}နေ့ ${myanmarDate.year.my}</p>
-      `;
+            <p>${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my}ရက် ${myanmarDate.weekday.my}နေ့ ${myanmarDate.year.my}</p>
+          `;
           myModal.classList.remove("hidden");
         }
 
         function getMonthName(month) {
-          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+          ];
           return monthNames[month];
         }
 
@@ -176,8 +191,7 @@
           currentMonth++;
           if (currentMonth > 11) {
             currentMonth = 0;
-            current;
-            Year++;
+            currentYear++;
           }
           updateMonthPicker();
           renderCalendar(currentYear, currentMonth);
