@@ -135,7 +135,7 @@
             ? "bg-blue-100 p-4 rounded-lg text-center shadow-md min-[100px] flex flex-col justify-between hover:bg-blue-200 transition duration-300 cursor-pointer select-none"
             : "bg-orange-50 p-4 rounded-lg text-center shadow-md min-[100px] w-1/7 flex flex-col justify-between hover:bg-orange-200 transition duration-300 cursor-pointer select-none";
 
-          cell.className = cellClass;
+          cell.className = cellClass + " flex justify-center items-center";
 
           const date = new Date(year, month, day);
           const dateString = `${month + 1}/${day}/${year}`;
@@ -144,9 +144,9 @@
           cell.innerHTML = `
             <div class="date text-center text-lg font-bold">${day}</div>
             <div class="myanmar-date mt-2 leading-loose">
-                <p class="text-xs mb-1">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
-                <p class="text-xs mb-1">${myanmarDate.day.fd.my}</p>
-                <p class="text-xs mb-1">${myanmarDate.year.my}</p>
+          <p class="text-xs mb-1">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
+          <p class="text-xs mb-1">${myanmarDate.day.fd.my}</p>
+          <p class="text-xs mb-1">${myanmarDate.year.my}</p>
             </div>
           `;
 
@@ -166,10 +166,7 @@
         }
 
         function getMonthName(month) {
-          const monthNames = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-          ];
+          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
           return monthNames[month];
         }
 
