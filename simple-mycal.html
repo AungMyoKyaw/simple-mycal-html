@@ -36,19 +36,15 @@
       .header div {
         flex: 1;
       }
-      .header input {
-        max-width: 200px;
+      .nav-button {
+        background-color: #4a90e2;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        transition: background-color 0.3s;
       }
-      .header button {
-        margin: 0 0.5rem;
-      }
-      .calendar-cell .date {
-        font-weight: bold;
-        color: #4a5568;
-      }
-      .calendar-cell .myanmar-date {
-        font-size: 0.875rem;
-        color: #718096;
+      .nav-button:hover {
+        background-color: #357abd;
       }
       .calendar-title {
         font-size: 1.5rem;
@@ -64,62 +60,62 @@
     </style>
   </head>
   <body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl">
-      <div class="header">
-        <button id="prevMonth" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">&lt; Prev</button>
+    <main class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl">
+      <header class="header">
+        <button id="prevMonth" class="nav-button">&lt; Prev</button>
         <div class="flex justify-center items-center">
           <input type="month" id="monthPicker" class="border rounded p-2" />
-          <button id="goToMonth" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 ml-2">Go</button>
+          <button id="goToMonth" class="nav-button ml-2">Go</button>
         </div>
-        <button id="nextMonth" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Next &gt;</button>
-      </div>
+        <button id="nextMonth" class="nav-button">Next &gt;</button>
+      </header>
       <h1 id="calendarTitle" class="calendar-title"></h1>
-      <div id="calendar" class="calendar-grid"></div>
-    </div>
-
+      <section id="calendar" class="calendar-grid"></section>
+    </main>
     <script>
-      const calendarElement = document.getElementById("calendar");
-      const calendarTitle = document.getElementById("calendarTitle");
-      const prevMonthButton = document.getElementById("prevMonth");
-      const nextMonthButton = document.getElementById("nextMonth");
-      const monthPicker = document.getElementById("monthPicker");
-      const goToMonthButton = document.getElementById("goToMonth");
+      document.addEventListener("DOMContentLoaded", () => {
+        const calendarElement = document.getElementById("calendar");
+        const calendarTitle = document.getElementById("calendarTitle");
+        const prevMonthButton = document.getElementById("prevMonth");
+        const nextMonthButton = document.getElementById("nextMonth");
+        const monthPicker = document.getElementById("monthPicker");
+        const goToMonthButton = document.getElementById("goToMonth");
 
-      let currentYear = new Date().getFullYear();
-      let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        let currentMonth = new Date().getMonth();
 
-      monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
+        monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
 
-      const renderCalendar = (year, month) => {
-        calendarElement.innerHTML = "";
-        const monthNames = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ];
-        calendarTitle.innerText = `${monthNames[month]} ${year}`;
+        function renderCalendar(year, month) {
+          calendarElement.innerHTML = "";
+          calendarTitle.innerText = `${getMonthName(month)} ${year}`;
 
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const firstDay = new Date(year, month, 1).getDay();
+          const daysInMonth = new Date(year, month + 1, 0).getDate();
+          const firstDay = new Date(year, month, 1).getDay();
 
-        // Fill initial empty cells
-        for (let i = 0; i < firstDay; i++) {
-          const cell = document.createElement("div");
-          cell.className = "calendar-cell";
-          calendarElement.appendChild(cell);
+          fillInitialEmptyCells(firstDay);
+          fillDaysOfMonth(year, month, daysInMonth);
         }
 
-        // Fill the days of the month
-        for (let day = 1; day <= daysInMonth; day++) {
+        function fillInitialEmptyCells(firstDay) {
+          for (let i = 0; i < firstDay; i++) {
+            calendarElement.appendChild(createEmptyCell());
+          }
+        }
+
+        function fillDaysOfMonth(year, month, daysInMonth) {
+          for (let day = 1; day <= daysInMonth; day++) {
+            calendarElement.appendChild(createCalendarCell(year, month, day));
+          }
+        }
+
+        function createEmptyCell() {
+          const cell = document.createElement("div");
+          cell.className = "calendar-cell";
+          return cell;
+        }
+
+        function createCalendarCell(year, month, day) {
           const cell = document.createElement("div");
           cell.className = "calendar-cell";
 
@@ -128,48 +124,69 @@
           const myanmarDate = new mycal(dateString);
 
           cell.innerHTML = `
-          <div class="date">${date.getDate()}</div>
-          <div class="myanmar-date">
-            <p class="text-xs">${myanmarDate.month.my}</p>
-            <p class="text-xs">${myanmarDate.day.mp.my}</p>
-            <p class="text-xs">${myanmarDate.day.fd.my}</p>
-            <p class="text-xs">${myanmarDate.weekday.my}</p>
-            <p class="text-xs">${myanmarDate.year.my}</p>
-          </div>
+            <div class="date">${day}</div>
+            <div class="myanmar-date">
+                <p class="text-xs">${myanmarDate.month.my}</p>
+                <p class="text-xs">${myanmarDate.day.mp.my}</p>
+                <p class="text-xs">${myanmarDate.day.fd.my}</p>
+                <p class="text-xs">${myanmarDate.weekday.my}</p>
+                <p class="text-xs">${myanmarDate.year.my}</p>
+            </div>
         `;
-
-          calendarElement.appendChild(cell);
+          return cell;
         }
-      };
 
-      prevMonthButton.addEventListener("click", () => {
-        currentMonth--;
-        if (currentMonth < 0) {
-          currentMonth = 11;
-          currentYear--;
+        function getMonthName(month) {
+          const monthNames = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ];
+          return monthNames[month];
         }
-        monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
+
+        function updateMonthPicker() {
+          monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
+        }
+
+        prevMonthButton.addEventListener("click", () => {
+          currentMonth--;
+          if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+          }
+          updateMonthPicker();
+          renderCalendar(currentYear, currentMonth);
+        });
+
+        nextMonthButton.addEventListener("click", () => {
+          currentMonth++;
+          if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+          }
+          updateMonthPicker();
+          renderCalendar(currentYear, currentMonth);
+        });
+
+        goToMonthButton.addEventListener("click", () => {
+          const [year, month] = monthPicker.value.split("-").map(Number);
+          currentYear = year;
+          currentMonth = month - 1;
+          renderCalendar(currentYear, currentMonth);
+        });
+
         renderCalendar(currentYear, currentMonth);
       });
-
-      nextMonthButton.addEventListener("click", () => {
-        currentMonth++;
-        if (currentMonth > 11) {
-          currentMonth = 0;
-          currentYear++;
-        }
-        monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
-        renderCalendar(currentYear, currentMonth);
-      });
-
-      goToMonthButton.addEventListener("click", () => {
-        const [year, month] = monthPicker.value.split("-").map(Number);
-        currentYear = year;
-        currentMonth = month - 1;
-        renderCalendar(currentYear, currentMonth);
-      });
-
-      renderCalendar(currentYear, currentMonth);
     </script>
   </body>
 </html>
