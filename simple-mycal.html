@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <!-- Favicon links -->
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
@@ -14,8 +13,7 @@
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="msapplication-TileImage" content="/favicon/mstile-150x150.png" />
     <meta name="theme-color" content="#ffffff" />
-
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/mycal@latest/dist/client/mycal.min.js"></script>
     <title>Myanmar Calendar</title>
     <style>
@@ -28,31 +26,18 @@
   </head>
   <body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
     <main class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl">
-      <header class="flex flex-col sm:flex-row justify-between items-center mb-4">
-        <button
-          id="prevMonth"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 mb-2 sm:mb-0"
-        >
-          &lt; Prev
-        </button>
-        <div class="flex justify-center items-center mb-2 sm:mb-0">
-          <input type="month" id="monthPicker" class="border rounded p-2" />
-          <button
-            id="goToMonth"
-            class="bg-blue-500 text-white py-2 px-4 rounded ml-2 hover:bg-blue-700 transition duration-300"
-          >
-            Go
-          </button>
+      <header class="flex flex-row justify-between items-center mb-4">
+        <button id="prevMonth" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 mb-2 sm:mb-0 select-none">&lt;</button>
+        <div class="flex justify-center items-center mb-2 sm:mb-0 select-none">
+          <input type="month" id="monthPicker" class="border rounded p-2 select-none" />
         </div>
-        <button
-          id="nextMonth"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-        >
-          Next &gt;
-        </button>
+        <button id="nextMonth" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 select-none">&gt;</button>
       </header>
-      <h1 id="calendarTitle" class="text-2xl font-bold text-center mb-4"></h1>
+      <h1 id="calendarTitle" class="text-2xl font-bold text-center mb-4 select-none"></h1>
       <section id="calendar" class="grid grid-cols-7 gap-2 sm:gap-4 text-center"></section>
+      <div class="flex justify-center mt-4">
+        <button id="goToToday" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 hidden select-none">Go to Today</button>
+      </div>
     </main>
 
     <!-- Modal -->
@@ -61,12 +46,7 @@
         <div id="modalContent" class="text-center"></div>
         <h2 class="text-xl font-bold mb-4 text-center">Myanmar Date Details for <span id="modalDate"></span></h2>
         <div id="modalMyanmarDate" class="text-xl leading-relaxed mb-4 flex flex-col items-center"></div>
-        <button
-          id="closeModal"
-          class="bg-blue-500 text-white py-2 px-4 rounded mt-4 mx-auto block hover:bg-blue-700 transition duration-300"
-        >
-          Close
-        </button>
+        <button id="closeModal" class="bg-blue-500 text-white py-2 px-4 rounded mt-4 mx-auto block hover:bg-blue-700 transition duration-300">Close</button>
       </div>
     </div>
 
@@ -77,7 +57,7 @@
         const prevMonthButton = document.getElementById("prevMonth");
         const nextMonthButton = document.getElementById("nextMonth");
         const monthPicker = document.getElementById("monthPicker");
-        const goToMonthButton = document.getElementById("goToMonth");
+        const goToTodayButton = document.getElementById("goToToday");
         const myModal = document.getElementById("myModal");
         const modalContent = document.getElementById("modalContent");
         const closeModal = document.getElementById("closeModal");
@@ -99,6 +79,12 @@
 
           fillInitialEmptyCells(firstDay);
           fillDaysOfMonth(year, month, daysInMonth);
+
+          if (year !== today.getFullYear() || month !== today.getMonth()) {
+            goToTodayButton.classList.remove("hidden");
+          } else {
+            goToTodayButton.classList.add("hidden");
+          }
         }
 
         function fillInitialEmptyCells(firstDay) {
@@ -115,8 +101,7 @@
 
         function createEmptyCell() {
           const cell = document.createElement("div");
-          cell.className =
-            "bg-orange-100 p-4 rounded-lg text-center shadow-md min-h-[100px] flex flex-col justify-between";
+          cell.className = "bg-orange-50 p-4 rounded-lg text-center shadow-md flex flex-col justify-between";
           return cell;
         }
 
@@ -124,8 +109,8 @@
           const cell = document.createElement("div");
           const isToday = year === today.getFullYear() && month === today.getMonth() && day === today.getDate();
           const cellClass = isToday
-            ? "bg-blue-100 p-4 rounded-lg text-center shadow-md min-[100px] flex flex-col justify-between hover:bg-blue-200 transition duration-300 cursor-pointer"
-            : "bg-orange-100 p-4 rounded-lg text-center shadow-md min-[100px] w-1/7 flex flex-col justify-between hover:bg-orange-200 transition duration-300 cursor-pointer";
+            ? "bg-blue-100 p-4 rounded-lg text-center shadow-md min-[100px] flex flex-col justify-between hover:bg-blue-200 transition duration-300 cursor-pointer select-none"
+            : "bg-orange-50 p-4 rounded-lg text-center shadow-md min-[100px] w-1/7 flex flex-col justify-between hover:bg-orange-200 transition duration-300 cursor-pointer select-none";
 
           cell.className = cellClass;
 
@@ -134,50 +119,33 @@
           const myanmarDate = new mycal(dateString);
 
           cell.innerHTML = `
-          <div class="date text-center text-lg font-bold">${day}</div>
-          <div class="myanmar-date mt-2">
-              <p class="text-xs">${myanmarDate.month.my}</p>
-              <p class="text-xs">${myanmarDate.day.mp.my}</p>
-              <p class="text-xs">${myanmarDate.day.fd.my}</p>
-              <p class="text-xs">${myanmarDate.weekday.my}</p>
-              <p class="text-xs">${myanmarDate.year.my}</p>
-          </div>
-        `;
+        <div class="date text-center text-lg font-bold">${day}</div>
+        <div class="myanmar-date mt-2 leading-loose">
+            <p class="text-xs mb-1">${myanmarDate.month.my}</p>
+            <p class="text-xs mb-1">${myanmarDate.day.mp.my}</p>
+            <p class="text-xs mb-1">${myanmarDate.day.fd.my}</p>
+            <p class="text-xs mb-1">${myanmarDate.weekday.my}</p>
+            <p class="text-xs mb-1">${myanmarDate.year.my}</p>
+        </div>
+      `;
 
           cell.addEventListener("click", () => {
-            showModal(myanmarDate, day);
+            showModal(myanmarDate, dateString);
           });
 
           return cell;
         }
 
-        function showModal(myanmarDate, day) {
-          modalDate.innerText = day;
+        function showModal(myanmarDate, dateString) {
+          modalDate.innerText = dateString;
           modalMyanmarDate.innerHTML = `
-          <p>${myanmarDate.month.my}</p>
-          <p>${myanmarDate.day.mp.my}</p>
-          <p>${myanmarDate.day.fd.my}</p>
-          <p>${myanmarDate.weekday.my}</p>
-          <p>${myanmarDate.year.my}</p>
-        `;
+        <p>${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my}ရက် ${myanmarDate.weekday.my}နေ့ ${myanmarDate.year.my}</p>
+      `;
           myModal.classList.remove("hidden");
         }
 
         function getMonthName(month) {
-          const monthNames = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-          ];
+          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
           return monthNames[month];
         }
 
@@ -199,16 +167,24 @@
           currentMonth++;
           if (currentMonth > 11) {
             currentMonth = 0;
-            currentYear++;
+            current;
+            Year++;
           }
           updateMonthPicker();
           renderCalendar(currentYear, currentMonth);
         });
 
-        goToMonthButton.addEventListener("click", () => {
+        monthPicker.addEventListener("change", () => {
           const [year, month] = monthPicker.value.split("-").map(Number);
           currentYear = year;
           currentMonth = month - 1;
+          renderCalendar(currentYear, currentMonth);
+        });
+
+        goToTodayButton.addEventListener("click", () => {
+          currentYear = today.getFullYear();
+          currentMonth = today.getMonth();
+          updateMonthPicker();
           renderCalendar(currentYear, currentMonth);
         });
 
