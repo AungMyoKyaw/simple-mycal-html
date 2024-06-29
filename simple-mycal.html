@@ -7,71 +7,57 @@
     <script src="https://unpkg.com/mycal@latest/dist/client/mycal.min.js"></script>
     <title>Myanmar Calendar</title>
     <style>
-      .calendar-grid {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 1rem;
-      }
-      .calendar-cell {
-        background: #fff5e1;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: background-color 0.3s;
-        min-height: 100px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      .calendar-cell:hover {
-        background: #ffebcd;
-      }
-      .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
-      }
-      .header div {
-        flex: 1;
-      }
-      .nav-button {
-        background-color: #4a90e2;
-        color: #fff;
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        transition: background-color 0.3s;
-      }
-      .nav-button:hover {
-        background-color: #357abd;
-      }
-      .calendar-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 1rem;
-      }
       @media (max-width: 640px) {
-        .calendar-grid {
-          grid-template-columns: repeat(2, 1fr);
+        .myanmar-date {
+          display: none;
         }
       }
     </style>
   </head>
   <body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
     <main class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl">
-      <header class="header">
-        <button id="prevMonth" class="nav-button">&lt; Prev</button>
-        <div class="flex justify-center items-center">
+      <header class="flex flex-col sm:flex-row justify-between items-center mb-4">
+        <button
+          id="prevMonth"
+          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 mb-2 sm:mb-0"
+        >
+          &lt; Prev
+        </button>
+        <div class="flex justify-center items-center mb-2 sm:mb-0">
           <input type="month" id="monthPicker" class="border rounded p-2" />
-          <button id="goToMonth" class="nav-button ml-2">Go</button>
+          <button
+            id="goToMonth"
+            class="bg-blue-500 text-white py-2 px-4 rounded ml-2 hover:bg-blue-700 transition duration-300"
+          >
+            Go
+          </button>
         </div>
-        <button id="nextMonth" class="nav-button">Next &gt;</button>
+        <button
+          id="nextMonth"
+          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+        >
+          Next &gt;
+        </button>
       </header>
-      <h1 id="calendarTitle" class="calendar-title"></h1>
-      <section id="calendar" class="calendar-grid"></section>
+      <h1 id="calendarTitle" class="text-2xl font-bold text-center mb-4"></h1>
+      <section id="calendar" class="grid grid-cols-7 gap-2 sm:gap-4 text-center"></section>
     </main>
+
+    <!-- Modal -->
+    <div id="myModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4 sm:mx-auto">
+        <div id="modalContent" class="text-center"></div>
+        <h2 class="text-xl font-bold mb-4 text-center">Myanmar Date Details for <span id="modalDate"></span></h2>
+        <div id="modalMyanmarDate" class="text-xl leading-relaxed mb-4 flex flex-col items-center"></div>
+        <button
+          id="closeModal"
+          class="bg-blue-500 text-white py-2 px-4 rounded mt-4 mx-auto block hover:bg-blue-700 transition duration-300"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const calendarElement = document.getElementById("calendar");
@@ -80,9 +66,15 @@
         const nextMonthButton = document.getElementById("nextMonth");
         const monthPicker = document.getElementById("monthPicker");
         const goToMonthButton = document.getElementById("goToMonth");
+        const myModal = document.getElementById("myModal");
+        const modalContent = document.getElementById("modalContent");
+        const closeModal = document.getElementById("closeModal");
+        const modalDate = document.getElementById("modalDate");
+        const modalMyanmarDate = document.getElementById("modalMyanmarDate");
 
         let currentYear = new Date().getFullYear();
         let currentMonth = new Date().getMonth();
+        const today = new Date();
 
         monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
 
@@ -111,29 +103,52 @@
 
         function createEmptyCell() {
           const cell = document.createElement("div");
-          cell.className = "calendar-cell";
+          cell.className =
+            "bg-orange-100 p-4 rounded-lg text-center shadow-md min-h-[100px] flex flex-col justify-between";
           return cell;
         }
 
         function createCalendarCell(year, month, day) {
           const cell = document.createElement("div");
-          cell.className = "calendar-cell";
+          const isToday = year === today.getFullYear() && month === today.getMonth() && day === today.getDate();
+          const cellClass = isToday
+            ? "bg-blue-100 p-4 rounded-lg text-center shadow-md min-[100px] flex flex-col justify-between hover:bg-blue-200 transition duration-300 cursor-pointer"
+            : "bg-orange-100 p-4 rounded-lg text-center shadow-md min-[100px] w-1/7 flex flex-col justify-between hover:bg-orange-200 transition duration-300 cursor-pointer";
+
+          cell.className = cellClass;
 
           const date = new Date(year, month, day);
           const dateString = `${month + 1}/${day}/${year}`;
           const myanmarDate = new mycal(dateString);
 
           cell.innerHTML = `
-            <div class="date">${day}</div>
-            <div class="myanmar-date">
-                <p class="text-xs">${myanmarDate.month.my}</p>
-                <p class="text-xs">${myanmarDate.day.mp.my}</p>
-                <p class="text-xs">${myanmarDate.day.fd.my}</p>
-                <p class="text-xs">${myanmarDate.weekday.my}</p>
-                <p class="text-xs">${myanmarDate.year.my}</p>
-            </div>
+          <div class="date text-center text-lg font-bold">${day}</div>
+          <div class="myanmar-date mt-2">
+              <p class="text-xs">${myanmarDate.month.my}</p>
+              <p class="text-xs">${myanmarDate.day.mp.my}</p>
+              <p class="text-xs">${myanmarDate.day.fd.my}</p>
+              <p class="text-xs">${myanmarDate.weekday.my}</p>
+              <p class="text-xs">${myanmarDate.year.my}</p>
+          </div>
         `;
+
+          cell.addEventListener("click", () => {
+            showModal(myanmarDate, day);
+          });
+
           return cell;
+        }
+
+        function showModal(myanmarDate, day) {
+          modalDate.innerText = day;
+          modalMyanmarDate.innerHTML = `
+          <p>${myanmarDate.month.my}</p>
+          <p>${myanmarDate.day.mp.my}</p>
+          <p>${myanmarDate.day.fd.my}</p>
+          <p>${myanmarDate.weekday.my}</p>
+          <p>${myanmarDate.year.my}</p>
+        `;
+          myModal.classList.remove("hidden");
         }
 
         function getMonthName(month) {
@@ -183,6 +198,10 @@
           currentYear = year;
           currentMonth = month - 1;
           renderCalendar(currentYear, currentMonth);
+        });
+
+        closeModal.addEventListener("click", () => {
+          myModal.classList.add("hidden");
         });
 
         renderCalendar(currentYear, currentMonth);
