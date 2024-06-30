@@ -185,6 +185,8 @@
           modalDate.innerText = dateString;
           const weekDayNumber = new Date(dateString).getDay() + 1;
           const dateNumber = new Date(dateString).getDate();
+          const yearNumber = new Date(dateString).getFullYear();
+          const monthNumber = new Date(dateString).getMonth() + 1;
           modalMyanmarDate.innerHTML = `
             <p>${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my}ရက် ${myanmarDate.weekday.my}နေ့ ${myanmarDate.year.my}</p>
           `;
@@ -193,6 +195,10 @@
           const numero = baydin.numerology(dateNumber);
           const numeroText = baydin.numFormat(numero);
           modalMyanmarDate.innerHTML += `<p>${numeroText}ဂဏန်း သမား</p>`;
+          const chineseZodiac = baydin.chineseZodiac(yearNumber);
+          modalMyanmarDate.innerHTML += `<p>${chineseZodiac.signInBurmese}နှစ်</p>`;
+          const zodiac = baydin.zodiac(dateNumber, monthNumber);
+          modalMyanmarDate.innerHTML += `<p>${zodiac.sign_mm}ရာသီ</p>`;
           myModal.classList.add("modal-enter");
           setTimeout(() => {
             myModal.classList.remove("modal-enter");
