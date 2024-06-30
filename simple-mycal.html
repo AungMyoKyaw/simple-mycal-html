@@ -187,17 +187,17 @@
           const yearNumber = new Date(dateString).getFullYear();
           const monthNumber = new Date(dateString).getMonth() + 1;
           modalMyanmarDate.innerHTML = `
-            <p>${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my}ရက် ${myanmarDate.weekday.my}နေ့ ${myanmarDate.year.my}</p>
+            <p class="text-center">${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my}ရက် ${myanmarDate.weekday.my}နေ့ ${myanmarDate.year.my}</p>
           `;
           const mahb = baydin.maharbote(myanmarDate.year.en, weekDayNumber);
-          modalMyanmarDate.innerHTML += `<p>${mahb}ဖွား</p>`;
+          modalMyanmarDate.innerHTML += `<p class="text-center">${mahb}ဖွား</p>`;
           const numero = baydin.numerology(dateNumber);
           const numeroText = baydin.numFormat(numero);
-          modalMyanmarDate.innerHTML += `<p>${numeroText}ဂဏန်း သမား</p>`;
+          modalMyanmarDate.innerHTML += `<p class="text-center">${numeroText}ဂဏန်း သမား</p>`;
           const chineseZodiac = baydin.chineseZodiac(yearNumber);
-          modalMyanmarDate.innerHTML += `<p>${chineseZodiac.signInBurmese}နှစ်</p>`;
+          modalMyanmarDate.innerHTML += `<p class="text-center">${chineseZodiac.signInBurmese}နှစ်</p>`;
           const zodiac = baydin.zodiac(dateNumber, monthNumber);
-          modalMyanmarDate.innerHTML += `<p>${zodiac.sign_mm}ရာသီ</p>`;
+          modalMyanmarDate.innerHTML += `<p class="text-center">${zodiac.sign_mm}ရာသီ</p>`;
           myModal.classList.add("modal-enter");
           setTimeout(() => {
             myModal.classList.remove("modal-enter");
