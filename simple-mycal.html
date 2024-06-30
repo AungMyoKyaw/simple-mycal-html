@@ -24,6 +24,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/mycal@latest/dist/client/mycal.min.js"></script>
+    <script src="https://unpkg.com/baydin@latest/dist/client/baydin.min.js"></script>
     <title>Myanmar Calendar</title>
     <style>
       @media (max-width: 640px) {
@@ -182,9 +183,16 @@
 
         function showModal(myanmarDate, dateString) {
           modalDate.innerText = dateString;
+          const weekDayNumber = new Date(dateString).getDay() + 1;
+          const dateNumber = new Date(dateString).getDate();
           modalMyanmarDate.innerHTML = `
             <p>${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my}ရက် ${myanmarDate.weekday.my}နေ့ ${myanmarDate.year.my}</p>
           `;
+          const mahb = baydin.maharbote(myanmarDate.year.en, weekDayNumber);
+          modalMyanmarDate.innerHTML += `<p>${mahb}ဖွား</p>`;
+          const numero = baydin.numerology(dateNumber);
+          const numeroText = baydin.numFormat(numero);
+          modalMyanmarDate.innerHTML += `<p>${numeroText}ဂဏန်း သမား</p>`;
           myModal.classList.add("modal-enter");
           setTimeout(() => {
             myModal.classList.remove("modal-enter");
