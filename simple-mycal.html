@@ -31,6 +31,24 @@
           display: none;
         }
       }
+      .modal-enter {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      .modal-enter-active {
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .modal-leave {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .modal-leave-active {
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
     </style>
   </head>
   <body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
@@ -52,9 +70,9 @@
 
     <!-- Modal -->
     <div id="myModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4 sm:mx-auto transform transition-all duration-300 ease-out scale-95">
+      <div class="modal-content bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4 sm:mx-auto transform transition-all duration-300 ease-out scale-95">
         <div id="modalContent" class="text-center"></div>
-        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-800">Myanmar Date Details for <span id="modalDate" class="text-blue-500"></span></h2>
+        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-800"><span id="modalDate" class="text-blue-500"></span></h2>
         <div id="modalMyanmarDate" class="text-lg leading-relaxed mb-4 flex flex-col items-center text-gray-600"></div>
         <button
           id="closeModal"
@@ -149,14 +167,14 @@
           cell.innerHTML = `
             <div class="date text-center text-lg font-bold">${day}</div>
             <div class="myanmar-date mt-2 leading-loose">
-          <p class="text-xs mb-1">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
-          <p class="text-xs mb-1">${myanmarDate.day.fd.my}</p>
-          <p class="text-xs mb-1">${myanmarDate.year.my}</p>
+              <p class="text-xs mb-1">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
+              <p class="text-xs mb-1">${myanmarDate.day.fd.my}</p>
+              <p class="text-xs mb-1">${myanmarDate.year.my}</p>
             </div>
           `;
 
           cell.addEventListener("click", () => {
-            showModal(myanmarDate, dateString);
+            showModal(myanmarDate, date.toDateString());
           });
 
           return cell;
@@ -167,7 +185,25 @@
           modalMyanmarDate.innerHTML = `
             <p>${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my}ရက် ${myanmarDate.weekday.my}နေ့ ${myanmarDate.year.my}</p>
           `;
+          myModal.classList.add("modal-enter");
+          setTimeout(() => {
+            myModal.classList.remove("modal-enter");
+            myModal.classList.add("modal-enter-active");
+          }, 10);
           myModal.classList.remove("hidden");
+        }
+
+        function hideModal() {
+          myModal.classList.add("modal-leave");
+          myModal.classList.remove("modal-enter-active");
+          setTimeout(() => {
+            myModal.classList.add("modal-leave-active");
+            myModal.classList.remove("modal-leave");
+            setTimeout(() => {
+              myModal.classList.add("hidden");
+              myModal.classList.remove("modal-leave-active");
+            }, 300);
+          }, 10);
         }
 
         function getMonthName(month) {
@@ -213,9 +249,7 @@
           renderCalendar(currentYear, currentMonth);
         });
 
-        closeModal.addEventListener("click", () => {
-          myModal.classList.add("hidden");
-        });
+        closeModal.addEventListener("click", hideModal);
 
         renderCalendar(currentYear, currentMonth);
       });
