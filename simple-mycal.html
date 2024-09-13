@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Myanmar Calendar</title>
     <!-- Favicon links -->
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
@@ -22,16 +23,13 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Myanmar Calendar" />
 
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Scripts -->
     <script src="https://unpkg.com/mycal@latest/dist/client/mycal.min.js"></script>
     <script src="https://unpkg.com/baydin@latest/dist/client/baydin.min.js"></script>
-    <title>Myanmar Calendar</title>
     <style>
-      @media (max-width: 640px) {
-        .myanmar-date {
-          display: none;
-        }
-      }
+      /* Modal Transition Effects */
       .modal-enter {
         opacity: 0;
         transform: scale(0.95);
@@ -39,7 +37,9 @@
       .modal-enter-active {
         opacity: 1;
         transform: scale(1);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
       }
       .modal-leave {
         opacity: 1;
@@ -48,32 +48,84 @@
       .modal-leave-active {
         opacity: 0;
         transform: scale(0.95);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      /* Custom Select Styling */
+      .custom-select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGgxNnY4SDB6IiBmaWxsPSIjNTVCQUQ1Ii8+PC9zdmc+")
+          no-repeat right 0.75rem center;
+        background-size: 1rem;
+        padding-right: 2rem;
+      }
+      .custom-select:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+      }
+
+      /* Modal Content Styling */
+      #myModal .modal-content {
+        @apply flex flex-col items-center;
       }
     </style>
   </head>
   <body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
-    <main class="bg-white p-6 rounded-lg shadow-lg w-full max-w-7xl">
-      <header class="flex flex-row justify-between items-center mb-4">
-        <button id="prevMonth" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 mb-2 sm:mb-0 select-none">&lt;</button>
-        <div class="flex justify-center items-center mb-2 sm:mb-0 select-none">
-          <input type="month" id="monthPicker" class="border rounded p-2 select-none" />
+    <main class="bg-white p-6 rounded-lg shadow-lg w-full max-w-5xl mx-4">
+      <header class="flex flex-col sm:flex-row justify-center items-center mb-6 space-y-4 sm:space-y-0 sm:space-x-6">
+        <div class="flex items-center space-x-4">
+          <button
+            id="prevMonth"
+            class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            aria-label="Previous Month"
+          >
+            <!-- Left Arrow SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <div class="flex items-center space-x-2">
+            <select id="monthPicker" class="border border-gray-300 rounded-md p-2 custom-select" aria-label="Select Month">
+              <!-- Month options will be populated by JavaScript -->
+            </select>
+            <select id="yearPicker" class="border border-gray-300 rounded-md p-2 custom-select" aria-label="Select Year">
+              <!-- Year options will be populated by JavaScript -->
+            </select>
+          </div>
+          <button
+            id="nextMonth"
+            class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            aria-label="Next Month"
+          >
+            <!-- Right Arrow SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
-        <button id="nextMonth" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 select-none">&gt;</button>
       </header>
-      <h1 id="calendarTitle" class="text-2xl font-bold text-center mb-4 select-none"></h1>
-      <div id="weekdayNames" class="grid grid-cols-7 gap-2 sm:gap-4 text-center font-bold"></div>
-      <section id="calendar" class="grid grid-cols-7 gap-2 sm:gap-4 text-center"></section>
-      <div class="flex justify-center mt-4">
-        <button id="goToToday" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 hidden select-none">Go to Today</button>
-      </div>
+      <h1 id="calendarTitle" class="text-3xl font-bold text-center mb-6"></h1>
+      <div id="weekdayNames" class="grid grid-cols-7 gap-2 sm:gap-4 text-center font-semibold text-gray-700"></div>
+      <section id="calendar" class="grid grid-cols-7 gap-2 sm:gap-4"></section>
+      <footer class="flex justify-center mt-6">
+        <button
+          id="goToToday"
+          class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 hidden focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          Go to Today
+        </button>
+      </footer>
     </main>
 
     <!-- Modal -->
     <div id="myModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
       <div class="modal-content bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4 sm:mx-auto transform transition-all duration-300 ease-out scale-95">
-        <div id="modalContent" class="text-center"></div>
-        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-800"><span id="modalDate" class="text-blue-500"></span></h2>
+        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-800">
+          <span id="modalDate" class="text-blue-500"></span>
+        </h2>
         <div id="modalMyanmarDate" class="text-lg leading-relaxed mb-4 flex flex-col items-center text-gray-600"></div>
         <button
           id="closeModal"
@@ -91,19 +143,43 @@
         const prevMonthButton = document.getElementById("prevMonth");
         const nextMonthButton = document.getElementById("nextMonth");
         const monthPicker = document.getElementById("monthPicker");
+        const yearPicker = document.getElementById("yearPicker");
         const goToTodayButton = document.getElementById("goToToday");
         const myModal = document.getElementById("myModal");
-        const modalContent = document.getElementById("modalContent");
         const closeModal = document.getElementById("closeModal");
         const modalDate = document.getElementById("modalDate");
         const modalMyanmarDate = document.getElementById("modalMyanmarDate");
         const weekdayNamesElement = document.getElementById("weekdayNames");
 
-        let currentYear = new Date().getFullYear();
-        let currentMonth = new Date().getMonth();
-        const today = new Date();
+        let today = new Date();
+        let currentYear = today.getFullYear();
+        let currentMonth = today.getMonth();
 
-        monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
+        // Populate month and year dropdowns
+        function populateMonthPicker() {
+          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          monthPicker.innerHTML = monthNames
+            .map(
+              (month, index) => `
+          <option value="${index}" ${index === currentMonth ? "selected" : ""}>${month}</option>
+        `
+            )
+            .join("");
+        }
+
+        function populateYearPicker() {
+          const startYear = today.getFullYear() - 50;
+          const endYear = today.getFullYear() + 50;
+          let options = "";
+          for (let year = startYear; year <= endYear; year++) {
+            options += `<option value="${year}" ${year === currentYear ? "selected" : ""}>${year}</option>`;
+          }
+          yearPicker.innerHTML = options;
+        }
+
+        // Initialize the pickers
+        populateMonthPicker();
+        populateYearPicker();
 
         function renderCalendar(year, month) {
           calendarElement.innerHTML = "";
@@ -128,7 +204,7 @@
           weekdayNamesElement.innerHTML = "";
           for (const name of weekdayNames) {
             const cell = document.createElement("div");
-            cell.className = "p-2";
+            cell.className = "p-2 text-sm text-gray-700";
             cell.innerText = name;
             weekdayNamesElement.appendChild(cell);
           }
@@ -148,7 +224,7 @@
 
         function createEmptyCell() {
           const cell = document.createElement("div");
-          cell.className = "bg-orange-50 p-4 rounded-lg text-center shadow-md flex flex-col justify-between";
+          cell.className = "bg-transparent p-4 rounded-lg shadow-md";
           return cell;
         }
 
@@ -156,22 +232,22 @@
           const cell = document.createElement("div");
           const isToday = year === today.getFullYear() && month === today.getMonth() && day === today.getDate();
           const cellClass = isToday
-            ? "bg-blue-100 p-4 rounded-lg text-center shadow-md min-[100px] flex flex-col justify-between hover:bg-blue-200 transition duration-300 cursor-pointer select-none"
-            : "bg-orange-50 p-4 rounded-lg text-center shadow-md min-[100px] w-1/7 flex flex-col justify-between hover:bg-orange-200 transition duration-300 cursor-pointer select-none";
+            ? "bg-blue-100 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-300 cursor-pointer flex flex-col items-center justify-center"
+            : "bg-orange-50 p-4 rounded-lg shadow-md hover:bg-orange-200 transition duration-300 cursor-pointer flex flex-col items-center justify-center";
 
-          cell.className = cellClass + " flex justify-center items-center";
+          cell.className = cellClass + " calendar-cell";
 
           const date = new Date(year, month, day);
           const dateString = `${month + 1}/${day}/${year}`;
           const myanmarDate = new mycal(dateString);
 
           cell.innerHTML = `
-            <div class="date text-center text-lg font-bold">${day}</div>
-            <div class="myanmar-date mt-2 leading-loose">
-              <p class="text-xs mb-1">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
-              <p class="text-xs mb-1">${myanmarDate.day.fd.my}</p>
-            </div>
-          `;
+          <div class="text-xl font-bold">${day}</div>
+          <div class="hidden lg:block">
+            <p class="text-center text-sm">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
+            <p class="text-center text-sm">${myanmarDate.day.fd.my}</p>
+          </div>
+        `;
 
           cell.addEventListener("click", () => {
             showModal(myanmarDate, date.toDateString());
@@ -187,17 +263,12 @@
           const yearNumber = new Date(dateString).getFullYear();
           const monthNumber = new Date(dateString).getMonth() + 1;
           modalMyanmarDate.innerHTML = `
-            <p class="text-center">${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my}ရက် ${myanmarDate.weekday.my}နေ့ ${myanmarDate.year.my}</p>
-          `;
-          const mahb = baydin.maharbote(myanmarDate.year.en, weekDayNumber);
-          modalMyanmarDate.innerHTML += `<p class="text-center">${mahb}ဖွား</p>`;
-          const numero = baydin.numerology(dateNumber);
-          const numeroText = baydin.numFormat(numero);
-          modalMyanmarDate.innerHTML += `<p class="text-center">${numeroText}ဂဏန်း သမား</p>`;
-          const chineseZodiac = baydin.chineseZodiac(yearNumber);
-          modalMyanmarDate.innerHTML += `<p class="text-center">${chineseZodiac.signInBurmese}နှစ်</p>`;
-          const zodiac = baydin.zodiac(dateNumber, monthNumber);
-          modalMyanmarDate.innerHTML += `<p class="text-center">${zodiac.sign_mm}ရာသီ</p>`;
+          <p class="text-center mb-2">${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my} ရက် ${myanmarDate.weekday.my} နေ့ ${myanmarDate.year.my}</p>
+          <p class="text-center mb-2">${baydin.maharbote(myanmarDate.year.en, weekDayNumber)} ဖွား</p>
+          <p class="text-center mb-2">${baydin.numFormat(baydin.numerology(dateNumber))} ဂဏန်း သမား</p>
+          <p class="text-center mb-2">${baydin.chineseZodiac(yearNumber).signInBurmese} နှစ်</p>
+          <p class="text-center">${baydin.zodiac(dateNumber, monthNumber).sign_mm} ရာသီ</p>
+        `;
           myModal.classList.add("modal-enter");
           setTimeout(() => {
             myModal.classList.remove("modal-enter");
@@ -224,17 +295,25 @@
           return monthNames[month];
         }
 
-        function updateMonthPicker() {
-          monthPicker.value = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`;
+        function updatePickers() {
+          monthPicker.value = currentMonth;
+          yearPicker.value = currentYear;
         }
 
+        // Event Listeners
         prevMonthButton.addEventListener("click", () => {
           currentMonth--;
           if (currentMonth < 0) {
             currentMonth = 11;
             currentYear--;
+            // Update year picker if year changes
+            if (currentYear < parseInt(yearPicker.options[0].value)) {
+              // Prevent underflow
+              currentYear = parseInt(yearPicker.options[0].value);
+              currentMonth = 0;
+            }
           }
-          updateMonthPicker();
+          updatePickers();
           renderCalendar(currentYear, currentMonth);
         });
 
@@ -243,27 +322,51 @@
           if (currentMonth > 11) {
             currentMonth = 0;
             currentYear++;
+            // Update year picker if year changes
+            if (currentYear > parseInt(yearPicker.options[yearPicker.options.length - 1].value)) {
+              // Prevent overflow
+              currentYear = parseInt(yearPicker.options[yearPicker.options.length - 1].value);
+              currentMonth = 11;
+            }
           }
-          updateMonthPicker();
+          updatePickers();
           renderCalendar(currentYear, currentMonth);
         });
 
         monthPicker.addEventListener("change", () => {
-          const [year, month] = monthPicker.value.split("-").map(Number);
-          currentYear = year;
-          currentMonth = month - 1;
+          currentMonth = parseInt(monthPicker.value);
+          renderCalendar(currentYear, currentMonth);
+        });
+
+        yearPicker.addEventListener("change", () => {
+          currentYear = parseInt(yearPicker.value);
           renderCalendar(currentYear, currentMonth);
         });
 
         goToTodayButton.addEventListener("click", () => {
           currentYear = today.getFullYear();
           currentMonth = today.getMonth();
-          updateMonthPicker();
+          updatePickers();
           renderCalendar(currentYear, currentMonth);
         });
 
         closeModal.addEventListener("click", hideModal);
 
+        // Close modal when clicking outside the modal content
+        myModal.addEventListener("click", (e) => {
+          if (e.target === myModal) {
+            hideModal();
+          }
+        });
+
+        // Close modal on Escape key press
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && !myModal.classList.contains("hidden")) {
+            hideModal();
+          }
+        });
+
+        // Initial Render
         renderCalendar(currentYear, currentMonth);
       });
     </script>
