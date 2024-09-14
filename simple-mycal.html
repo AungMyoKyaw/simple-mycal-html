@@ -28,50 +28,6 @@
     <!-- Custom Scripts -->
     <script src="https://unpkg.com/mycal@latest/dist/client/mycal.min.js"></script>
     <script src="https://unpkg.com/baydin@latest/dist/client/baydin.min.js"></script>
-    <style>
-      /* Modal Transition Effects */
-      .modal-enter {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      .modal-enter-active {
-        opacity: 1;
-        transform: scale(1);
-        transition:
-          opacity 0.3s ease,
-          transform 0.3s ease;
-      }
-      .modal-leave {
-        opacity: 1;
-        transform: scale(1);
-      }
-      .modal-leave-active {
-        opacity: 0;
-        transform: scale(0.95);
-        transition:
-          opacity 0.3s ease,
-          transform 0.3s ease;
-      }
-
-      /* Custom Select Styling */
-      .custom-select {
-        appearance: none;
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGgxNnY4SDB6IiBmaWxsPSIjNTVCQUQ1Ii8+PC9zdmc+")
-          no-repeat right 0.75rem center;
-        background-size: 1rem;
-        padding-right: 2rem;
-      }
-      .custom-select:focus {
-        outline: none;
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-      }
-
-      /* Modal Content Styling */
-      #myModal .modal-content {
-        @apply flex flex-col items-center;
-      }
-    </style>
   </head>
   <body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
     <main class="bg-white p-6 rounded-lg shadow-lg w-full max-w-5xl mx-4">
@@ -88,10 +44,18 @@
             </svg>
           </button>
           <div class="flex items-center space-x-2">
-            <select id="monthPicker" class="border border-gray-300 rounded-md p-2 custom-select" aria-label="Select Month">
+            <select
+              id="monthPicker"
+              class="appearance-none bg-white border border-gray-300 rounded-md p-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              aria-label="Select Month"
+            >
               <!-- Month options will be populated by JavaScript -->
             </select>
-            <select id="yearPicker" class="border border-gray-300 rounded-md p-2 custom-select" aria-label="Select Year">
+            <select
+              id="yearPicker"
+              class="appearance-none bg-white border border-gray-300 rounded-md p-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              aria-label="Select Year"
+            >
               <!-- Year options will be populated by JavaScript -->
             </select>
           </div>
@@ -122,7 +86,7 @@
 
     <!-- Modal -->
     <div id="myModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
-      <div class="modal-content bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4 sm:mx-auto transform transition-all duration-300 ease-out scale-95">
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4 sm:mx-auto transform transition-all duration-300 ease-out scale-95 opacity-0 flex flex-col items-center">
         <h2 class="text-2xl font-semibold mb-4 text-center text-gray-800">
           <span id="modalDate" class="text-blue-500"></span>
         </h2>
@@ -161,8 +125,8 @@
           monthPicker.innerHTML = monthNames
             .map(
               (month, index) => `
-          <option value="${index}" ${index === currentMonth ? "selected" : ""}>${month}</option>
-        `
+            <option value="${index}" ${index === currentMonth ? "selected" : ""}>${month}</option>
+          `,
             )
             .join("");
         }
@@ -242,12 +206,12 @@
           const myanmarDate = new mycal(dateString);
 
           cell.innerHTML = `
-          <div class="text-xl font-bold">${day}</div>
-          <div class="hidden lg:block">
-            <p class="text-center text-sm">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
-            <p class="text-center text-sm">${myanmarDate.day.fd.my}</p>
-          </div>
-        `;
+            <div class="text-xl font-bold">${day}</div>
+            <div class="hidden lg:block">
+              <p class="text-center text-sm">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
+              <p class="text-center text-sm">${myanmarDate.day.fd.my}</p>
+            </div>
+          `;
 
           cell.addEventListener("click", () => {
             showModal(myanmarDate, date.toDateString());
@@ -263,31 +227,28 @@
           const yearNumber = new Date(dateString).getFullYear();
           const monthNumber = new Date(dateString).getMonth() + 1;
           modalMyanmarDate.innerHTML = `
-          <p class="text-center mb-2">${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my} ရက် ${myanmarDate.weekday.my} နေ့ ${myanmarDate.year.my}</p>
-          <p class="text-center mb-2">${baydin.maharbote(myanmarDate.year.en, weekDayNumber)} ဖွား</p>
-          <p class="text-center mb-2">${baydin.numFormat(baydin.numerology(dateNumber))} ဂဏန်း သမား</p>
-          <p class="text-center mb-2">${baydin.chineseZodiac(yearNumber).signInBurmese} နှစ်</p>
-          <p class="text-center">${baydin.zodiac(dateNumber, monthNumber).sign_mm} ရာသီ</p>
-        `;
-          myModal.classList.add("modal-enter");
-          setTimeout(() => {
-            myModal.classList.remove("modal-enter");
-            myModal.classList.add("modal-enter-active");
-          }, 10);
+            <p class="text-center mb-2">${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my} ရက် ${myanmarDate.weekday.my} နေ့ ${myanmarDate.year.my}</p>
+            <p class="text-center mb-2">${baydin.maharbote(myanmarDate.year.en, weekDayNumber)} ဖွား</p>
+            <p class="text-center mb-2">${baydin.numFormat(baydin.numerology(dateNumber))} ဂဏန်း သမား</p>
+            <p class="text-center mb-2">${baydin.chineseZodiac(yearNumber).signInBurmese} နှစ်</p>
+            <p class="text-center">${baydin.zodiac(dateNumber, monthNumber).sign_mm} ရာသီ</p>
+          `;
+
           myModal.classList.remove("hidden");
+          const modalContent = myModal.querySelector("div");
+          setTimeout(() => {
+            modalContent.classList.remove("scale-95", "opacity-0");
+            modalContent.classList.add("scale-100", "opacity-100");
+          }, 10);
         }
 
         function hideModal() {
-          myModal.classList.add("modal-leave");
-          myModal.classList.remove("modal-enter-active");
+          const modalContent = myModal.querySelector("div");
+          modalContent.classList.remove("scale-100", "opacity-100");
+          modalContent.classList.add("scale-95", "opacity-0");
           setTimeout(() => {
-            myModal.classList.add("modal-leave-active");
-            myModal.classList.remove("modal-leave");
-            setTimeout(() => {
-              myModal.classList.add("hidden");
-              myModal.classList.remove("modal-leave-active");
-            }, 300);
-          }, 10);
+            myModal.classList.add("hidden");
+          }, 300);
         }
 
         function getMonthName(month) {
@@ -306,9 +267,7 @@
           if (currentMonth < 0) {
             currentMonth = 11;
             currentYear--;
-            // Update year picker if year changes
             if (currentYear < parseInt(yearPicker.options[0].value)) {
-              // Prevent underflow
               currentYear = parseInt(yearPicker.options[0].value);
               currentMonth = 0;
             }
@@ -322,9 +281,7 @@
           if (currentMonth > 11) {
             currentMonth = 0;
             currentYear++;
-            // Update year picker if year changes
             if (currentYear > parseInt(yearPicker.options[yearPicker.options.length - 1].value)) {
-              // Prevent overflow
               currentYear = parseInt(yearPicker.options[yearPicker.options.length - 1].value);
               currentMonth = 11;
             }
