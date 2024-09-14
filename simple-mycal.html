@@ -44,20 +44,38 @@
             </svg>
           </button>
           <div class="flex items-center space-x-2">
-            <select
-              id="monthPicker"
-              class="appearance-none bg-white border border-gray-300 rounded-md p-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              aria-label="Select Month"
-            >
-              <!-- Month options will be populated by JavaScript -->
-            </select>
-            <select
-              id="yearPicker"
-              class="appearance-none bg-white border border-gray-300 rounded-md p-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              aria-label="Select Year"
-            >
-              <!-- Year options will be populated by JavaScript -->
-            </select>
+            <!-- Month Picker -->
+            <div class="relative">
+              <select
+                id="monthPicker"
+                class="appearance-none bg-blue-500 text-white p-2 rounded-full pr-8 hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Select Month"
+              >
+                <!-- Month options will be populated by JavaScript -->
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                <!-- Down Arrow SVG -->
+                <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+                  <path d="M7 7l3 3 3-3" />
+                </svg>
+              </div>
+            </div>
+            <!-- Year Picker -->
+            <div class="relative">
+              <select
+                id="yearPicker"
+                class="appearance-none bg-blue-500 text-white p-2 rounded-full pr-8 hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Select Year"
+              >
+                <!-- Year options will be populated by JavaScript -->
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                <!-- Down Arrow SVG -->
+                <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+                  <path d="M7 7l3 3 3-3" />
+                </svg>
+              </div>
+            </div>
           </div>
           <button
             id="nextMonth"
@@ -125,8 +143,8 @@
           monthPicker.innerHTML = monthNames
             .map(
               (month, index) => `
-            <option value="${index}" ${index === currentMonth ? "selected" : ""}>${month}</option>
-          `,
+                <option value="${index}" ${index === currentMonth ? "selected" : ""}>${month}</option>
+              `,
             )
             .join("");
         }
