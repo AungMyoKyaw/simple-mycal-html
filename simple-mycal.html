@@ -172,9 +172,10 @@
       <div class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
         <h2 class="text-2xl font-semibold mb-4 text-center text-gray-100">Select Year</h2>
         <input
-          type="text"
+          type="number"
           id="yearSearchModal"
           placeholder="Search Year"
+          inputmode="numeric"
           class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white mb-4"
         />
         <ul id="yearListModal" class="max-h-60 overflow-y-auto">
@@ -371,6 +372,15 @@
           monthListModal.innerHTML = monthList.innerHTML;
           monthSearchModal.value = "";
           filterMonthOptionsModal();
+
+          // Scroll to the selected month
+          setTimeout(() => {
+            const selectedOption = monthListModal.querySelector(`li[data-month="${currentMonth}"]`);
+            if (selectedOption) {
+              selectedOption.scrollIntoView({ block: "nearest", behavior: "smooth" });
+            }
+          }, 0);
+
           monthPickerModal.classList.remove("hidden");
           const modalContent = monthPickerModal.querySelector("div");
           setTimeout(() => {
@@ -393,6 +403,15 @@
           yearListModal.innerHTML = yearList.innerHTML;
           yearSearchModal.value = "";
           filterYearOptionsModal();
+
+          // Scroll to the selected year
+          setTimeout(() => {
+            const selectedOption = yearListModal.querySelector(`li[data-year="${currentYear}"]`);
+            if (selectedOption) {
+              selectedOption.scrollIntoView({ block: "nearest", behavior: "smooth" });
+            }
+          }, 0);
+
           yearPickerModal.classList.remove("hidden");
           const modalContent = yearPickerModal.querySelector("div");
           setTimeout(() => {
