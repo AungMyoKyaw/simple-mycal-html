@@ -145,6 +145,50 @@
       </div>
     </div>
 
+    <!-- Month Picker Modal -->
+    <div id="monthPickerModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
+        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-100">Select Month</h2>
+        <input
+          type="text"
+          id="monthSearchModal"
+          placeholder="Search Month"
+          class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white mb-4"
+        />
+        <ul id="monthListModal" class="max-h-60 overflow-y-auto">
+          <!-- Month options will be populated here -->
+        </ul>
+        <button
+          id="closeMonthModal"
+          class="bg-blue-600 text-white py-2 px-6 rounded-full mt-4 mx-auto block hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Year Picker Modal -->
+    <div id="yearPickerModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
+        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-100">Select Year</h2>
+        <input
+          type="text"
+          id="yearSearchModal"
+          placeholder="Search Year"
+          class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white mb-4"
+        />
+        <ul id="yearListModal" class="max-h-60 overflow-y-auto">
+          <!-- Year options will be populated here -->
+        </ul>
+        <button
+          id="closeYearModal"
+          class="bg-blue-600 text-white py-2 px-6 rounded-full mt-4 mx-auto block hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // Your existing JavaScript variables
@@ -172,9 +216,27 @@
         const yearSearch = document.getElementById("yearSearch");
         const selectedYearElement = document.getElementById("selectedYear");
 
+        // Variables for modals
+        const monthPickerModal = document.getElementById("monthPickerModal");
+        const monthListModal = document.getElementById("monthListModal");
+        const monthSearchModal = document.getElementById("monthSearchModal");
+        const closeMonthModal = document.getElementById("closeMonthModal");
+
+        const yearPickerModal = document.getElementById("yearPickerModal");
+        const yearListModal = document.getElementById("yearListModal");
+        const yearSearchModal = document.getElementById("yearSearchModal");
+        const closeYearModal = document.getElementById("closeYearModal");
+
         let today = new Date();
         let currentYear = today.getFullYear();
         let currentMonth = today.getMonth();
+
+        // Variable to check if the device is mobile
+        let isMobile = window.innerWidth <= 640;
+
+        window.addEventListener("resize", () => {
+          isMobile = window.innerWidth <= 640;
+        });
 
         // Initialize selected month and year
         selectedMonthElement.textContent = getMonthName(currentMonth);
@@ -192,14 +254,6 @@
                 `,
             )
             .join("");
-
-          // Scroll the selected month into view
-          setTimeout(() => {
-            const selectedOption = monthList.querySelector(`li[data-month="${currentMonth}"]`);
-            if (selectedOption) {
-              selectedOption.scrollIntoView({ block: "nearest" });
-            }
-          }, 0);
         }
 
         function populateYearDropdown() {
@@ -214,14 +268,6 @@
                 `;
           }
           yearList.innerHTML = years;
-
-          // Scroll the selected year into view
-          setTimeout(() => {
-            const selectedOption = yearList.querySelector(`li[data-year="${currentYear}"]`);
-            if (selectedOption) {
-              selectedOption.scrollIntoView({ block: "nearest" });
-            }
-          }, 0);
         }
 
         // Initialize the dropdowns
@@ -231,27 +277,33 @@
         // Event listeners for opening and closing dropdowns
         monthPicker.addEventListener("click", (e) => {
           e.stopPropagation();
-          monthDropdown.classList.toggle("hidden");
-          yearDropdown.classList.add("hidden");
-          monthSearch.value = "";
-          filterMonthOptions();
-          // Scroll selected month into view
-          const selectedOption = monthList.querySelector(`li[data-month="${currentMonth}"]`);
-          if (selectedOption) {
-            selectedOption.scrollIntoView({ block: "nearest" });
+          if (isMobile) {
+            showMonthModal();
+          } else {
+            monthDropdown.classList.toggle("hidden");
+            yearDropdown.classList.add("hidden");
+            monthSearch.value = "";
+            filterMonthOptions();
+            const selectedOption = monthList.querySelector(`li[data-month="${currentMonth}"]`);
+            if (selectedOption) {
+              selectedOption.scrollIntoView({ block: "nearest" });
+            }
           }
         });
 
         yearPicker.addEventListener("click", (e) => {
           e.stopPropagation();
-          yearDropdown.classList.toggle("hidden");
-          monthDropdown.classList.add("hidden");
-          yearSearch.value = "";
-          filterYearOptions();
-          // Scroll selected year into view
-          const selectedOption = yearList.querySelector(`li[data-year="${currentYear}"]`);
-          if (selectedOption) {
-            selectedOption.scrollIntoView({ block: "nearest" });
+          if (isMobile) {
+            showYearModal();
+          } else {
+            yearDropdown.classList.toggle("hidden");
+            monthDropdown.classList.add("hidden");
+            yearSearch.value = "";
+            filterYearOptions();
+            const selectedOption = yearList.querySelector(`li[data-year="${currentYear}"]`);
+            if (selectedOption) {
+              selectedOption.scrollIntoView({ block: "nearest" });
+            }
           }
         });
 
@@ -312,6 +364,122 @@
 
         monthSearch.addEventListener("keyup", filterMonthOptions);
         yearSearch.addEventListener("keyup", filterYearOptions);
+
+        // Modal show and hide functions
+        function showMonthModal() {
+          // Populate the modal with month options
+          monthListModal.innerHTML = monthList.innerHTML;
+          monthSearchModal.value = "";
+          filterMonthOptionsModal();
+          monthPickerModal.classList.remove("hidden");
+          const modalContent = monthPickerModal.querySelector("div");
+          setTimeout(() => {
+            modalContent.classList.remove("scale-95", "opacity-0");
+            modalContent.classList.add("scale-100", "opacity-100");
+          }, 10);
+        }
+
+        function hideMonthModal() {
+          const modalContent = monthPickerModal.querySelector("div");
+          modalContent.classList.remove("scale-100", "opacity-100");
+          modalContent.classList.add("scale-95", "opacity-0");
+          setTimeout(() => {
+            monthPickerModal.classList.add("hidden");
+          }, 300);
+        }
+
+        function showYearModal() {
+          // Populate the modal with year options
+          yearListModal.innerHTML = yearList.innerHTML;
+          yearSearchModal.value = "";
+          filterYearOptionsModal();
+          yearPickerModal.classList.remove("hidden");
+          const modalContent = yearPickerModal.querySelector("div");
+          setTimeout(() => {
+            modalContent.classList.remove("scale-95", "opacity-0");
+            modalContent.classList.add("scale-100", "opacity-100");
+          }, 10);
+        }
+
+        function hideYearModal() {
+          const modalContent = yearPickerModal.querySelector("div");
+          modalContent.classList.remove("scale-100", "opacity-100");
+          modalContent.classList.add("scale-95", "opacity-0");
+          setTimeout(() => {
+            yearPickerModal.classList.add("hidden");
+          }, 300);
+        }
+
+        // Event Listeners for Modals
+        closeMonthModal.addEventListener("click", hideMonthModal);
+        closeYearModal.addEventListener("click", hideYearModal);
+
+        monthPickerModal.addEventListener("click", (e) => {
+          if (e.target === monthPickerModal) {
+            hideMonthModal();
+          }
+        });
+
+        yearPickerModal.addEventListener("click", (e) => {
+          if (e.target === yearPickerModal) {
+            hideYearModal();
+          }
+        });
+
+        // Close modal on Escape key press
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            if (!monthPickerModal.classList.contains("hidden")) {
+              hideMonthModal();
+            }
+            if (!yearPickerModal.classList.contains("hidden")) {
+              hideYearModal();
+            }
+          }
+        });
+
+        // Filtering functions for modals
+        function filterMonthOptionsModal() {
+          const filter = monthSearchModal.value.toLowerCase();
+          const options = monthListModal.querySelectorAll("li");
+          options.forEach((option) => {
+            const text = option.textContent.toLowerCase();
+            option.style.display = text.includes(filter) ? "" : "none";
+          });
+        }
+
+        function filterYearOptionsModal() {
+          const filter = yearSearchModal.value;
+          const options = yearListModal.querySelectorAll("li");
+          options.forEach((option) => {
+            const text = option.textContent;
+            option.style.display = text.includes(filter) ? "" : "none";
+          });
+        }
+
+        monthSearchModal.addEventListener("keyup", filterMonthOptionsModal);
+        yearSearchModal.addEventListener("keyup", filterYearOptionsModal);
+
+        // Handle selection in modals
+        monthListModal.addEventListener("click", (e) => {
+          const li = e.target.closest("li[data-month]");
+          if (li) {
+            currentMonth = parseInt(li.getAttribute("data-month"));
+            selectedMonthElement.textContent = li.textContent;
+            hideMonthModal();
+            renderCalendar(currentYear, currentMonth);
+          }
+        });
+
+        yearListModal.addEventListener("click", (e) => {
+          const li = e.target.closest("li[data-year]");
+          if (li) {
+            currentYear = parseInt(li.getAttribute("data-year"));
+            selectedYearElement.textContent = li.textContent;
+            hideYearModal();
+            renderCalendar(currentYear, currentMonth);
+          }
+        });
 
         // Render calendar
         function renderCalendar(year, month) {
@@ -513,11 +681,7 @@
 
         // Make the application responsive for mobile devices
         function adjustForMobile() {
-          const isMobile = window.innerWidth <= 640; // Tailwind's sm breakpoint
-          if (isMobile) {
-            // Adjust styles for mobile if necessary
-            // For example, increase touch target sizes
-          }
+          isMobile = window.innerWidth <= 640;
         }
 
         // Call the function on load and on window resize
