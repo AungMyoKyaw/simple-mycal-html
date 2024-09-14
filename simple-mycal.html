@@ -23,19 +23,25 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Myanmar Calendar" />
 
+    <!-- Tailwind CSS Configuration -->
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom Scripts -->
     <script src="https://unpkg.com/mycal@latest/dist/client/mycal.min.js"></script>
     <script src="https://unpkg.com/baydin@latest/dist/client/baydin.min.js"></script>
   </head>
-  <body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
-    <main class="bg-white p-6 rounded-lg shadow-lg w-full max-w-5xl mx-4">
+  <body class="bg-gray-900 text-gray-100 flex items-center justify-center min-h-screen">
+    <main class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-5xl mx-4">
       <header class="flex flex-col sm:flex-row justify-center items-center mb-6 space-y-4 sm:space-y-0 sm:space-x-6">
         <div class="flex items-center space-x-4">
           <button
             id="prevMonth"
-            class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label="Previous Month"
           >
             <!-- Left Arrow SVG -->
@@ -48,7 +54,7 @@
             <div class="relative">
               <select
                 id="monthPicker"
-                class="appearance-none bg-blue-500 text-white p-2 rounded-full pr-8 hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="appearance-none bg-blue-600 text-white p-2 rounded-full pr-8 hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label="Select Month"
               >
                 <!-- Month options will be populated by JavaScript -->
@@ -64,7 +70,7 @@
             <div class="relative">
               <select
                 id="yearPicker"
-                class="appearance-none bg-blue-500 text-white p-2 rounded-full pr-8 hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="appearance-none bg-blue-600 text-white p-2 rounded-full pr-8 hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label="Select Year"
               >
                 <!-- Year options will be populated by JavaScript -->
@@ -79,7 +85,7 @@
           </div>
           <button
             id="nextMonth"
-            class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label="Next Month"
           >
             <!-- Right Arrow SVG -->
@@ -89,13 +95,13 @@
           </button>
         </div>
       </header>
-      <h1 id="calendarTitle" class="text-3xl font-bold text-center mb-6"></h1>
-      <div id="weekdayNames" class="grid grid-cols-7 gap-2 sm:gap-4 text-center font-semibold text-gray-700"></div>
+      <h1 id="calendarTitle" class="text-3xl font-bold text-center mb-6 text-gray-100"></h1>
+      <div id="weekdayNames" class="grid grid-cols-7 gap-2 sm:gap-4 text-center font-semibold text-gray-300"></div>
       <section id="calendar" class="grid grid-cols-7 gap-2 sm:gap-4"></section>
       <footer class="flex justify-center mt-6">
         <button
           id="goToToday"
-          class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 hidden focus:outline-none focus:ring-2 focus:ring-green-500"
+          class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 hidden focus:outline-none focus:ring-2 focus:ring-green-500"
         >
           Go to Today
         </button>
@@ -104,14 +110,16 @@
 
     <!-- Modal -->
     <div id="myModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4 sm:mx-auto transform transition-all duration-300 ease-out scale-95 opacity-0 flex flex-col items-center">
-        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-800">
-          <span id="modalDate" class="text-blue-500"></span>
+      <div
+        class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4 sm:mx-auto transform transition-all duration-300 ease-out scale-95 opacity-0 flex flex-col items-center"
+      >
+        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-100">
+          <span id="modalDate" class="text-blue-400"></span>
         </h2>
-        <div id="modalMyanmarDate" class="text-lg leading-relaxed mb-4 flex flex-col items-center text-gray-600"></div>
+        <div id="modalMyanmarDate" class="text-lg leading-relaxed mb-4 flex flex-col items-center text-gray-300"></div>
         <button
           id="closeModal"
-          class="bg-blue-500 text-white py-2 px-6 rounded-full mt-4 mx-auto block hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
+          class="bg-blue-600 text-white py-2 px-6 rounded-full mt-4 mx-auto block hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
         >
           Close
         </button>
@@ -143,8 +151,8 @@
           monthPicker.innerHTML = monthNames
             .map(
               (month, index) => `
-                <option value="${index}" ${index === currentMonth ? "selected" : ""}>${month}</option>
-              `,
+                  <option value="${index}" ${index === currentMonth ? "selected" : ""}>${month}</option>
+                `,
             )
             .join("");
         }
@@ -186,7 +194,7 @@
           weekdayNamesElement.innerHTML = "";
           for (const name of weekdayNames) {
             const cell = document.createElement("div");
-            cell.className = "p-2 text-sm text-gray-700";
+            cell.className = "p-2 text-sm text-gray-300";
             cell.innerText = name;
             weekdayNamesElement.appendChild(cell);
           }
@@ -213,11 +221,12 @@
         function createCalendarCell(year, month, day) {
           const cell = document.createElement("div");
           const isToday = year === today.getFullYear() && month === today.getMonth() && day === today.getDate();
-          const cellClass = isToday
-            ? "bg-blue-100 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-300 cursor-pointer flex flex-col items-center justify-center"
-            : "bg-orange-50 p-4 rounded-lg shadow-md hover:bg-orange-200 transition duration-300 cursor-pointer flex flex-col items-center justify-center";
 
-          cell.className = cellClass + " calendar-cell";
+          // Updated color scheme
+          const baseCellClass = "p-4 rounded-lg shadow-md transition duration-300 cursor-pointer flex flex-col items-center justify-center";
+          const todayCellClass = isToday ? "bg-indigo-600 text-white hover:bg-indigo-700" : "bg-gray-700 text-gray-100 hover:bg-gray-600";
+
+          cell.className = `${baseCellClass} ${todayCellClass} calendar-cell`;
 
           const date = new Date(year, month, day);
           const dateString = `${month + 1}/${day}/${year}`;
