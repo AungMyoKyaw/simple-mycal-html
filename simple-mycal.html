@@ -49,40 +49,59 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <div class="flex items-center space-x-2">
-            <!-- Month Picker -->
-            <div class="relative">
-              <select
-                id="monthPicker"
-                class="appearance-none bg-blue-600 text-white p-2 rounded-full pr-8 hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="Select Month"
-              >
-                <!-- Month options will be populated by JavaScript -->
-              </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                <!-- Down Arrow SVG -->
-                <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
-                  <path d="M7 7l3 3 3-3" />
-                </svg>
-              </div>
+
+          <!-- Month Picker -->
+          <div class="relative">
+            <div
+              id="monthPicker"
+              class="bg-blue-600 text-white p-2 rounded-full cursor-pointer hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between w-32"
+            >
+              <span id="selectedMonth">Select Month</span>
+              <!-- Down Arrow SVG -->
+              <svg class="h-4 w-4 text-white ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+                <path d="M7 7l3 3 3-3" />
+              </svg>
             </div>
-            <!-- Year Picker -->
-            <div class="relative">
-              <select
-                id="yearPicker"
-                class="appearance-none bg-blue-600 text-white p-2 rounded-full pr-8 hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="Select Year"
-              >
-                <!-- Year options will be populated by JavaScript -->
-              </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                <!-- Down Arrow SVG -->
-                <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
-                  <path d="M7 7l3 3 3-3" />
-                </svg>
-              </div>
+            <!-- Month Dropdown -->
+            <div id="monthDropdown" class="absolute mt-2 w-48 bg-white dark:bg-gray-700 text-black dark:text-white rounded shadow-lg overflow-hidden z-20 hidden">
+              <input
+                type="text"
+                id="monthSearch"
+                placeholder="Search Month"
+                class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white"
+              />
+              <ul id="monthList" class="max-h-60 overflow-y-auto">
+                <!-- Month options will be populated here -->
+              </ul>
             </div>
           </div>
+
+          <!-- Year Picker -->
+          <div class="relative">
+            <div
+              id="yearPicker"
+              class="bg-blue-600 text-white p-2 rounded-full cursor-pointer hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between w-32"
+            >
+              <span id="selectedYear">Select Year</span>
+              <!-- Down Arrow SVG -->
+              <svg class="h-4 w-4 text-white ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+                <path d="M7 7l3 3 3-3" />
+              </svg>
+            </div>
+            <!-- Year Dropdown -->
+            <div id="yearDropdown" class="absolute mt-2 w-48 bg-white dark:bg-gray-700 text-black dark:text-white rounded shadow-lg overflow-hidden z-20 hidden">
+              <input
+                type="text"
+                id="yearSearch"
+                placeholder="Search Year"
+                class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white"
+              />
+              <ul id="yearList" class="max-h-60 overflow-y-auto">
+                <!-- Year options will be populated here -->
+              </ul>
+            </div>
+          </div>
+
           <button
             id="nextMonth"
             class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -128,6 +147,7 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        // Your existing JavaScript variables
         const calendarElement = document.getElementById("calendar");
         const calendarTitle = document.getElementById("calendarTitle");
         const prevMonthButton = document.getElementById("prevMonth");
@@ -141,36 +161,159 @@
         const modalMyanmarDate = document.getElementById("modalMyanmarDate");
         const weekdayNamesElement = document.getElementById("weekdayNames");
 
+        // New variables for custom dropdowns
+        const monthDropdown = document.getElementById("monthDropdown");
+        const monthList = document.getElementById("monthList");
+        const monthSearch = document.getElementById("monthSearch");
+        const selectedMonthElement = document.getElementById("selectedMonth");
+
+        const yearDropdown = document.getElementById("yearDropdown");
+        const yearList = document.getElementById("yearList");
+        const yearSearch = document.getElementById("yearSearch");
+        const selectedYearElement = document.getElementById("selectedYear");
+
         let today = new Date();
         let currentYear = today.getFullYear();
         let currentMonth = today.getMonth();
 
+        // Initialize selected month and year
+        selectedMonthElement.textContent = getMonthName(currentMonth);
+        selectedYearElement.textContent = currentYear;
+
         // Populate month and year dropdowns
-        function populateMonthPicker() {
+        function populateMonthDropdown() {
           const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-          monthPicker.innerHTML = monthNames
+          monthList.innerHTML = monthNames
             .map(
               (month, index) => `
-                  <option value="${index}" ${index === currentMonth ? "selected" : ""}>${month}</option>
+                  <li class="p-2 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer ${index === currentMonth ? "bg-gray-300 dark:bg-gray-600" : ""}" data-month="${index}">
+                    ${month}
+                  </li>
                 `,
             )
             .join("");
+
+          // Scroll the selected month into view
+          setTimeout(() => {
+            const selectedOption = monthList.querySelector(`li[data-month="${currentMonth}"]`);
+            if (selectedOption) {
+              selectedOption.scrollIntoView({ block: "nearest" });
+            }
+          }, 0);
         }
 
-        function populateYearPicker() {
-          const startYear = today.getFullYear() - 50;
-          const endYear = today.getFullYear() + 50;
-          let options = "";
-          for (let year = startYear; year <= endYear; year++) {
-            options += `<option value="${year}" ${year === currentYear ? "selected" : ""}>${year}</option>`;
+        function populateYearDropdown() {
+          const minYear = 1885;
+          const maxYear = today.getFullYear() + 100;
+          let years = "";
+          for (let year = maxYear; year >= minYear; year--) {
+            years += `
+                  <li class="p-2 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer ${year === currentYear ? "bg-gray-300 dark:bg-gray-600" : ""}" data-year="${year}">
+                    ${year}
+                  </li>
+                `;
           }
-          yearPicker.innerHTML = options;
+          yearList.innerHTML = years;
+
+          // Scroll the selected year into view
+          setTimeout(() => {
+            const selectedOption = yearList.querySelector(`li[data-year="${currentYear}"]`);
+            if (selectedOption) {
+              selectedOption.scrollIntoView({ block: "nearest" });
+            }
+          }, 0);
         }
 
-        // Initialize the pickers
-        populateMonthPicker();
-        populateYearPicker();
+        // Initialize the dropdowns
+        populateMonthDropdown();
+        populateYearDropdown();
 
+        // Event listeners for opening and closing dropdowns
+        monthPicker.addEventListener("click", (e) => {
+          e.stopPropagation();
+          monthDropdown.classList.toggle("hidden");
+          yearDropdown.classList.add("hidden");
+          monthSearch.value = "";
+          filterMonthOptions();
+          // Scroll selected month into view
+          const selectedOption = monthList.querySelector(`li[data-month="${currentMonth}"]`);
+          if (selectedOption) {
+            selectedOption.scrollIntoView({ block: "nearest" });
+          }
+        });
+
+        yearPicker.addEventListener("click", (e) => {
+          e.stopPropagation();
+          yearDropdown.classList.toggle("hidden");
+          monthDropdown.classList.add("hidden");
+          yearSearch.value = "";
+          filterYearOptions();
+          // Scroll selected year into view
+          const selectedOption = yearList.querySelector(`li[data-year="${currentYear}"]`);
+          if (selectedOption) {
+            selectedOption.scrollIntoView({ block: "nearest" });
+          }
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener("click", () => {
+          monthDropdown.classList.add("hidden");
+          yearDropdown.classList.add("hidden");
+        });
+
+        // Event listeners for selecting month and year
+        monthList.addEventListener("click", (e) => {
+          const li = e.target.closest("li[data-month]");
+          if (li) {
+            currentMonth = parseInt(li.getAttribute("data-month"));
+            selectedMonthElement.textContent = li.textContent;
+            monthDropdown.classList.add("hidden");
+            renderCalendar(currentYear, currentMonth);
+          }
+        });
+
+        yearList.addEventListener("click", (e) => {
+          const li = e.target.closest("li[data-year]");
+          if (li) {
+            currentYear = parseInt(li.getAttribute("data-year"));
+            selectedYearElement.textContent = li.textContent;
+            yearDropdown.classList.add("hidden");
+            renderCalendar(currentYear, currentMonth);
+          }
+        });
+
+        // Prevent event propagation inside the dropdowns
+        monthDropdown.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+
+        yearDropdown.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+
+        // Search functionality for month and year
+        function filterMonthOptions() {
+          const filter = monthSearch.value.toLowerCase();
+          const options = monthList.querySelectorAll("li");
+          options.forEach((option) => {
+            const text = option.textContent.toLowerCase();
+            option.style.display = text.includes(filter) ? "" : "none";
+          });
+        }
+
+        function filterYearOptions() {
+          const filter = yearSearch.value;
+          const options = yearList.querySelectorAll("li");
+          options.forEach((option) => {
+            const text = option.textContent;
+            option.style.display = text.includes(filter) ? "" : "none";
+          });
+        }
+
+        monthSearch.addEventListener("keyup", filterMonthOptions);
+        yearSearch.addEventListener("keyup", filterYearOptions);
+
+        // Render calendar
         function renderCalendar(year, month) {
           calendarElement.innerHTML = "";
           calendarTitle.innerText = `${getMonthName(month)} ${year}`;
@@ -187,6 +330,9 @@
           } else {
             goToTodayButton.classList.add("hidden");
           }
+
+          // Update the highlighting in the dropdowns
+          updateDropdownHighlighting();
         }
 
         function fillWeekdayNames() {
@@ -283,23 +429,43 @@
           return monthNames[month];
         }
 
-        function updatePickers() {
-          monthPicker.value = currentMonth;
-          yearPicker.value = currentYear;
+        function updateDropdownHighlighting() {
+          // Update month highlighting
+          const monthOptions = monthList.querySelectorAll("li");
+          monthOptions.forEach((option) => {
+            const monthValue = parseInt(option.getAttribute("data-month"));
+            if (monthValue === currentMonth) {
+              option.classList.add("bg-gray-300", "dark:bg-gray-600");
+            } else {
+              option.classList.remove("bg-gray-300", "dark:bg-gray-600");
+            }
+          });
+
+          // Update year highlighting
+          const yearOptions = yearList.querySelectorAll("li");
+          yearOptions.forEach((option) => {
+            const yearValue = parseInt(option.getAttribute("data-year"));
+            if (yearValue === currentYear) {
+              option.classList.add("bg-gray-300", "dark:bg-gray-600");
+            } else {
+              option.classList.remove("bg-gray-300", "dark:bg-gray-600");
+            }
+          });
         }
 
-        // Event Listeners
+        // Event Listeners for navigation buttons
         prevMonthButton.addEventListener("click", () => {
           currentMonth--;
           if (currentMonth < 0) {
             currentMonth = 11;
             currentYear--;
-            if (currentYear < parseInt(yearPicker.options[0].value)) {
-              currentYear = parseInt(yearPicker.options[0].value);
+            if (currentYear < 1885) {
+              currentYear = 1885;
               currentMonth = 0;
             }
           }
-          updatePickers();
+          selectedMonthElement.textContent = getMonthName(currentMonth);
+          selectedYearElement.textContent = currentYear;
           renderCalendar(currentYear, currentMonth);
         });
 
@@ -308,29 +474,21 @@
           if (currentMonth > 11) {
             currentMonth = 0;
             currentYear++;
-            if (currentYear > parseInt(yearPicker.options[yearPicker.options.length - 1].value)) {
-              currentYear = parseInt(yearPicker.options[yearPicker.options.length - 1].value);
+            if (currentYear > today.getFullYear() + 100) {
+              currentYear = today.getFullYear() + 100;
               currentMonth = 11;
             }
           }
-          updatePickers();
-          renderCalendar(currentYear, currentMonth);
-        });
-
-        monthPicker.addEventListener("change", () => {
-          currentMonth = parseInt(monthPicker.value);
-          renderCalendar(currentYear, currentMonth);
-        });
-
-        yearPicker.addEventListener("change", () => {
-          currentYear = parseInt(yearPicker.value);
+          selectedMonthElement.textContent = getMonthName(currentMonth);
+          selectedYearElement.textContent = currentYear;
           renderCalendar(currentYear, currentMonth);
         });
 
         goToTodayButton.addEventListener("click", () => {
           currentYear = today.getFullYear();
           currentMonth = today.getMonth();
-          updatePickers();
+          selectedYearElement.textContent = currentYear;
+          selectedMonthElement.textContent = getMonthName(currentMonth);
           renderCalendar(currentYear, currentMonth);
         });
 
@@ -352,6 +510,19 @@
 
         // Initial Render
         renderCalendar(currentYear, currentMonth);
+
+        // Make the application responsive for mobile devices
+        function adjustForMobile() {
+          const isMobile = window.innerWidth <= 640; // Tailwind's sm breakpoint
+          if (isMobile) {
+            // Adjust styles for mobile if necessary
+            // For example, increase touch target sizes
+          }
+        }
+
+        // Call the function on load and on window resize
+        adjustForMobile();
+        window.addEventListener("resize", adjustForMobile);
       });
     </script>
   </body>
