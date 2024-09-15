@@ -1,4 +1,4 @@
-# simple-mycal-html
+# [simple-mycal-html](https://simple-mycal-html.pages.dev)
 
 > A simple Myanmar calendar in HTML
 
