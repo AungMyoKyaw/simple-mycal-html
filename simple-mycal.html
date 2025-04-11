@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Myanmar Calendar</title>
-    <!-- Favicon links -->
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
@@ -22,16 +21,12 @@
     <meta property="og:description" content="Myanmar Calendar is a simple calendar application that displays Myanmar dates." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Myanmar Calendar" />
-
-    <!-- Tailwind CSS Configuration -->
     <script>
       tailwind.config = {
         darkMode: "class",
       };
     </script>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Custom Scripts -->
     <script src="https://unpkg.com/mycal@latest/dist/client/mycal.min.js"></script>
     <script src="https://unpkg.com/baydin@latest/dist/client/baydin.min.js"></script>
   </head>
@@ -44,25 +39,20 @@
             class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label="Previous Month"
           >
-            <!-- Left Arrow SVG -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-
-          <!-- Month Picker -->
           <div class="relative">
             <div
               id="monthPicker"
               class="bg-blue-600 text-white p-2 rounded-full cursor-pointer hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between w-32"
             >
               <span id="selectedMonth">Select Month</span>
-              <!-- Down Arrow SVG -->
               <svg class="h-4 w-4 text-white ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
                 <path d="M7 7l3 3 3-3" />
               </svg>
             </div>
-            <!-- Month Dropdown -->
             <div id="monthDropdown" class="absolute mt-2 w-48 bg-white dark:bg-gray-700 text-black dark:text-white rounded shadow-lg overflow-hidden z-20 hidden">
               <input
                 type="text"
@@ -70,25 +60,19 @@
                 placeholder="Search Month"
                 class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white"
               />
-              <ul id="monthList" class="max-h-60 overflow-y-auto">
-                <!-- Month options will be populated here -->
-              </ul>
+              <ul id="monthList" class="max-h-60 overflow-y-auto"></ul>
             </div>
           </div>
-
-          <!-- Year Picker -->
           <div class="relative">
             <div
               id="yearPicker"
               class="bg-blue-600 text-white p-2 rounded-full cursor-pointer hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between w-32"
             >
               <span id="selectedYear">Select Year</span>
-              <!-- Down Arrow SVG -->
               <svg class="h-4 w-4 text-white ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
                 <path d="M7 7l3 3 3-3" />
               </svg>
             </div>
-            <!-- Year Dropdown -->
             <div id="yearDropdown" class="absolute mt-2 w-48 bg-white dark:bg-gray-700 text-black dark:text-white rounded shadow-lg overflow-hidden z-20 hidden">
               <input
                 type="number"
@@ -97,18 +81,14 @@
                 inputmode="numeric"
                 class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white"
               />
-              <ul id="yearList" class="max-h-60 overflow-y-auto">
-                <!-- Year options will be populated here -->
-              </ul>
+              <ul id="yearList" class="max-h-60 overflow-y-auto"></ul>
             </div>
           </div>
-
           <button
             id="nextMonth"
             class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label="Next Month"
           >
-            <!-- Right Arrow SVG -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
@@ -118,16 +98,13 @@
       <h1 id="calendarTitle" class="text-3xl font-bold text-center mb-6 text-gray-100"></h1>
       <div id="weekdayNames" class="grid grid-cols-7 gap-2 sm:gap-4 text-center font-semibold text-gray-300"></div>
       <section id="calendar" class="grid grid-cols-7 gap-2 sm:gap-4"></section>
-      <footer class="flex justify-center mt-6">
-        <button
-          id="goToToday"
-          class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 hidden focus:outline-none focus:ring-2 focus:ring-green-500"
-        >
+      <footer class="flex justify-between mt-6">
+        <button id="goToToday" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500">
           Go to Today
         </button>
+        <div class="text-sm text-gray-400 text-center sm:text-left">Tip: Click on any date to see Myanmar date details</div>
       </footer>
     </main>
-
     <!-- Modal -->
     <div id="myModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
       <div
