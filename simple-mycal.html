@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Myanmar Calendar</title>
+    <title>Myanmar Calendar - Traditional Lunar Calendar</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
@@ -12,79 +12,1517 @@
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="msapplication-TileImage" content="/favicon/mstile-150x150.png" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#0a0a0f" />
     <meta property="og:image" content="/icon.jpg" />
     <meta property="og:image:width" content="1024" />
     <meta property="og:image:height" content="1024" />
     <meta property="og:image:alt" content="Myanmar Calendar" />
-    <meta property="og:title" content="Myanmar Calendar" />
-    <meta property="og:description" content="Myanmar Calendar is a simple calendar application that displays Myanmar dates." />
+    <meta property="og:title" content="Myanmar Calendar - Traditional Lunar Calendar" />
+    <meta property="og:description" content="Experience the elegance of Myanmar's traditional lunar calendar with modern design excellence." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Myanmar Calendar" />
+
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
-        darkMode: "class"
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              'serif': ['Crimson Pro', 'Cormorant Garamond', 'serif'],
+              'sans': ['DM Sans', 'sans-serif'],
+            }
+          }
+        }
       };
     </script>
+
+    <style>
+      :root {
+        /* Neo-Traditional Luxury Palette - Myanmar Gemstones */
+        --color-ruby-dark: #1a0a0f;
+        --color-ruby-deep: #2d1419;
+        --color-ruby: #8b1e3f;
+        --color-ruby-bright: #c73659;
+        --color-sapphire-dark: #0f1923;
+        --color-sapphire: #1e3a5f;
+        --color-sapphire-bright: #3d5a80;
+        --color-jade: #2d5a4f;
+        --color-jade-bright: #52a88f;
+        --color-gold: #d4af37;
+        --color-gold-bright: #f4d03f;
+        --color-pearl: #f5f3f0;
+        --color-obsidian: #0a0a0f;
+        --color-smoke: rgba(245, 243, 240, 0.05);
+
+        /* Glassmorphism */
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(212, 175, 55, 0.1);
+        --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+        /* Gradients */
+        --gradient-ruby: linear-gradient(135deg, var(--color-ruby-deep) 0%, var(--color-ruby) 100%);
+        --gradient-sapphire: linear-gradient(135deg, var(--color-sapphire-dark) 0%, var(--color-sapphire) 100%);
+        --gradient-gold: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-bright) 100%);
+        --gradient-mesh: radial-gradient(at 0% 0%, var(--color-ruby-dark) 0px, transparent 50%),
+                         radial-gradient(at 100% 0%, var(--color-sapphire-dark) 0px, transparent 50%),
+                         radial-gradient(at 100% 100%, var(--color-jade) 0px, transparent 50%),
+                         radial-gradient(at 0% 100%, var(--color-ruby-deep) 0px, transparent 50%);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background: var(--color-obsidian);
+        color: var(--color-pearl);
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Animated Background Mesh */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--gradient-mesh);
+        opacity: 0.4;
+        z-index: 0;
+        animation: meshShift 20s ease-in-out infinite;
+      }
+
+      @keyframes meshShift {
+        0%, 100% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(1.1) rotate(5deg); }
+      }
+
+      /* Grain Texture Overlay */
+      body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        opacity: 0.15;
+        z-index: 1;
+        pointer-events: none;
+        mix-blend-mode: overlay;
+      }
+
+      /* Main Container */
+      main {
+        position: relative;
+        z-index: 2;
+        animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Premium Glass Container */
+      .glass-container {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow),
+                    0 0 0 1px rgba(212, 175, 55, 0.05) inset,
+                    0 0 60px rgba(212, 175, 55, 0.05);
+      }
+
+      /* Elegant Title with Gold Accent */
+      .calendar-title {
+        font-family: 'Crimson Pro', serif;
+        font-weight: 600;
+        font-size: 2.5rem;
+        letter-spacing: 0.02em;
+        background: var(--gradient-gold);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+        text-align: center;
+        margin-bottom: 2rem;
+        animation: shimmer 3s ease-in-out infinite;
+      }
+
+      @keyframes shimmer {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.85; }
+      }
+
+      .calendar-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 2px;
+        background: var(--gradient-gold);
+        border-radius: 2px;
+      }
+
+      /* Premium Button Styling */
+      .btn-primary {
+        position: relative;
+        background: var(--gradient-ruby);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        color: var(--color-pearl);
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(139, 30, 63, 0.3);
+      }
+
+      .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(139, 30, 63, 0.4);
+        border-color: var(--color-gold);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      /* Icon Buttons */
+      .btn-icon {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        color: var(--color-gold);
+        padding: 0.75rem;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn-icon:hover {
+        background: var(--gradient-ruby);
+        border-color: var(--color-gold);
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 8px 20px rgba(139, 30, 63, 0.4);
+      }
+
+      .btn-icon svg {
+        display: block;
+      }
+
+      /* Premium Picker Buttons */
+      .picker-button {
+        background: var(--gradient-sapphire);
+        border: 1px solid rgba(212, 175, 55, 0.15);
+        color: var(--color-pearl);
+        padding: 0.75rem 1.25rem;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        font-weight: 500;
+        min-width: 140px;
+        box-shadow: 0 4px 12px rgba(30, 58, 95, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .picker-button::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .picker-button:hover::after {
+        width: 300px;
+        height: 300px;
+      }
+
+      .picker-button:hover {
+        transform: translateY(-2px);
+        border-color: var(--color-gold);
+        box-shadow: 0 8px 20px rgba(30, 58, 95, 0.5);
+      }
+
+      /* Gem Card Calendar Cells */
+      .calendar-cell {
+        position: relative;
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 1.25rem;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        animation: cardEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+        min-height: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @keyframes cardEntrance {
+        from {
+          opacity: 0;
+          transform: scale(0.9) rotateY(-10deg);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) rotateY(0deg);
+        }
+      }
+
+      /* Stagger animation for calendar cells */
+      .calendar-cell:nth-child(1) { animation-delay: 0.05s; }
+      .calendar-cell:nth-child(2) { animation-delay: 0.1s; }
+      .calendar-cell:nth-child(3) { animation-delay: 0.15s; }
+      .calendar-cell:nth-child(4) { animation-delay: 0.2s; }
+      .calendar-cell:nth-child(5) { animation-delay: 0.25s; }
+      .calendar-cell:nth-child(6) { animation-delay: 0.3s; }
+      .calendar-cell:nth-child(7) { animation-delay: 0.35s; }
+
+      .calendar-cell::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: var(--gradient-gold);
+        border-radius: 16px;
+        opacity: 0;
+        transition: opacity 0.4s;
+        z-index: -1;
+      }
+
+      .calendar-cell:hover::before {
+        opacity: 0.3;
+      }
+
+      .calendar-cell:hover {
+        transform: scale(1.02);
+        border-color: var(--color-gold);
+        box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3),
+                    0 0 0 1px rgba(212, 175, 55, 0.2) inset;
+      }
+
+      .calendar-cell.today {
+        background: var(--gradient-ruby);
+        border-color: var(--color-gold);
+        box-shadow: 0 8px 25px rgba(139, 30, 63, 0.4),
+                    0 0 0 2px rgba(212, 175, 55, 0.3) inset;
+      }
+
+      .calendar-cell.today::after {
+        content: '';
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 8px;
+        height: 8px;
+        background: var(--color-gold);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--color-gold);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(1.2); }
+      }
+
+      .day-number {
+        font-family: 'Crimson Pro', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--color-gold);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+      }
+
+      .myanmar-date {
+        font-size: 0.75rem;
+        color: rgba(245, 243, 240, 0.8);
+        line-height: 1.4;
+        font-weight: 400;
+      }
+
+      /* Weekday Names */
+      .weekday-name {
+        font-family: 'Crimson Pro', serif;
+        font-weight: 500;
+        font-size: 0.875rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-gold);
+        opacity: 0.7;
+      }
+
+      /* Premium Modal */
+      .modal-overlay {
+        background: rgba(10, 10, 15, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .modal-content {
+        background: var(--gradient-sapphire);
+        border: 2px solid var(--color-gold);
+        border-radius: 24px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                    0 0 0 1px rgba(212, 175, 55, 0.2) inset;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .modal-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+      }
+
+      .modal-title {
+        font-family: 'Crimson Pro', serif;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--color-gold);
+        margin-bottom: 1.5rem;
+      }
+
+      .modal-detail {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: var(--color-pearl);
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      }
+
+      .modal-detail:last-child {
+        border-bottom: none;
+      }
+
+      /* Dropdown Styling */
+      .dropdown-menu {
+        background: var(--gradient-sapphire);
+        border: 1px solid var(--color-gold);
+        border-radius: 16px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(20px);
+        overflow: hidden;
+      }
+
+      .dropdown-item {
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: var(--color-pearl);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      }
+
+      .dropdown-item:hover {
+        background: rgba(212, 175, 55, 0.15);
+        padding-left: 1.5rem;
+      }
+
+      .dropdown-item.selected {
+        background: var(--gradient-ruby);
+        color: var(--color-gold);
+        font-weight: 600;
+      }
+
+      /* Search Input */
+      .search-input {
+        background: rgba(10, 10, 15, 0.5);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        border-radius: 12px;
+        color: var(--color-pearl);
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        transition: all 0.3s;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: var(--color-gold);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        background: rgba(10, 10, 15, 0.7);
+      }
+
+      .search-input::placeholder {
+        color: rgba(245, 243, 240, 0.4);
+      }
+
+      /* Responsive Adjustments - All Screen Sizes */
+
+      /* Extra Small Mobile - 320px and below */
+      @media (max-width: 320px) {
+        body {
+          padding: 0.5rem;
+        }
+
+        main {
+          padding: 1rem !important;
+          border-radius: 1rem !important;
+        }
+
+        .calendar-title {
+          font-size: 1.25rem;
+          margin-bottom: 1rem;
+        }
+
+        .calendar-title::after {
+          width: 40px;
+        }
+
+        header {
+          gap: 0.75rem !important;
+          margin-bottom: 1rem !important;
+        }
+
+        .btn-icon {
+          padding: 0.5rem;
+        }
+
+        .btn-icon svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        .picker-button {
+          min-width: 90px;
+          padding: 0.5rem 0.75rem;
+          font-size: 0.75rem;
+        }
+
+        .picker-button svg {
+          width: 12px;
+          height: 12px;
+        }
+
+        .weekday-name {
+          font-size: 0.65rem;
+          padding: 0.25rem;
+        }
+
+        #calendar {
+          gap: 0.375rem !important;
+        }
+
+        #weekdayNames {
+          gap: 0.375rem !important;
+          margin-bottom: 0.5rem !important;
+        }
+
+        .calendar-cell {
+          padding: 0.5rem;
+          border-radius: 8px;
+          min-height: 60px;
+        }
+
+        .day-number {
+          font-size: 1rem;
+          margin-bottom: 0.25rem;
+        }
+
+        .myanmar-date {
+          font-size: 0.5rem;
+        }
+
+        .btn-primary {
+          padding: 0.5rem 1rem;
+          font-size: 0.75rem;
+        }
+
+        footer {
+          flex-direction: column;
+          gap: 0.75rem;
+          padding-top: 1rem;
+        }
+
+        footer .text-sm {
+          font-size: 0.65rem;
+        }
+
+        .modal-content {
+          padding: 1.5rem !important;
+        }
+
+        .modal-title {
+          font-size: 1.25rem;
+          margin-bottom: 1rem;
+        }
+
+        .modal-detail {
+          font-size: 0.875rem;
+        }
+      }
+
+      /* Small Mobile - 321px to 480px */
+      @media (min-width: 321px) and (max-width: 480px) {
+        body {
+          padding: 0.75rem;
+        }
+
+        main {
+          padding: 1.5rem !important;
+          border-radius: 1.5rem !important;
+        }
+
+        .calendar-title {
+          font-size: 1.5rem;
+          margin-bottom: 1.25rem;
+        }
+
+        .calendar-title::after {
+          width: 50px;
+        }
+
+        header {
+          gap: 1rem !important;
+          margin-bottom: 1.5rem !important;
+        }
+
+        .btn-icon {
+          padding: 0.625rem;
+        }
+
+        .picker-button {
+          min-width: 110px;
+          padding: 0.625rem 1rem;
+          font-size: 0.875rem;
+        }
+
+        .weekday-name {
+          font-size: 0.75rem;
+          padding: 0.375rem;
+        }
+
+        #calendar {
+          gap: 0.5rem !important;
+        }
+
+        #weekdayNames {
+          gap: 0.5rem !important;
+          margin-bottom: 0.75rem !important;
+        }
+
+        .calendar-cell {
+          padding: 0.625rem;
+          border-radius: 12px;
+          min-height: 70px;
+        }
+
+        .day-number {
+          font-size: 1.25rem;
+          margin-bottom: 0.375rem;
+        }
+
+        .myanmar-date {
+          font-size: 0.6rem;
+        }
+
+        .btn-primary {
+          padding: 0.625rem 1.25rem;
+          font-size: 0.875rem;
+        }
+
+        footer {
+          gap: 1rem;
+          padding-top: 1.25rem;
+        }
+
+        .modal-content {
+          padding: 2rem !important;
+        }
+
+        .modal-title {
+          font-size: 1.5rem;
+          margin-bottom: 1.25rem;
+        }
+
+        .modal-detail {
+          font-size: 0.95rem;
+        }
+      }
+
+      /* Medium Mobile - 481px to 640px */
+      @media (min-width: 481px) and (max-width: 640px) {
+        body {
+          padding: 1rem;
+        }
+
+        main {
+          padding: 2rem !important;
+        }
+
+        .calendar-title {
+          font-size: 1.75rem;
+        }
+
+        #calendar {
+          gap: 0.625rem !important;
+        }
+
+        #weekdayNames {
+          gap: 0.625rem !important;
+        }
+
+        .calendar-cell {
+          min-height: 80px;
+        }
+
+        .day-number {
+          font-size: 1.5rem;
+        }
+
+        .myanmar-date {
+          font-size: 0.65rem;
+        }
+
+        .calendar-cell {
+          padding: 0.75rem;
+        }
+
+        .modal-content {
+          padding: 2.5rem !important;
+        }
+      }
+
+      /* Tablet Portrait - 641px to 768px */
+      @media (min-width: 641px) and (max-width: 768px) {
+        main {
+          padding: 2.5rem !important;
+        }
+
+        .calendar-title {
+          font-size: 2rem;
+        }
+
+        #calendar {
+          gap: 0.75rem !important;
+        }
+
+        #weekdayNames {
+          gap: 0.75rem !important;
+        }
+
+        .calendar-cell {
+          padding: 1rem;
+          min-height: 90px;
+        }
+
+        .day-number {
+          font-size: 1.75rem;
+        }
+
+        .myanmar-date {
+          font-size: 0.7rem;
+        }
+      }
+
+      /* Tablet Landscape - 769px to 1024px */
+      @media (min-width: 769px) and (max-width: 1024px) {
+        main {
+          padding: 3rem !important;
+        }
+
+        .calendar-title {
+          font-size: 2.25rem;
+        }
+
+        #calendar {
+          gap: 1rem !important;
+        }
+
+        #weekdayNames {
+          gap: 1rem !important;
+        }
+
+        .calendar-cell {
+          padding: 1.125rem;
+          min-height: 100px;
+        }
+
+        .day-number {
+          font-size: 1.875rem;
+        }
+
+        .myanmar-date {
+          font-size: 0.75rem;
+        }
+      }
+
+      /* Desktop - 1025px to 1440px */
+      @media (min-width: 1025px) and (max-width: 1440px) {
+        main {
+          max-width: 1200px;
+        }
+
+        .calendar-title {
+          font-size: 2.5rem;
+        }
+
+        #calendar {
+          gap: 1rem !important;
+        }
+
+        #weekdayNames {
+          gap: 1rem !important;
+        }
+
+        .calendar-cell {
+          padding: 1.25rem;
+          min-height: 110px;
+        }
+
+        .day-number {
+          font-size: 2rem;
+        }
+
+        .myanmar-date {
+          font-size: 0.8rem;
+        }
+      }
+
+      /* Large Desktop - 1441px to 1920px */
+      @media (min-width: 1441px) and (max-width: 1920px) {
+        main {
+          max-width: 1400px;
+          padding: 3.5rem !important;
+        }
+
+        .calendar-title {
+          font-size: 3rem;
+          margin-bottom: 2.5rem;
+        }
+
+        .calendar-title::after {
+          width: 80px;
+          height: 3px;
+        }
+
+        #calendar {
+          gap: 1.25rem !important;
+        }
+
+        #weekdayNames {
+          gap: 1.25rem !important;
+        }
+
+        .calendar-cell {
+          padding: 1.5rem;
+          border-radius: 20px;
+          min-height: 130px;
+        }
+
+        .day-number {
+          font-size: 2.5rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .myanmar-date {
+          font-size: 0.875rem;
+          line-height: 1.6;
+        }
+
+        .weekday-name {
+          font-size: 1rem;
+          padding: 0.75rem;
+        }
+
+        .btn-icon {
+          padding: 1rem;
+        }
+
+        .btn-icon svg {
+          width: 24px;
+          height: 24px;
+        }
+
+        .picker-button {
+          min-width: 160px;
+          padding: 1rem 1.5rem;
+          font-size: 1.05rem;
+        }
+
+        .btn-primary {
+          padding: 1rem 2rem;
+          font-size: 1.05rem;
+        }
+
+        .modal-content {
+          max-width: 600px;
+          padding: 3rem !important;
+        }
+
+        .modal-title {
+          font-size: 2rem;
+        }
+
+        .modal-detail {
+          font-size: 1.25rem;
+          line-height: 2;
+        }
+      }
+
+      /* Ultra Wide / 4K - 1921px and above */
+      @media (min-width: 1921px) {
+        main {
+          max-width: 1600px;
+          padding: 4rem !important;
+        }
+
+        .calendar-title {
+          font-size: 3.5rem;
+          margin-bottom: 3rem;
+        }
+
+        .calendar-title::after {
+          width: 100px;
+          height: 4px;
+        }
+
+        #calendar {
+          gap: 1.5rem !important;
+        }
+
+        #weekdayNames {
+          gap: 1.5rem !important;
+        }
+
+        .calendar-cell {
+          padding: 2rem;
+          border-radius: 24px;
+          min-height: 160px;
+        }
+
+        .calendar-cell:hover {
+          transform: scale(1.03);
+        }
+
+        .day-number {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+        }
+
+        .myanmar-date {
+          font-size: 1rem;
+          line-height: 1.8;
+        }
+
+        .weekday-name {
+          font-size: 1.125rem;
+          padding: 1rem;
+        }
+
+        .btn-icon {
+          padding: 1.25rem;
+        }
+
+        .btn-icon svg {
+          width: 28px;
+          height: 28px;
+        }
+
+        .picker-button {
+          min-width: 180px;
+          padding: 1.125rem 1.75rem;
+          font-size: 1.125rem;
+        }
+
+        .btn-primary {
+          padding: 1.125rem 2.25rem;
+          font-size: 1.125rem;
+        }
+
+        .modal-content {
+          max-width: 700px;
+          padding: 3.5rem !important;
+        }
+
+        .modal-title {
+          font-size: 2.25rem;
+        }
+
+        .modal-detail {
+          font-size: 1.375rem;
+          line-height: 2.2;
+        }
+      }
+
+      /* Landscape Orientation Adjustments */
+      @media (max-height: 500px) and (orientation: landscape) {
+        body {
+          padding: 0.5rem;
+        }
+
+        main {
+          padding: 1rem !important;
+        }
+
+        .calendar-title {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+        }
+
+        header {
+          margin-bottom: 1rem !important;
+        }
+
+        #calendar {
+          gap: 0.5rem !important;
+        }
+
+        #weekdayNames {
+          gap: 0.5rem !important;
+          margin-bottom: 0.5rem !important;
+        }
+
+        .calendar-cell {
+          padding: 0.5rem;
+          min-height: 50px;
+        }
+
+        .day-number {
+          font-size: 1.25rem;
+        }
+
+        .weekday-name {
+          padding: 0.25rem;
+          font-size: 0.75rem;
+        }
+
+        footer {
+          padding-top: 1rem;
+        }
+      }
+
+      /* Touch Device Enhancements */
+      @media (hover: none) and (pointer: coarse) {
+        .calendar-cell {
+          min-height: 70px; /* Larger touch targets */
+        }
+
+        .btn-icon {
+          min-width: 44px;
+          min-height: 44px;
+        }
+
+        .picker-button {
+          min-height: 44px;
+        }
+
+        .btn-primary {
+          min-height: 44px;
+        }
+
+        /* Disable hover effects on touch devices */
+        .calendar-cell:hover {
+          transform: none;
+        }
+
+        /* Add active state for touch feedback */
+        .calendar-cell:active {
+          transform: scale(0.98);
+          opacity: 0.9;
+        }
+
+        .btn-icon:active {
+          transform: scale(0.95);
+        }
+
+        .picker-button:active {
+          transform: scale(0.98);
+        }
+      }
+
+      /* High DPI / Retina Display Adjustments */
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .calendar-cell {
+          border-width: 0.5px;
+        }
+
+        .modal-content {
+          border-width: 1.5px;
+        }
+
+        .calendar-title::after {
+          height: 1.5px;
+        }
+      }
+
+      /* Ultra Narrow Screens */
+      @media (max-width: 280px) {
+        body {
+          padding: 0.25rem;
+        }
+
+        main {
+          padding: 0.75rem !important;
+          border-radius: 0.75rem !important;
+        }
+
+        .calendar-title {
+          font-size: 1rem;
+        }
+
+        .picker-button {
+          min-width: 70px;
+          padding: 0.375rem 0.5rem;
+          font-size: 0.65rem;
+        }
+
+        #calendar {
+          gap: 0.25rem !important;
+        }
+
+        #weekdayNames {
+          gap: 0.25rem !important;
+        }
+
+        .calendar-cell {
+          padding: 0.375rem;
+          min-height: 50px;
+        }
+
+        .day-number {
+          font-size: 0.875rem;
+        }
+
+        .weekday-name {
+          font-size: 0.5rem;
+        }
+      }
+
+      /* Scrollbar Styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgba(10, 10, 15, 0.5);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--gradient-gold);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-gold-bright);
+      }
+
+      /* Utility Classes */
+      .text-gold {
+        color: var(--color-gold);
+      }
+
+      .text-pearl {
+        color: var(--color-pearl);
+      }
+
+      .flex-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .transition-smooth {
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* Premium Loading State */
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--color-obsidian);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Animated Logo/Icon */
+      .loading-icon {
+        width: 120px;
+        height: 120px;
+        position: relative;
+        margin-bottom: 2rem;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+      }
+
+      /* Gemstone Spinner */
+      .gemstone-spinner {
+        width: 120px;
+        height: 120px;
+        position: relative;
+      }
+
+      .gem {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        animation: orbit 2s linear infinite;
+      }
+
+      .gem-1 {
+        background: var(--gradient-ruby);
+        box-shadow: 0 0 20px rgba(139, 30, 63, 0.6);
+        animation-delay: 0s;
+        top: 0;
+        left: 50%;
+        margin-left: -10px;
+      }
+
+      .gem-2 {
+        background: var(--gradient-gold);
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        animation-delay: -0.5s;
+        top: 50%;
+        right: 0;
+        margin-top: -10px;
+      }
+
+      .gem-3 {
+        background: var(--gradient-sapphire);
+        box-shadow: 0 0 20px rgba(30, 58, 95, 0.6);
+        animation-delay: -1s;
+        bottom: 0;
+        left: 50%;
+        margin-left: -10px;
+      }
+
+      .gem-4 {
+        background: linear-gradient(135deg, var(--color-jade) 0%, var(--color-jade-bright) 100%);
+        box-shadow: 0 0 20px rgba(45, 90, 79, 0.6);
+        animation-delay: -1.5s;
+        top: 50%;
+        left: 0;
+        margin-top: -10px;
+      }
+
+      @keyframes orbit {
+        0% {
+          transform: rotate(0deg) translateX(50px) rotate(0deg) scale(1);
+        }
+        50% {
+          transform: rotate(180deg) translateX(50px) rotate(-180deg) scale(1.3);
+        }
+        100% {
+          transform: rotate(360deg) translateX(50px) rotate(-360deg) scale(1);
+        }
+      }
+
+      /* Center Glow */
+      .spinner-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60px;
+        height: 60px;
+        margin-left: -30px;
+        margin-top: -30px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% { transform: scale(1); opacity: 0.6; }
+        50% { transform: scale(1.5); opacity: 1; }
+      }
+
+      /* Loading Text */
+      .loading-text {
+        font-family: 'Crimson Pro', serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        background: var(--gradient-gold);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer-text 2s ease-in-out infinite;
+        margin-bottom: 0.5rem;
+      }
+
+      @keyframes shimmer-text {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+      }
+
+      .loading-subtext {
+        font-size: 0.875rem;
+        color: rgba(245, 243, 240, 0.6);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      /* Progress Bar */
+      .loading-progress {
+        width: 200px;
+        height: 3px;
+        background: rgba(212, 175, 55, 0.1);
+        border-radius: 2px;
+        margin-top: 2rem;
+        overflow: hidden;
+      }
+
+      .loading-progress-bar {
+        height: 100%;
+        background: var(--gradient-gold);
+        border-radius: 2px;
+        animation: progress 2s ease-in-out infinite;
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+      }
+
+      @keyframes progress {
+        0% { width: 0%; transform: translateX(0); }
+        50% { width: 100%; transform: translateX(0); }
+        100% { width: 100%; transform: translateX(200px); }
+      }
+
+      /* Page Transition Fade In */
+      body.loading main {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      body.loaded main {
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* Skeleton Loading for Calendar Cells */
+      .skeleton-cell {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.02) 25%,
+          rgba(255, 255, 255, 0.05) 50%,
+          rgba(255, 255, 255, 0.02) 75%
+        );
+        background-size: 200% 100%;
+        animation: skeleton-loading 1.5s ease-in-out infinite;
+        border-radius: 16px;
+        min-height: 80px;
+      }
+
+      @keyframes skeleton-loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      /* Fade in calendar cells when loaded */
+      .calendar-cell.loaded {
+        animation: fadeInCell 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      @keyframes fadeInCell {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Loading State */
+      @media (max-width: 480px) {
+        .loading-icon {
+          width: 80px;
+          height: 80px;
+        }
+
+        .gemstone-spinner {
+          width: 80px;
+          height: 80px;
+        }
+
+        .gem {
+          width: 14px;
+          height: 14px;
+        }
+
+        @keyframes orbit {
+          0% {
+            transform: rotate(0deg) translateX(35px) rotate(0deg) scale(1);
+          }
+          50% {
+            transform: rotate(180deg) translateX(35px) rotate(-180deg) scale(1.3);
+          }
+          100% {
+            transform: rotate(360deg) translateX(35px) rotate(-360deg) scale(1);
+          }
+        }
+
+        .spinner-glow {
+          width: 40px;
+          height: 40px;
+          margin-left: -20px;
+          margin-top: -20px;
+        }
+
+        .loading-text {
+          font-size: 1.25rem;
+        }
+
+        .loading-subtext {
+          font-size: 0.75rem;
+        }
+
+        .loading-progress {
+          width: 150px;
+        }
+      }
+    </style>
   </head>
-  <body class="bg-gray-900 text-gray-100 flex items-center justify-center min-h-screen">
-    <main class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-5xl mx-4">
-      <header class="flex flex-col sm:flex-row justify-center items-center mb-6 space-y-4 sm:space-y-0 sm:space-x-6">
-        <div class="flex items-center space-x-4">
+  <body class="flex-center min-h-screen p-4 loading">
+    <!-- Premium Loading Screen -->
+    <div id="loadingOverlay" class="loading-overlay">
+      <div class="loading-icon">
+        <div class="gemstone-spinner">
+          <div class="spinner-glow"></div>
+          <div class="gem gem-1"></div>
+          <div class="gem gem-2"></div>
+          <div class="gem gem-3"></div>
+          <div class="gem gem-4"></div>
+        </div>
+      </div>
+      <div class="loading-text">Myanmar Calendar</div>
+      <div class="loading-subtext">Loading Traditional Dates</div>
+      <div class="loading-progress">
+        <div class="loading-progress-bar"></div>
+      </div>
+    </div>
+    <main class="glass-container w-full max-w-6xl mx-auto p-8 rounded-3xl relative">
+      <!-- Header Navigation -->
+      <header class="flex flex-col sm:flex-row justify-center items-center mb-8 gap-6">
+        <div class="flex items-center gap-4">
           <button
             id="prevMonth"
-            class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="btn-icon"
             aria-label="Previous Month"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
+
           <div class="relative">
-            <div
-              id="monthPicker"
-              class="bg-blue-600 text-white p-2 rounded-full cursor-pointer hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between w-32"
-            >
+            <div id="monthPicker" class="picker-button flex items-center justify-between gap-2">
               <span id="selectedMonth">Select Month</span>
-              <svg class="h-4 w-4 text-white ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
-                <path d="M7 7l3 3 3-3" />
+              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7l3 3 3-3" />
               </svg>
             </div>
-            <div id="monthDropdown" class="absolute mt-2 w-48 bg-white dark:bg-gray-700 text-black dark:text-white rounded shadow-lg overflow-hidden z-20 hidden">
+            <div id="monthDropdown" class="dropdown-menu absolute mt-3 w-56 z-20 hidden">
               <input
                 type="text"
                 id="monthSearch"
                 placeholder="Search Month"
-                class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white"
+                class="search-input w-full"
               />
-              <ul id="monthList" class="max-h-60 overflow-y-auto"></ul>
+              <ul id="monthList" class="max-h-64 overflow-y-auto"></ul>
             </div>
           </div>
+
           <div class="relative">
-            <div
-              id="yearPicker"
-              class="bg-blue-600 text-white p-2 rounded-full cursor-pointer hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between w-32"
-            >
+            <div id="yearPicker" class="picker-button flex items-center justify-between gap-2">
               <span id="selectedYear">Select Year</span>
-              <svg class="h-4 w-4 text-white ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
-                <path d="M7 7l3 3 3-3" />
+              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7l3 3 3-3" />
               </svg>
             </div>
-            <div id="yearDropdown" class="absolute mt-2 w-48 bg-white dark:bg-gray-700 text-black dark:text-white rounded shadow-lg overflow-hidden z-20 hidden">
+            <div id="yearDropdown" class="dropdown-menu absolute mt-3 w-56 z-20 hidden">
               <input
                 type="number"
                 id="yearSearch"
                 placeholder="Search Year"
                 inputmode="numeric"
-                class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white"
+                class="search-input w-full"
               />
-              <ul id="yearList" class="max-h-60 overflow-y-auto"></ul>
+              <ul id="yearList" class="max-h-64 overflow-y-auto"></ul>
             </div>
           </div>
+
           <button
             id="nextMonth"
-            class="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="btn-icon"
             aria-label="Next Month"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -93,28 +1531,37 @@
           </button>
         </div>
       </header>
-      <h1 id="calendarTitle" class="text-3xl font-bold text-center mb-6 text-gray-100"></h1>
-      <div id="weekdayNames" class="grid grid-cols-7 gap-2 sm:gap-4 text-center font-semibold text-gray-300"></div>
-      <section id="calendar" class="grid grid-cols-7 gap-2 sm:gap-4"></section>
-      <footer class="flex justify-between mt-6">
-        <button id="goToToday" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500">
-          Go to Today
+
+      <!-- Calendar Title -->
+      <h1 id="calendarTitle" class="calendar-title"></h1>
+
+      <!-- Weekday Names -->
+      <div id="weekdayNames" class="grid grid-cols-7 gap-3 sm:gap-4 text-center mb-4"></div>
+
+      <!-- Calendar Grid -->
+      <section id="calendar" class="grid grid-cols-7 gap-3 sm:gap-4 mb-8"></section>
+
+      <!-- Footer -->
+      <footer class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-gold border-opacity-10">
+        <button id="goToToday" class="btn-primary">
+          Return to Today
         </button>
-        <div class="text-sm text-gray-400 text-center sm:text-left">Tip: Click on any date to see Myanmar date details</div>
+        <div class="text-sm text-pearl opacity-60 text-center">
+          Click any date to explore Myanmar calendar details
+        </div>
       </footer>
     </main>
-    <!-- Modal -->
-    <div id="myModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
-      <div
-        class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4 sm:mx-auto transform transition-all duration-300 ease-out scale-95 opacity-0 flex flex-col items-center"
-      >
-        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-100">
-          <span id="modalDate" class="text-blue-400"></span>
+
+    <!-- Date Details Modal -->
+    <div id="myModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
+      <div class="modal-content p-8 rounded-3xl max-w-lg w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0 flex flex-col items-center">
+        <h2 class="modal-title text-center">
+          <span id="modalDate"></span>
         </h2>
-        <div id="modalMyanmarDate" class="text-lg leading-relaxed mb-4 flex flex-col items-center text-gray-300"></div>
+        <div id="modalMyanmarDate" class="flex flex-col items-center gap-3 mb-6"></div>
         <button
           id="closeModal"
-          class="bg-blue-600 text-white py-2 px-6 rounded-full mt-4 mx-auto block hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
+          class="btn-primary"
         >
           Close
         </button>
@@ -122,21 +1569,19 @@
     </div>
 
     <!-- Month Picker Modal -->
-    <div id="monthPickerModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
-        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-100">Select Month</h2>
+    <div id="monthPickerModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
+      <div class="modal-content p-8 rounded-3xl max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
+        <h2 class="modal-title text-center">Select Month</h2>
         <input
           type="text"
           id="monthSearchModal"
           placeholder="Search Month"
-          class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white mb-4"
+          class="search-input w-full mb-4"
         />
-        <ul id="monthListModal" class="max-h-60 overflow-y-auto">
-          <!-- Month options will be populated here -->
-        </ul>
+        <ul id="monthListModal" class="max-h-64 overflow-y-auto mb-6"></ul>
         <button
           id="closeMonthModal"
-          class="bg-blue-600 text-white py-2 px-6 rounded-full mt-4 mx-auto block hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
+          class="btn-primary mx-auto block"
         >
           Close
         </button>
@@ -144,22 +1589,20 @@
     </div>
 
     <!-- Year Picker Modal -->
-    <div id="yearPickerModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
-        <h2 class="text-2xl font-semibold mb-4 text-center text-gray-100">Select Year</h2>
+    <div id="yearPickerModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
+      <div class="modal-content p-8 rounded-3xl max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
+        <h2 class="modal-title text-center">Select Year</h2>
         <input
           type="number"
           id="yearSearchModal"
           placeholder="Search Year"
           inputmode="numeric"
-          class="w-full p-2 border-b border-gray-200 dark:border-gray-600 outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-black dark:text-white mb-4"
+          class="search-input w-full mb-4"
         />
-        <ul id="yearListModal" class="max-h-60 overflow-y-auto">
-          <!-- Year options will be populated here -->
-        </ul>
+        <ul id="yearListModal" class="max-h-64 overflow-y-auto mb-6"></ul>
         <button
           id="closeYearModal"
-          class="bg-blue-600 text-white py-2 px-6 rounded-full mt-4 mx-auto block hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
+          class="btn-primary mx-auto block"
         >
           Close
         </button>
@@ -169,8 +1612,51 @@
     <script type="module">
       import { Mycal } from "https://unpkg.com/mycal@latest/dist/browser/index.js";
 
+      // Preload: Show loading immediately
+      window.addEventListener('load', () => {
+        // Ensure minimum loading time for smooth UX
+        const minLoadTime = 800;
+        const startTime = Date.now();
+
+        const checkReadyAndHide = () => {
+          const elapsedTime = Date.now() - startTime;
+          const remainingTime = Math.max(0, minLoadTime - elapsedTime);
+
+          setTimeout(() => {
+            // Final check before hiding
+            if (document.readyState === 'complete') {
+              console.log('Myanmar Calendar loaded successfully');
+            }
+          }, remainingTime);
+        };
+
+        checkReadyAndHide();
+      });
+
+      // Hide loading screen function
+      function hideLoadingScreen() {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const body = document.body;
+
+        // Add loaded class to body for smooth transition
+        body.classList.remove('loading');
+        body.classList.add('loaded');
+
+        // Hide loading overlay with fade out
+        setTimeout(() => {
+          loadingOverlay.classList.add('hidden');
+        }, 100);
+
+        // Remove loading overlay from DOM after animation
+        setTimeout(() => {
+          if (loadingOverlay && loadingOverlay.parentNode) {
+            loadingOverlay.remove();
+          }
+        }, 800);
+      }
+
       document.addEventListener("DOMContentLoaded", () => {
-        // Your existing JavaScript variables
+        // Element references
         const calendarElement = document.getElementById("calendar");
         const calendarTitle = document.getElementById("calendarTitle");
         const prevMonthButton = document.getElementById("prevMonth");
@@ -184,7 +1670,7 @@
         const modalMyanmarDate = document.getElementById("modalMyanmarDate");
         const weekdayNamesElement = document.getElementById("weekdayNames");
 
-        // New variables for custom dropdowns
+        // Dropdown elements
         const monthDropdown = document.getElementById("monthDropdown");
         const monthList = document.getElementById("monthList");
         const monthSearch = document.getElementById("monthSearch");
@@ -195,7 +1681,7 @@
         const yearSearch = document.getElementById("yearSearch");
         const selectedYearElement = document.getElementById("selectedYear");
 
-        // Variables for modals
+        // Modal elements
         const monthPickerModal = document.getElementById("monthPickerModal");
         const monthListModal = document.getElementById("monthListModal");
         const monthSearchModal = document.getElementById("monthSearchModal");
@@ -210,7 +1696,7 @@
         let currentYear = today.getFullYear();
         let currentMonth = today.getMonth();
 
-        // Variable to check if the device is mobile
+        // Check if device is mobile
         let isMobile = window.innerWidth <= 640;
 
         window.addEventListener("resize", () => {
@@ -227,7 +1713,7 @@
           monthList.innerHTML = monthNames
             .map(
               (month, index) => `
-                  <li class="p-2 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer ${index === currentMonth ? "bg-gray-300 dark:bg-gray-600" : ""}" data-month="${index}">
+                  <li class="dropdown-item ${index === currentMonth ? "selected" : ""}" data-month="${index}">
                     ${month}
                   </li>
                 `
@@ -241,7 +1727,7 @@
           let years = "";
           for (let year = maxYear; year >= minYear; year--) {
             years += `
-                  <li class="p-2 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer ${year === currentYear ? "bg-gray-300 dark:bg-gray-600" : ""}" data-year="${year}">
+                  <li class="dropdown-item ${year === currentYear ? "selected" : ""}" data-year="${year}">
                     ${year}
                   </li>
                 `;
@@ -297,7 +1783,7 @@
           const li = e.target.closest("li[data-month]");
           if (li) {
             currentMonth = parseInt(li.getAttribute("data-month"));
-            selectedMonthElement.textContent = li.textContent;
+            selectedMonthElement.textContent = li.textContent.trim();
             monthDropdown.classList.add("hidden");
             renderCalendar(currentYear, currentMonth);
           }
@@ -307,7 +1793,7 @@
           const li = e.target.closest("li[data-year]");
           if (li) {
             currentYear = parseInt(li.getAttribute("data-year"));
-            selectedYearElement.textContent = li.textContent;
+            selectedYearElement.textContent = li.textContent.trim();
             yearDropdown.classList.add("hidden");
             renderCalendar(currentYear, currentMonth);
           }
@@ -346,12 +1832,10 @@
 
         // Modal show and hide functions
         function showMonthModal() {
-          // Populate the modal with month options
           monthListModal.innerHTML = monthList.innerHTML;
           monthSearchModal.value = "";
           filterMonthOptionsModal();
 
-          // Scroll to the selected month
           setTimeout(() => {
             const selectedOption = monthListModal.querySelector(`li[data-month="${currentMonth}"]`);
             if (selectedOption) {
@@ -377,12 +1861,10 @@
         }
 
         function showYearModal() {
-          // Populate the modal with year options
           yearListModal.innerHTML = yearList.innerHTML;
           yearSearchModal.value = "";
           filterYearOptionsModal();
 
-          // Scroll to the selected year
           setTimeout(() => {
             const selectedOption = yearListModal.querySelector(`li[data-year="${currentYear}"]`);
             if (selectedOption) {
@@ -462,7 +1944,7 @@
           const li = e.target.closest("li[data-month]");
           if (li) {
             currentMonth = parseInt(li.getAttribute("data-month"));
-            selectedMonthElement.textContent = li.textContent;
+            selectedMonthElement.textContent = li.textContent.trim();
             hideMonthModal();
             renderCalendar(currentYear, currentMonth);
           }
@@ -472,7 +1954,7 @@
           const li = e.target.closest("li[data-year]");
           if (li) {
             currentYear = parseInt(li.getAttribute("data-year"));
-            selectedYearElement.textContent = li.textContent;
+            selectedYearElement.textContent = li.textContent.trim();
             hideYearModal();
             renderCalendar(currentYear, currentMonth);
           }
@@ -496,7 +1978,6 @@
             goToTodayButton.classList.add("hidden");
           }
 
-          // Update the highlighting in the dropdowns
           updateDropdownHighlighting();
         }
 
@@ -505,7 +1986,7 @@
           weekdayNamesElement.innerHTML = "";
           for (const name of weekdayNames) {
             const cell = document.createElement("div");
-            cell.className = "p-2 text-sm text-gray-300";
+            cell.className = "weekday-name p-2";
             cell.innerText = name;
             weekdayNamesElement.appendChild(cell);
           }
@@ -525,7 +2006,7 @@
 
         function createEmptyCell() {
           const cell = document.createElement("div");
-          cell.className = "bg-transparent p-4 rounded-lg shadow-md";
+          cell.className = "bg-transparent p-4 rounded-lg";
           return cell;
         }
 
@@ -533,27 +2014,28 @@
           const cell = document.createElement("div");
           const isToday = year === today.getFullYear() && month === today.getMonth() && day === today.getDate();
 
-          // Updated color scheme
-          const baseCellClass = "p-4 rounded-lg shadow-md transition duration-300 cursor-pointer flex flex-col items-center justify-center";
-          const todayCellClass = isToday ? "bg-indigo-600 text-white hover:bg-indigo-700" : "bg-gray-700 text-gray-100 hover:bg-gray-600";
-
-          cell.className = `${baseCellClass} ${todayCellClass} calendar-cell`;
+          cell.className = `calendar-cell ${isToday ? 'today' : ''}`;
 
           const date = new Date(year, month, day);
           const dateString = `${month + 1}/${day}/${year}`;
           const myanmarDate = new Mycal(dateString);
 
           cell.innerHTML = `
-            <div class="text-xl font-bold">${day}</div>
-            <div class="hidden lg:block">
-              <p class="text-center text-sm">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
-              <p class="text-center text-sm">${myanmarDate.day.fd.my}</p>
+            <div class="day-number">${day}</div>
+            <div class="myanmar-date hidden lg:block">
+              <p class="text-center">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
+              <p class="text-center">${myanmarDate.day.fd.my}</p>
             </div>
           `;
 
           cell.addEventListener("click", () => {
             showModal(myanmarDate, date.toDateString());
           });
+
+          // Add loaded class with slight delay for stagger effect
+          setTimeout(() => {
+            cell.classList.add('loaded');
+          }, day * 10);
 
           return cell;
         }
@@ -567,22 +2049,18 @@
 
           // Chinese zodiac from instance property
           const cz = myanmarDate.chineseZodiac;
-          console.log("Chinese Zodiac object:", cz);
-          console.log("Chinese Zodiac keys:", cz ? Object.keys(cz) : "no object");
           const czText = cz?.my || cz?.mm || cz?.signInBurmese || cz?.en || "";
 
           // Western zodiac from static method
           const wz = Mycal.zodiac(dateNumber, monthNumber);
-          console.log("Western Zodiac object:", wz);
-          console.log("Western Zodiac keys:", wz ? Object.keys(wz) : "no object");
           const wzText = wz?.my || wz?.mm || wz?.sign_mm || wz?.en || "";
 
           modalMyanmarDate.innerHTML = `
-            <p class="text-center mb-2">${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my} ရက် ${myanmarDate.weekday.my} နေ့ ${myanmarDate.year.my}</p>
-            <p class="text-center mb-2">${myanmarDate.maharbote} ဖွား</p>
-            <p class="text-center mb-2">${myanmarDate.numFormat(myanmarDate.numerology)} ဂဏန်း သမား</p>
-            <p class="text-center mb-2">${czText} နှစ်</p>
-            <p class="text-center">${wzText} ရာသီ</p>
+            <p class="modal-detail text-center">${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my} ရက် ${myanmarDate.weekday.my} နေ့ ${myanmarDate.year.my}</p>
+            <p class="modal-detail text-center">${myanmarDate.maharbote} ဖွား</p>
+            <p class="modal-detail text-center">${myanmarDate.numFormat(myanmarDate.numerology)} ဂဏန်း သမား</p>
+            <p class="modal-detail text-center">${czText} နှစ်</p>
+            <p class="modal-detail text-center">${wzText} ရာသီ</p>
           `;
 
           myModal.classList.remove("hidden");
@@ -613,9 +2091,9 @@
           monthOptions.forEach((option) => {
             const monthValue = parseInt(option.getAttribute("data-month"));
             if (monthValue === currentMonth) {
-              option.classList.add("bg-gray-300", "dark:bg-gray-600");
+              option.classList.add("selected");
             } else {
-              option.classList.remove("bg-gray-300", "dark:bg-gray-600");
+              option.classList.remove("selected");
             }
           });
 
@@ -624,9 +2102,9 @@
           yearOptions.forEach((option) => {
             const yearValue = parseInt(option.getAttribute("data-year"));
             if (yearValue === currentYear) {
-              option.classList.add("bg-gray-300", "dark:bg-gray-600");
+              option.classList.add("selected");
             } else {
-              option.classList.remove("bg-gray-300", "dark:bg-gray-600");
+              option.classList.remove("selected");
             }
           });
         }
@@ -697,6 +2175,12 @@
         // Call the function on load and on window resize
         adjustForMobile();
         window.addEventListener("resize", adjustForMobile);
+
+        // Hide loading screen after calendar is fully rendered and ready
+        // Add a small delay to ensure smooth transition
+        setTimeout(() => {
+          hideLoadingScreen();
+        }, 500);
       });
     </script>
   </body>
