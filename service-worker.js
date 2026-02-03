@@ -3,7 +3,7 @@
 
 const CACHE_NAME = 'myanmar-calendar-v1';
 const urlsToCache = [
-  '/simple-mycal.html',
+  '/index.html',
   '/manifest.json',
   'https://cdn.tailwindcss.com',
   'https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap',

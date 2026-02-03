@@ -2,7 +2,7 @@
   "name": "Myanmar Calendar - Traditional Lunar Calendar",
   "short_name": "Myanmar Calendar",
   "description": "Experience the elegance of Myanmar's traditional lunar calendar with modern design excellence",
-  "start_url": "/simple-mycal.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0f",
   "theme_color": "#d4af37",
