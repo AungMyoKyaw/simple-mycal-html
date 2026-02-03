@@ -21,14 +21,12 @@
     <meta property="og:description" content="Myanmar Calendar is a simple calendar application that displays Myanmar dates." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Myanmar Calendar" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
-        darkMode: "class",
+        darkMode: "class"
       };
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/mycal@latest/dist/client/mycal.min.js"></script>
-    <script src="https://unpkg.com/baydin@latest/dist/client/baydin.min.js"></script>
   </head>
   <body class="bg-gray-900 text-gray-100 flex items-center justify-center min-h-screen">
     <main class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-5xl mx-4">
@@ -168,7 +166,9 @@
       </div>
     </div>
 
-    <script>
+    <script type="module">
+      import { Mycal } from "https://unpkg.com/mycal@latest/dist/browser/index.js";
+
       document.addEventListener("DOMContentLoaded", () => {
         // Your existing JavaScript variables
         const calendarElement = document.getElementById("calendar");
@@ -230,7 +230,7 @@
                   <li class="p-2 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer ${index === currentMonth ? "bg-gray-300 dark:bg-gray-600" : ""}" data-month="${index}">
                     ${month}
                   </li>
-                `,
+                `
             )
             .join("");
         }
@@ -541,7 +541,7 @@
 
           const date = new Date(year, month, day);
           const dateString = `${month + 1}/${day}/${year}`;
-          const myanmarDate = new mycal(dateString);
+          const myanmarDate = new Mycal(dateString);
 
           cell.innerHTML = `
             <div class="text-xl font-bold">${day}</div>
@@ -560,16 +560,29 @@
 
         function showModal(myanmarDate, dateString) {
           modalDate.innerText = dateString;
-          const weekDayNumber = new Date(dateString).getDay() + 1;
-          const dateNumber = new Date(dateString).getDate();
-          const yearNumber = new Date(dateString).getFullYear();
-          const monthNumber = new Date(dateString).getMonth() + 1;
+          const dateObj = new Date(dateString);
+          const dateNumber = dateObj.getDate();
+          const monthNumber = dateObj.getMonth() + 1;
+          const yearNumber = dateObj.getFullYear();
+
+          // Chinese zodiac from instance property
+          const cz = myanmarDate.chineseZodiac;
+          console.log("Chinese Zodiac object:", cz);
+          console.log("Chinese Zodiac keys:", cz ? Object.keys(cz) : "no object");
+          const czText = cz?.my || cz?.mm || cz?.signInBurmese || cz?.en || "";
+
+          // Western zodiac from static method
+          const wz = Mycal.zodiac(dateNumber, monthNumber);
+          console.log("Western Zodiac object:", wz);
+          console.log("Western Zodiac keys:", wz ? Object.keys(wz) : "no object");
+          const wzText = wz?.my || wz?.mm || wz?.sign_mm || wz?.en || "";
+
           modalMyanmarDate.innerHTML = `
             <p class="text-center mb-2">${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my} ရက် ${myanmarDate.weekday.my} နေ့ ${myanmarDate.year.my}</p>
-            <p class="text-center mb-2">${baydin.maharbote(myanmarDate.year.en, weekDayNumber)} ဖွား</p>
-            <p class="text-center mb-2">${baydin.numFormat(baydin.numerology(dateNumber))} ဂဏန်း သမား</p>
-            <p class="text-center mb-2">${baydin.chineseZodiac(yearNumber).signInBurmese} နှစ်</p>
-            <p class="text-center">${baydin.zodiac(dateNumber, monthNumber).sign_mm} ရာသီ</p>
+            <p class="text-center mb-2">${myanmarDate.maharbote} ဖွား</p>
+            <p class="text-center mb-2">${myanmarDate.numFormat(myanmarDate.numerology)} ဂဏန်း သမား</p>
+            <p class="text-center mb-2">${czText} နှစ်</p>
+            <p class="text-center">${wzText} ရာသီ</p>
           `;
 
           myModal.classList.remove("hidden");
