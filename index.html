@@ -3,86 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Myanmar Calendar - Traditional Lunar Calendar</title>
+    <title>Myanmar Calendar</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#000000" />
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="msapplication-TileImage" content="/favicon/mstile-150x150.png" />
-    <meta name="theme-color" content="#0a0a0f" />
-    <meta property="og:image" content="/icon.jpg" />
-    <meta property="og:image:width" content="1024" />
-    <meta property="og:image:height" content="1024" />
-    <meta property="og:image:alt" content="Myanmar Calendar" />
-    <meta property="og:title" content="Myanmar Calendar - Traditional Lunar Calendar" />
-    <meta property="og:description" content="Experience the elegance of Myanmar's traditional lunar calendar with modern design excellence." />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Myanmar Calendar" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:title" content="Myanmar Calendar" />
+    <meta property="og:description" content="Traditional Myanmar Calendar" />
 
-    <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Myanmar Calendar" />
-
-    <!-- Premium Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            fontFamily: {
-              serif: ["Crimson Pro", "Cormorant Garamond", "serif"],
-              sans: ["DM Sans", "sans-serif"]
-            }
-          }
-        }
-      };
-    </script>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Calendar" />
 
     <style>
+      /* Design System */
+
       :root {
-        /* Neo-Traditional Luxury Palette - Myanmar Gemstones */
-        --color-ruby-dark: #1a0a0f;
-        --color-ruby-deep: #2d1419;
-        --color-ruby: #8b1e3f;
-        --color-ruby-bright: #c73659;
-        --color-sapphire-dark: #0f1923;
-        --color-sapphire: #1e3a5f;
-        --color-sapphire-bright: #3d5a80;
-        --color-jade: #2d5a4f;
-        --color-jade-bright: #52a88f;
-        --color-gold: #d4af37;
-        --color-gold-bright: #f4d03f;
-        --color-pearl: #f5f3f0;
-        --color-obsidian: #0a0a0f;
-        --color-smoke: rgba(245, 243, 240, 0.05);
-
-        /* Glassmorphism */
-        --glass-bg: rgba(255, 255, 255, 0.03);
-        --glass-border: rgba(212, 175, 55, 0.1);
-        --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-
-        /* Gradients */
-        --gradient-ruby: linear-gradient(135deg, var(--color-ruby-deep) 0%, var(--color-ruby) 100%);
-        --gradient-sapphire: linear-gradient(135deg, var(--color-sapphire-dark) 0%, var(--color-sapphire) 100%);
-        --gradient-gold: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-bright) 100%);
-        --gradient-mesh:
-          radial-gradient(at 0% 0%, var(--color-ruby-dark) 0px, transparent 50%), radial-gradient(at 100% 0%, var(--color-sapphire-dark) 0px, transparent 50%),
-          radial-gradient(at 100% 100%, var(--color-jade) 0px, transparent 50%), radial-gradient(at 0% 100%, var(--color-ruby-deep) 0px, transparent 50%);
+        --color-bg: #ffffff;
+        --color-bg-secondary: #f5f5f7;
+        --color-text: #1d1d1f;
+        --color-text-secondary: #86868b;
+        --color-border: #d2d2d7;
+        --color-border-light: #e5e5ea;
+        --color-accent: #007aff;
+        --radius: 8px;
+        --radius-lg: 12px;
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+        --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
 
       * {
@@ -92,68 +46,25 @@
       }
 
       body {
-        font-family: "DM Sans", sans-serif;
-        background: var(--color-obsidian);
-        color: var(--color-pearl);
-        min-height: 100vh;
-        position: relative;
-        overflow-x: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+        background: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.4;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
-      /* Animated Background Mesh */
-      body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--gradient-mesh);
-        opacity: 0.4;
-        z-index: 0;
-        animation: meshShift 20s ease-in-out infinite;
-        will-change: transform;
-      }
-
-      @keyframes meshShift {
-        0%,
-        100% {
-          transform: scale(1) rotate(0deg) translate(0, 0);
-        }
-        33% {
-          transform: scale(1.05) rotate(2deg) translate(10px, 10px);
-        }
-        66% {
-          transform: scale(1.1) rotate(-2deg) translate(-10px, 10px);
-        }
-      }
-
-      /* Grain Texture Overlay */
-      body::after {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-        opacity: 0.15;
-        z-index: 1;
-        pointer-events: none;
-        mix-blend-mode: overlay;
-      }
-
-      /* Main Container */
       main {
-        position: relative;
-        z-index: 2;
-        animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 2.5rem 1rem;
+        animation: fadeIn 0.5s var(--ease);
       }
 
-      @keyframes fadeInUp {
+      @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(30px);
+          transform: translateY(6px);
         }
         to {
           opacity: 1;
@@ -161,1912 +72,729 @@
         }
       }
 
-      /* Premium Glass Container */
-      .glass-container {
-        background: var(--glass-bg);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border: 1px solid var(--glass-border);
-        box-shadow:
-          var(--glass-shadow),
-          0 0 0 1px rgba(212, 175, 55, 0.05) inset,
-          0 0 60px rgba(212, 175, 55, 0.05);
-      }
+      /* Typography */
 
-      /* Elegant Title with Gold Accent */
-      .calendar-title {
-        font-family: "Crimson Pro", serif;
+      h1 {
+        font-size: 1.875rem;
         font-weight: 600;
-        font-size: 2.5rem;
-        letter-spacing: 0.02em;
-        background: var(--gradient-gold);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        position: relative;
+        letter-spacing: -0.03em;
         text-align: center;
+        margin-bottom: 2.5rem;
+        color: var(--color-text);
+      }
+
+      /* Header */
+
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
         margin-bottom: 2rem;
-        animation: shimmer 3s ease-in-out infinite;
       }
 
-      @keyframes shimmer {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.85;
-        }
+      .nav-group {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
       }
 
-      .calendar-title::after {
-        content: "";
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 2px;
-        background: var(--gradient-gold);
-        border-radius: 2px;
-      }
-
-      /* Premium Button Styling */
-      .btn-primary {
-        position: relative;
-        background: var(--gradient-ruby);
-        border: 1px solid rgba(212, 175, 55, 0.2);
-        color: var(--color-pearl);
-        padding: 0.75rem 1.5rem;
-        border-radius: 12px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(139, 30, 63, 0.3);
-      }
-
-      .btn-primary::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s;
-      }
-
-      .btn-primary:hover::before {
-        left: 100%;
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(139, 30, 63, 0.4);
-        border-color: var(--color-gold);
-      }
-
-      .btn-primary:active {
-        transform: translateY(0);
-      }
-
-      /* Icon Buttons */
       .btn-icon {
-        background: var(--glass-bg);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--glass-border);
-        color: var(--color-gold);
-        padding: 0.75rem;
-        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        border-radius: var(--radius);
         cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        color: var(--color-text);
+        transition:
+          transform 0.15s var(--ease),
+          background 0.15s var(--ease);
       }
 
       .btn-icon:hover {
-        background: var(--gradient-ruby);
-        border-color: var(--color-gold);
-        transform: scale(1.1) rotate(5deg);
-        box-shadow: 0 8px 20px rgba(139, 30, 63, 0.4);
+        background: var(--color-bg-secondary);
+      }
+
+      .btn-icon:active {
+        transform: scale(0.92);
       }
 
       .btn-icon svg {
-        display: block;
+        width: 17px;
+        height: 17px;
       }
 
-      /* Premium Picker Buttons */
       .picker-button {
-        background: var(--gradient-sapphire);
-        border: 1px solid rgba(212, 175, 55, 0.15);
-        color: var(--color-pearl);
-        padding: 0.75rem 1.25rem;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 0.5rem 0.75rem;
+        background: var(--color-bg-secondary);
+        border: none;
+        border-radius: var(--radius);
+        font-size: 0.8125rem;
         font-weight: 500;
-        min-width: 140px;
-        box-shadow: 0 4px 12px rgba(30, 58, 95, 0.3);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .picker-button::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-        transform: translate(-50%, -50%);
+        color: var(--color-text);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
         transition:
-          width 0.6s,
-          height 0.6s;
-      }
-
-      .picker-button:hover::after {
-        width: 300px;
-        height: 300px;
+          background 0.15s var(--ease),
+          transform 0.15s var(--ease);
+        min-width: 95px;
+        justify-content: space-between;
       }
 
       .picker-button:hover {
-        transform: translateY(-2px);
-        border-color: var(--color-gold);
-        box-shadow: 0 8px 20px rgba(30, 58, 95, 0.5);
+        background: var(--color-border-light);
       }
 
-      /* Gem Card Calendar Cells */
+      .picker-button:active {
+        transform: scale(0.97);
+      }
+
+      .picker-button svg {
+        width: 11px;
+        height: 11px;
+        opacity: 0.4;
+      }
+
+      /* Actions */
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 0.375rem;
+        margin-bottom: 2rem;
+      }
+
+      /* Weekday Names */
+
+      #weekdayNames {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .weekday-name {
+        text-align: center;
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 0.5rem;
+      }
+
+      /* Calendar Grid */
+
+      #calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
       .calendar-cell {
-        position: relative;
-        background: var(--glass-bg);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--glass-border);
-        border-radius: 16px;
-        padding: 1.25rem;
-        cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        animation: cardEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-        min-height: 80px;
+        aspect-ratio: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-      }
-
-      @keyframes cardEntrance {
-        from {
-          opacity: 0;
-          transform: scale(0.9) rotateY(-10deg);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1) rotateY(0deg);
-        }
-      }
-
-      /* Stagger animation for calendar cells */
-      .calendar-cell:nth-child(1) {
-        animation-delay: 0.05s;
-      }
-      .calendar-cell:nth-child(2) {
-        animation-delay: 0.1s;
-      }
-      .calendar-cell:nth-child(3) {
-        animation-delay: 0.15s;
-      }
-      .calendar-cell:nth-child(4) {
-        animation-delay: 0.2s;
-      }
-      .calendar-cell:nth-child(5) {
-        animation-delay: 0.25s;
-      }
-      .calendar-cell:nth-child(6) {
-        animation-delay: 0.3s;
-      }
-      .calendar-cell:nth-child(7) {
-        animation-delay: 0.35s;
-      }
-
-      .calendar-cell::before {
-        content: "";
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: var(--gradient-gold);
-        border-radius: 16px;
-        opacity: 0;
-        transition: opacity 0.4s;
-        z-index: -1;
-      }
-
-      .calendar-cell:hover::before {
-        opacity: 0.3;
+        padding: 0.5rem;
+        background: var(--color-bg-secondary);
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition:
+          transform 0.2s var(--spring),
+          background 0.15s var(--ease);
+        position: relative;
       }
 
       .calendar-cell:hover {
-        transform: scale(1.02);
-        border-color: var(--color-gold);
-        box-shadow:
-          0 12px 30px rgba(212, 175, 55, 0.3),
-          0 0 0 1px rgba(212, 175, 55, 0.2) inset;
+        transform: scale(1.03);
+        background: var(--color-border-light);
       }
 
-      .calendar-cell.today {
-        background: var(--gradient-ruby);
-        border-color: var(--color-gold);
-        box-shadow:
-          0 8px 25px rgba(139, 30, 63, 0.4),
-          0 0 0 2px rgba(212, 175, 55, 0.3) inset;
+      .calendar-cell:active {
+        transform: scale(0.98);
       }
 
       .calendar-cell.today::after {
         content: "";
         position: absolute;
-        top: 8px;
-        right: 8px;
-        width: 8px;
-        height: 8px;
-        background: var(--color-gold);
+        bottom: 8px;
+        width: 5px;
+        height: 5px;
+        background: var(--color-accent);
         border-radius: 50%;
-        box-shadow: 0 0 10px var(--color-gold);
-        animation: pulse 2s ease-in-out infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.6;
-          transform: scale(1.2);
-        }
       }
 
       .day-number {
-        font-family: "Crimson Pro", serif;
-        font-size: 2rem;
+        font-size: 1.125rem;
         font-weight: 600;
-        color: var(--color-gold);
-        line-height: 1;
-        margin-bottom: 0.5rem;
-        text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        color: var(--color-text);
+        margin-bottom: 0.125rem;
       }
 
       .myanmar-date {
-        font-size: 0.75rem;
-        color: rgba(245, 243, 240, 0.8);
-        line-height: 1.4;
-        font-weight: 400;
+        font-size: 0.625rem;
+        color: var(--color-text-secondary);
+        text-align: center;
+        line-height: 1.3;
       }
 
-      /* Weekday Names */
-      .weekday-name {
-        font-family: "Crimson Pro", serif;
-        font-weight: 500;
-        font-size: 0.875rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-gold);
-        opacity: 0.7;
+      /* Dropdown */
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 0.375rem;
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+        z-index: 100;
+        min-width: 140px;
+        max-height: 260px;
+        overflow-y: auto;
+        animation: dropdownIn 0.2s var(--spring);
       }
 
-      /* Premium Modal */
+      @keyframes dropdownIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .dropdown-menu input {
+        width: 100%;
+        padding: 0.625rem 0.75rem;
+        border: none;
+        border-bottom: 1px solid var(--color-border-light);
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        font-size: 0.8125rem;
+        background: var(--color-bg);
+        outline: none;
+      }
+
+      .dropdown-menu ul {
+        list-style: none;
+      }
+
+      .dropdown-item {
+        padding: 0.5625rem 0.75rem;
+        font-size: 0.8125rem;
+        cursor: pointer;
+        transition: background 0.15s var(--ease);
+      }
+
+      .dropdown-item:hover {
+        background: var(--color-bg-secondary);
+      }
+
+      .dropdown-item.selected {
+        background: var(--color-accent);
+        color: white;
+      }
+
+      /* Modal */
+
       .modal-overlay {
-        background: rgba(10, 10, 15, 0.85);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 1rem;
+        animation: fadeIn 0.2s var(--ease);
       }
 
       .modal-content {
-        background: var(--gradient-sapphire);
-        border: 2px solid var(--color-gold);
-        border-radius: 24px;
-        box-shadow:
-          0 20px 60px rgba(0, 0, 0, 0.5),
-          0 0 0 1px rgba(212, 175, 55, 0.2) inset;
-        position: relative;
-        overflow: hidden;
+        background: var(--color-bg);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        max-width: 360px;
+        width: 100%;
+        box-shadow: var(--shadow-lg);
+        animation: slideUp 0.35s var(--spring);
       }
 
-      .modal-content::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
-        pointer-events: none;
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px) scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
       }
 
       .modal-title {
-        font-family: "Crimson Pro", serif;
-        font-size: 1.75rem;
+        font-size: 1.125rem;
         font-weight: 600;
-        color: var(--color-gold);
-        margin-bottom: 1.5rem;
+        text-align: center;
+        margin-bottom: 1.25rem;
+        color: var(--color-text);
+        letter-spacing: -0.02em;
       }
 
       .modal-detail {
-        font-size: 1.125rem;
-        line-height: 1.8;
-        color: var(--color-pearl);
-        padding: 0.5rem 0;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        padding: 0.625rem 0;
+        border-bottom: 1px solid var(--color-border-light);
+        font-size: 0.9375rem;
+        color: var(--color-text);
+        text-align: center;
+        line-height: 1.5;
       }
 
       .modal-detail:last-child {
         border-bottom: none;
       }
 
-      /* Dropdown Styling */
-      .dropdown-menu {
-        background: var(--gradient-sapphire);
-        border: 1px solid var(--color-gold);
-        border-radius: 16px;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(20px);
-        overflow: hidden;
+      .modal-buttons {
+        display: flex;
+        gap: 0.625rem;
+        margin-top: 1.25rem;
       }
 
-      .dropdown-item {
-        padding: 0.75rem 1rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        color: var(--color-pearl);
-        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      .modal-buttons button {
+        flex: 1;
+        padding: 0.625rem;
+        font-size: 0.875rem;
+        transition: transform 0.15s var(--ease);
       }
 
-      .dropdown-item:hover {
-        background: rgba(212, 175, 55, 0.15);
-        padding-left: 1.5rem;
+      .modal-buttons button:active {
+        transform: scale(0.97);
       }
 
-      .dropdown-item.selected {
-        background: var(--gradient-ruby);
-        color: var(--color-gold);
-        font-weight: 600;
+      /* Toast */
+
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(80px);
+        background: var(--color-text);
+        color: white;
+        padding: 0.625rem 1.125rem;
+        border-radius: var(--radius-lg);
+        font-size: 0.8125rem;
+        box-shadow: var(--shadow-md);
+        opacity: 0;
+        transition: all 0.35s var(--spring);
+        z-index: 2000;
       }
 
-      /* Search Input */
-      .search-input {
-        background: rgba(10, 10, 15, 0.5);
-        border: 1px solid rgba(212, 175, 55, 0.2);
-        border-radius: 12px;
-        color: var(--color-pearl);
-        padding: 0.75rem 1rem;
-        font-size: 0.95rem;
-        transition: all 0.3s;
+      .toast.visible {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
       }
 
-      .search-input:focus {
+      /* Input */
+
+      input[type="date"],
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        padding: 0.625rem 0.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        font-size: 0.9375rem;
+        background: var(--color-bg);
         outline: none;
-        border-color: var(--color-gold);
-        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-        background: rgba(10, 10, 15, 0.7);
+        transition: border-color 0.15s var(--ease);
       }
 
-      .search-input::placeholder {
-        color: rgba(245, 243, 240, 0.4);
+      input:focus {
+        border-color: var(--color-accent);
       }
 
-      /* Gradient Utility Classes */
-      .bg-gradient-ruby {
-        background: var(--gradient-ruby);
+      /* Buttons */
+
+      .btn-primary {
+        padding: 0.625rem 1rem;
+        background: var(--color-accent);
+        color: white;
+        border: none;
+        border-radius: var(--radius);
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          transform 0.15s var(--ease),
+          opacity 0.15s var(--ease);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
       }
 
-      .bg-gradient-sapphire {
-        background: var(--gradient-sapphire);
+      .btn-primary:hover {
+        opacity: 0.9;
       }
 
-      .bg-gradient-gold {
-        background: var(--gradient-gold);
+      .btn-primary:active {
+        transform: scale(0.97);
       }
 
-      .border-gold {
-        border-color: var(--color-gold);
+      .btn-primary svg {
+        width: 15px;
+        height: 15px;
       }
 
-      .text-pearl {
-        color: var(--color-pearl);
+      /* Hidden */
+
+      .hidden {
+        display: none !important;
       }
 
-      /* Responsive Adjustments - All Screen Sizes */
+      /* Responsive */
 
-      /* Extra Small Mobile - 320px and below */
-      @media (max-width: 320px) {
-        body {
-          padding: 0.5rem;
-        }
-
+      @media (max-width: 640px) {
         main {
-          padding: 1rem !important;
-          border-radius: 1rem !important;
+          padding: 1.5rem 1rem;
         }
 
-        .calendar-title {
-          font-size: 1.25rem;
-          margin-bottom: 1rem;
-        }
-
-        .calendar-title::after {
-          width: 40px;
-        }
-
-        header {
-          gap: 0.75rem !important;
-          margin-bottom: 1rem !important;
-        }
-
-        .btn-icon {
-          padding: 0.5rem;
-        }
-
-        .btn-icon svg {
-          width: 16px;
-          height: 16px;
-        }
-
-        .picker-button {
-          min-width: 90px;
-          padding: 0.5rem 0.75rem;
-          font-size: 0.75rem;
-        }
-
-        .picker-button svg {
-          width: 12px;
-          height: 12px;
-        }
-
-        .weekday-name {
-          font-size: 0.65rem;
-          padding: 0.25rem;
-        }
-
-        #calendar {
-          gap: 0.375rem !important;
-        }
-
-        #weekdayNames {
-          gap: 0.375rem !important;
-          margin-bottom: 0.5rem !important;
-        }
-
-        .calendar-cell {
-          padding: 0.5rem;
-          border-radius: 8px;
-          min-height: 60px;
+        h1 {
+          font-size: 1.5rem;
+          margin-bottom: 1.75rem;
         }
 
         .day-number {
           font-size: 1rem;
-          margin-bottom: 0.25rem;
         }
 
         .myanmar-date {
-          font-size: 0.5rem;
+          font-size: 0.575rem;
         }
 
-        .btn-primary {
-          padding: 0.5rem 1rem;
-          font-size: 0.75rem;
+        .calendar-cell {
+          padding: 0.375rem;
         }
 
-        footer {
+        .modal-content {
+          padding: 1.25rem;
+        }
+
+        .modal-title {
+          font-size: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        .modal-detail {
+          font-size: 0.875rem;
+          padding: 0.5rem 0;
+        }
+
+        .modal-buttons {
           flex-direction: column;
-          gap: 0.75rem;
-          padding-top: 1rem;
-        }
-
-        footer .text-sm {
-          font-size: 0.65rem;
-        }
-
-        .modal-content {
-          padding: 1.5rem !important;
-        }
-
-        .modal-title {
-          font-size: 1.25rem;
-          margin-bottom: 1rem;
-        }
-
-        .modal-detail {
-          font-size: 0.875rem;
+          gap: 0.5rem;
         }
       }
 
-      /* Small Mobile - 321px to 480px */
-      @media (min-width: 321px) and (max-width: 480px) {
-        body {
-          padding: 0.75rem;
-        }
+      /* Print */
 
-        main {
-          padding: 1.5rem !important;
-          border-radius: 1.5rem !important;
-        }
-
-        .calendar-title {
-          font-size: 1.5rem;
-          margin-bottom: 1.25rem;
-        }
-
-        .calendar-title::after {
-          width: 50px;
-        }
-
-        header {
-          gap: 1rem !important;
-          margin-bottom: 1.5rem !important;
-        }
-
-        .btn-icon {
-          padding: 0.625rem;
-        }
-
-        .picker-button {
-          min-width: 110px;
-          padding: 0.625rem 1rem;
-          font-size: 0.875rem;
-        }
-
-        .weekday-name {
-          font-size: 0.75rem;
-          padding: 0.375rem;
-        }
-
-        #calendar {
-          gap: 0.5rem !important;
-        }
-
-        #weekdayNames {
-          gap: 0.5rem !important;
-          margin-bottom: 0.75rem !important;
-        }
-
-        .calendar-cell {
-          padding: 0.625rem;
-          border-radius: 12px;
-          min-height: 70px;
-        }
-
-        .day-number {
-          font-size: 1.25rem;
-          margin-bottom: 0.375rem;
-        }
-
-        .myanmar-date {
-          font-size: 0.6rem;
-        }
-
-        .btn-primary {
-          padding: 0.625rem 1.25rem;
-          font-size: 0.875rem;
-        }
-
-        footer {
-          gap: 1rem;
-          padding-top: 1.25rem;
-        }
-
-        .modal-content {
-          padding: 2rem !important;
-        }
-
-        .modal-title {
-          font-size: 1.5rem;
-          margin-bottom: 1.25rem;
-        }
-
-        .modal-detail {
-          font-size: 0.95rem;
-        }
-      }
-
-      /* Medium Mobile - 481px to 640px */
-      @media (min-width: 481px) and (max-width: 640px) {
-        body {
-          padding: 1rem;
-        }
-
-        main {
-          padding: 2rem !important;
-        }
-
-        .calendar-title {
-          font-size: 1.75rem;
-        }
-
-        #calendar {
-          gap: 0.625rem !important;
-        }
-
-        #weekdayNames {
-          gap: 0.625rem !important;
-        }
-
-        .calendar-cell {
-          min-height: 80px;
-        }
-
-        .day-number {
-          font-size: 1.5rem;
-        }
-
-        .myanmar-date {
-          font-size: 0.65rem;
-        }
-
-        .calendar-cell {
-          padding: 0.75rem;
-        }
-
-        .modal-content {
-          padding: 2.5rem !important;
-        }
-      }
-
-      /* Tablet Portrait - 641px to 768px */
-      @media (min-width: 641px) and (max-width: 768px) {
-        main {
-          padding: 2.5rem !important;
-        }
-
-        .calendar-title {
-          font-size: 2rem;
-        }
-
-        #calendar {
-          gap: 0.75rem !important;
-        }
-
-        #weekdayNames {
-          gap: 0.75rem !important;
-        }
-
-        .calendar-cell {
-          padding: 1rem;
-          min-height: 90px;
-        }
-
-        .day-number {
-          font-size: 1.75rem;
-        }
-
-        .myanmar-date {
-          font-size: 0.7rem;
-        }
-      }
-
-      /* Tablet Landscape - 769px to 1024px */
-      @media (min-width: 769px) and (max-width: 1024px) {
-        main {
-          padding: 3rem !important;
-        }
-
-        .calendar-title {
-          font-size: 2.25rem;
-        }
-
-        #calendar {
-          gap: 1rem !important;
-        }
-
-        #weekdayNames {
-          gap: 1rem !important;
-        }
-
-        .calendar-cell {
-          padding: 1.125rem;
-          min-height: 100px;
-        }
-
-        .day-number {
-          font-size: 1.875rem;
-        }
-
-        .myanmar-date {
-          font-size: 0.75rem;
-        }
-      }
-
-      /* Desktop - 1025px to 1440px */
-      @media (min-width: 1025px) and (max-width: 1440px) {
-        main {
-          max-width: 1200px;
-        }
-
-        .calendar-title {
-          font-size: 2.5rem;
-        }
-
-        #calendar {
-          gap: 1rem !important;
-        }
-
-        #weekdayNames {
-          gap: 1rem !important;
-        }
-
-        .calendar-cell {
-          padding: 1.25rem;
-          min-height: 110px;
-        }
-
-        .day-number {
-          font-size: 2rem;
-        }
-
-        .myanmar-date {
-          font-size: 0.8rem;
-        }
-      }
-
-      /* Large Desktop - 1441px to 1920px */
-      @media (min-width: 1441px) and (max-width: 1920px) {
-        main {
-          max-width: 1400px;
-          padding: 3.5rem !important;
-        }
-
-        .calendar-title {
-          font-size: 3rem;
-          margin-bottom: 2.5rem;
-        }
-
-        .calendar-title::after {
-          width: 80px;
-          height: 3px;
-        }
-
-        #calendar {
-          gap: 1.25rem !important;
-        }
-
-        #weekdayNames {
-          gap: 1.25rem !important;
-        }
-
-        .calendar-cell {
-          padding: 1.5rem;
-          border-radius: 20px;
-          min-height: 130px;
-        }
-
-        .day-number {
-          font-size: 2.5rem;
-          margin-bottom: 0.75rem;
-        }
-
-        .myanmar-date {
-          font-size: 0.875rem;
-          line-height: 1.6;
-        }
-
-        .weekday-name {
-          font-size: 1rem;
-          padding: 0.75rem;
-        }
-
-        .btn-icon {
-          padding: 1rem;
-        }
-
-        .btn-icon svg {
-          width: 24px;
-          height: 24px;
-        }
-
-        .picker-button {
-          min-width: 160px;
-          padding: 1rem 1.5rem;
-          font-size: 1.05rem;
-        }
-
-        .btn-primary {
-          padding: 1rem 2rem;
-          font-size: 1.05rem;
-        }
-
-        .modal-content {
-          max-width: 600px;
-          padding: 3rem !important;
-        }
-
-        .modal-title {
-          font-size: 2rem;
-        }
-
-        .modal-detail {
-          font-size: 1.25rem;
-          line-height: 2;
-        }
-      }
-
-      /* Ultra Wide / 4K - 1921px and above */
-      @media (min-width: 1921px) {
-        main {
-          max-width: 1600px;
-          padding: 4rem !important;
-        }
-
-        .calendar-title {
-          font-size: 3.5rem;
-          margin-bottom: 3rem;
-        }
-
-        .calendar-title::after {
-          width: 100px;
-          height: 4px;
-        }
-
-        #calendar {
-          gap: 1.5rem !important;
-        }
-
-        #weekdayNames {
-          gap: 1.5rem !important;
-        }
-
-        .calendar-cell {
-          padding: 2rem;
-          border-radius: 24px;
-          min-height: 160px;
-        }
-
-        .calendar-cell:hover {
-          transform: scale(1.03);
-        }
-
-        .day-number {
-          font-size: 3rem;
-          margin-bottom: 1rem;
-        }
-
-        .myanmar-date {
-          font-size: 1rem;
-          line-height: 1.8;
-        }
-
-        .weekday-name {
-          font-size: 1.125rem;
-          padding: 1rem;
-        }
-
-        .btn-icon {
-          padding: 1.25rem;
-        }
-
-        .btn-icon svg {
-          width: 28px;
-          height: 28px;
-        }
-
-        .picker-button {
-          min-width: 180px;
-          padding: 1.125rem 1.75rem;
-          font-size: 1.125rem;
-        }
-
-        .btn-primary {
-          padding: 1.125rem 2.25rem;
-          font-size: 1.125rem;
-        }
-
-        .modal-content {
-          max-width: 700px;
-          padding: 3.5rem !important;
-        }
-
-        .modal-title {
-          font-size: 2.25rem;
-        }
-
-        .modal-detail {
-          font-size: 1.375rem;
-          line-height: 2.2;
-        }
-      }
-
-      /* Landscape Orientation Adjustments */
-      @media (max-height: 500px) and (orientation: landscape) {
-        body {
-          padding: 0.5rem;
-        }
-
-        main {
-          padding: 1rem !important;
-        }
-
-        .calendar-title {
-          font-size: 1.5rem;
-          margin-bottom: 1rem;
-        }
-
-        header {
-          margin-bottom: 1rem !important;
-        }
-
-        #calendar {
-          gap: 0.5rem !important;
-        }
-
-        #weekdayNames {
-          gap: 0.5rem !important;
-          margin-bottom: 0.5rem !important;
-        }
-
-        .calendar-cell {
-          padding: 0.5rem;
-          min-height: 50px;
-        }
-
-        .day-number {
-          font-size: 1.25rem;
-        }
-
-        .weekday-name {
-          padding: 0.25rem;
-          font-size: 0.75rem;
-        }
-
-        footer {
-          padding-top: 1rem;
-        }
-      }
-
-      /* Touch Device Enhancements */
-      @media (hover: none) and (pointer: coarse) {
-        .calendar-cell {
-          min-height: 70px; /* Larger touch targets */
-        }
-
-        .btn-icon {
-          min-width: 44px;
-          min-height: 44px;
-        }
-
-        .picker-button {
-          min-height: 44px;
-        }
-
-        .btn-primary {
-          min-height: 44px;
-        }
-
-        /* Disable hover effects on touch devices */
-        .calendar-cell:hover {
-          transform: none;
-        }
-
-        /* Add active state for touch feedback */
-        .calendar-cell:active {
-          transform: scale(0.98);
-          opacity: 0.9;
-        }
-
-        .btn-icon:active {
-          transform: scale(0.95);
-        }
-
-        .picker-button:active {
-          transform: scale(0.98);
-        }
-      }
-
-      /* High DPI / Retina Display Adjustments */
-      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-        .calendar-cell {
-          border-width: 0.5px;
-        }
-
-        .modal-content {
-          border-width: 1.5px;
-        }
-
-        .calendar-title::after {
-          height: 1.5px;
-        }
-      }
-
-      /* Ultra Narrow Screens */
-      @media (max-width: 280px) {
-        body {
-          padding: 0.25rem;
-        }
-
-        main {
-          padding: 0.75rem !important;
-          border-radius: 0.75rem !important;
-        }
-
-        .calendar-title {
-          font-size: 1rem;
-        }
-
-        .picker-button {
-          min-width: 70px;
-          padding: 0.375rem 0.5rem;
-          font-size: 0.65rem;
-        }
-
-        #calendar {
-          gap: 0.25rem !important;
-        }
-
-        #weekdayNames {
-          gap: 0.25rem !important;
-        }
-
-        .calendar-cell {
-          padding: 0.375rem;
-          min-height: 50px;
-        }
-
-        .day-number {
-          font-size: 0.875rem;
-        }
-
-        .weekday-name {
-          font-size: 0.5rem;
-        }
-      }
-
-      /* Print Stylesheet */
       @media print {
-        @page {
-          size: A4;
-          margin: 1cm;
+        .btn-icon,
+        .picker-button,
+        .actions,
+        .modal-overlay {
+          display: none !important;
         }
 
         body {
-          background: white !important;
-          color: black !important;
-        }
-
-        body::before,
-        body::after {
-          display: none !important;
-        }
-
-        #loadingOverlay,
-        #toast,
-        header button,
-        footer,
-        .modal-overlay,
-        #jumpToDate,
-        #shareDate,
-        #printCalendar,
-        #exportMonth,
-        #searchDates {
-          display: none !important;
+          background: white;
         }
 
         main {
-          background: white !important;
-          box-shadow: none !important;
-          border: 2px solid #d4af37 !important;
-          max-width: 100% !important;
-          padding: 1.5rem !important;
-        }
-
-        .calendar-title {
-          color: #8b1e3f !important;
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-        }
-
-        .weekday-name {
-          color: #8b1e3f !important;
-          font-weight: 700 !important;
+          max-width: 100%;
+          padding: 1rem;
         }
 
         .calendar-cell {
-          border: 1px solid #d4af37 !important;
-          background: white !important;
-          box-shadow: none !important;
-          page-break-inside: avoid;
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-        }
-
-        .calendar-cell.today {
-          background: #fff9e6 !important;
-          border: 2px solid #d4af37 !important;
-        }
-
-        .day-number {
-          color: #8b1e3f !important;
-        }
-
-        .myanmar-date {
-          color: #333 !important;
-          display: block !important;
-        }
-
-        #calendar {
-          gap: 0.5rem !important;
-        }
-
-        #weekdayNames {
-          gap: 0.5rem !important;
+          border: 1px solid var(--color-border);
         }
       }
 
-      /* Scrollbar Styling */
+      /* Scrollbar */
+
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 6px;
       }
 
       ::-webkit-scrollbar-track {
-        background: rgba(10, 10, 15, 0.5);
+        background: transparent;
       }
 
       ::-webkit-scrollbar-thumb {
-        background: var(--gradient-gold);
-        border-radius: 4px;
+        background: var(--color-border);
+        border-radius: 3px;
       }
 
       ::-webkit-scrollbar-thumb:hover {
-        background: var(--color-gold-bright);
+        background: var(--color-text-secondary);
       }
 
-      /* Confetti Animation */
-      .confetti {
-        position: fixed;
-        width: 10px;
-        height: 10px;
-        background: var(--color-gold);
-        position: absolute;
-        animation: confetti-fall 3s linear forwards;
-        z-index: 1000;
-        pointer-events: none;
-      }
+      /* Loading State */
 
-      @keyframes confetti-fall {
-        0% {
-          transform: translateY(0) rotate(0deg);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(100vh) rotate(720deg);
-          opacity: 0;
-        }
-      }
-
-      .confetti.ruby {
-        background: var(--color-ruby-bright);
-      }
-      .confetti.sapphire {
-        background: var(--color-sapphire-bright);
-      }
-      .confetti.jade {
-        background: var(--color-jade-bright);
-      }
-      .confetti.gold {
-        background: var(--color-gold);
-      }
-
-      /* Utility Classes */
-      .text-gold {
-        color: var(--color-gold);
-      }
-
-      .text-pearl {
-        color: var(--color-pearl);
-      }
-
-      .flex-center {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .transition-smooth {
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-
-      /* Premium Loading State */
       .loading-overlay {
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--color-obsidian);
+        inset: 0;
+        background: var(--color-bg);
         z-index: 9999;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        opacity: 1;
-        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transition:
+          opacity 0.4s var(--ease),
+          visibility 0.4s;
       }
 
       .loading-overlay.hidden {
         opacity: 0;
-        pointer-events: none;
+        visibility: hidden;
       }
 
-      /* Animated Logo/Icon */
-      .loading-icon {
-        width: 120px;
-        height: 120px;
-        position: relative;
-        margin-bottom: 2rem;
-        animation: float 3s ease-in-out infinite;
-      }
-
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-20px);
-        }
-      }
-
-      /* Gemstone Spinner */
-      .gemstone-spinner {
-        width: 120px;
-        height: 120px;
-        position: relative;
-      }
-
-      .gem {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        animation: orbit 2s linear infinite;
-      }
-
-      .gem-1 {
-        background: var(--gradient-ruby);
-        box-shadow: 0 0 20px rgba(139, 30, 63, 0.6);
-        animation-delay: 0s;
-        top: 0;
-        left: 50%;
-        margin-left: -10px;
-      }
-
-      .gem-2 {
-        background: var(--gradient-gold);
-        box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-        animation-delay: -0.5s;
-        top: 50%;
-        right: 0;
-        margin-top: -10px;
-      }
-
-      .gem-3 {
-        background: var(--gradient-sapphire);
-        box-shadow: 0 0 20px rgba(30, 58, 95, 0.6);
-        animation-delay: -1s;
-        bottom: 0;
-        left: 50%;
-        margin-left: -10px;
-      }
-
-      .gem-4 {
-        background: linear-gradient(135deg, var(--color-jade) 0%, var(--color-jade-bright) 100%);
-        box-shadow: 0 0 20px rgba(45, 90, 79, 0.6);
-        animation-delay: -1.5s;
-        top: 50%;
-        left: 0;
-        margin-top: -10px;
-      }
-
-      @keyframes orbit {
-        0% {
-          transform: rotate(0deg) translateX(50px) rotate(0deg) scale(1);
-        }
-        50% {
-          transform: rotate(180deg) translateX(50px) rotate(-180deg) scale(1.3);
-        }
-        100% {
-          transform: rotate(360deg) translateX(50px) rotate(-360deg) scale(1);
-        }
-      }
-
-      /* Center Glow */
-      .spinner-glow {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 60px;
-        height: 60px;
-        margin-left: -30px;
-        margin-top: -30px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
-        animation: pulse-glow 2s ease-in-out infinite;
-      }
-
-      @keyframes pulse-glow {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 0.6;
-        }
-        50% {
-          transform: scale(1.5);
-          opacity: 1;
-        }
-      }
-
-      /* Loading Text */
-      .loading-text {
-        font-family: "Crimson Pro", serif;
-        font-size: 1.5rem;
-        font-weight: 600;
-        background: var(--gradient-gold);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: shimmer-text 2s ease-in-out infinite;
-        margin-bottom: 0.5rem;
-      }
-
-      @keyframes shimmer-text {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.6;
-        }
-      }
-
-      .loading-subtext {
-        font-size: 0.875rem;
-        color: rgba(245, 243, 240, 0.6);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-
-      /* Progress Bar */
-      .loading-progress {
-        width: 200px;
-        height: 3px;
-        background: rgba(212, 175, 55, 0.1);
-        border-radius: 2px;
-        margin-top: 2rem;
-        overflow: hidden;
-      }
-
-      .loading-progress-bar {
-        height: 100%;
-        background: var(--gradient-gold);
-        border-radius: 2px;
-        animation: progress 2s ease-in-out infinite;
-        box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-      }
-
-      @keyframes progress {
-        0% {
-          width: 0%;
-          transform: translateX(0);
-        }
-        50% {
-          width: 100%;
-          transform: translateX(0);
-        }
-        100% {
-          width: 100%;
-          transform: translateX(200px);
-        }
-      }
-
-      /* Page Transition Fade In */
       body.loading main {
         opacity: 0;
-        transform: scale(0.95);
       }
 
       body.loaded main {
         opacity: 1;
-        transform: scale(1);
-        transition:
-          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity 0.4s var(--ease);
       }
 
-      /* Skeleton Loading for Calendar Cells */
-      .skeleton-cell {
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 25%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 75%);
-        background-size: 200% 100%;
-        animation: skeleton-loading 1.5s ease-in-out infinite;
-        border-radius: 16px;
-        min-height: 80px;
+      .loading-spinner {
+        width: 32px;
+        height: 32px;
+        border: 2.5px solid var(--color-border-light);
+        border-top-color: var(--color-accent);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
       }
 
-      @keyframes skeleton-loading {
-        0% {
-          background-position: 200% 0;
-        }
-        100% {
-          background-position: -200% 0;
-        }
-      }
-
-      /* Fade in calendar cells when loaded */
-      .calendar-cell.loaded {
-        animation: fadeInCell 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      }
-
-      @keyframes fadeInCell {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
+      @keyframes spin {
         to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Responsive Loading State */
-      @media (max-width: 480px) {
-        .loading-icon {
-          width: 80px;
-          height: 80px;
-        }
-
-        .gemstone-spinner {
-          width: 80px;
-          height: 80px;
-        }
-
-        .gem {
-          width: 14px;
-          height: 14px;
-        }
-
-        @keyframes orbit {
-          0% {
-            transform: rotate(0deg) translateX(35px) rotate(0deg) scale(1);
-          }
-          50% {
-            transform: rotate(180deg) translateX(35px) rotate(-180deg) scale(1.3);
-          }
-          100% {
-            transform: rotate(360deg) translateX(35px) rotate(-360deg) scale(1);
-          }
-        }
-
-        .spinner-glow {
-          width: 40px;
-          height: 40px;
-          margin-left: -20px;
-          margin-top: -20px;
-        }
-
-        .loading-text {
-          font-size: 1.25rem;
-        }
-
-        .loading-subtext {
-          font-size: 0.75rem;
-        }
-
-        .loading-progress {
-          width: 150px;
+          transform: rotate(360deg);
         }
       }
     </style>
   </head>
-  <body class="flex-center min-h-screen p-4 loading">
-    <!-- Premium Loading Screen -->
-    <div id="loadingOverlay" class="loading-overlay">
-      <div class="loading-icon">
-        <div class="gemstone-spinner">
-          <div class="spinner-glow"></div>
-          <div class="gem gem-1"></div>
-          <div class="gem gem-2"></div>
-          <div class="gem gem-3"></div>
-          <div class="gem gem-4"></div>
-        </div>
-      </div>
-      <div class="loading-text">Myanmar Calendar</div>
-      <div class="loading-subtext">Loading Traditional Dates</div>
-      <div class="loading-progress">
-        <div class="loading-progress-bar"></div>
-      </div>
+  <body class="loading">
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner"></div>
     </div>
-    <main class="glass-container w-full max-w-6xl mx-auto p-8 rounded-3xl relative">
-      <!-- Header Navigation -->
-      <header class="flex flex-col sm:flex-row justify-center items-center mb-8 gap-6">
-        <div class="flex items-center gap-4">
-          <button id="prevMonth" class="btn-icon" aria-label="Previous Month">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+
+    <main>
+      <header>
+        <div class="nav-group">
+          <button id="prevMonth" class="btn-icon" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
 
-          <div class="relative">
-            <div id="monthPicker" class="picker-button flex items-center justify-between gap-2">
+          <div style="position: relative">
+            <button id="monthPicker" class="picker-button">
               <span id="selectedMonth">Select Month</span>
-              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7l3 3 3-3" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M6 9l6 6 6-6" />
               </svg>
-            </div>
-            <div id="monthDropdown" class="dropdown-menu absolute mt-3 w-56 z-20 hidden">
-              <input type="text" id="monthSearch" placeholder="Search Month" class="search-input w-full" />
-              <ul id="monthList" class="max-h-64 overflow-y-auto"></ul>
+            </button>
+            <div id="monthDropdown" class="dropdown-menu hidden">
+              <input type="text" id="monthSearch" placeholder="Search..." />
+              <ul id="monthList"></ul>
             </div>
           </div>
 
-          <div class="relative">
-            <div id="yearPicker" class="picker-button flex items-center justify-between gap-2">
+          <div style="position: relative">
+            <button id="yearPicker" class="picker-button">
               <span id="selectedYear">Select Year</span>
-              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7l3 3 3-3" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M6 9l6 6 6-6" />
               </svg>
-            </div>
-            <div id="yearDropdown" class="dropdown-menu absolute mt-3 w-56 z-20 hidden">
-              <input type="number" id="yearSearch" placeholder="Search Year" inputmode="numeric" class="search-input w-full" />
-              <ul id="yearList" class="max-h-64 overflow-y-auto"></ul>
+            </button>
+            <div id="yearDropdown" class="dropdown-menu hidden">
+              <input type="number" id="yearSearch" placeholder="Search..." />
+              <ul id="yearList"></ul>
             </div>
           </div>
 
-          <button id="nextMonth" class="btn-icon" aria-label="Next Month">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          <button id="nextMonth" class="btn-icon" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M9 18l6-6-6-6" />
             </svg>
           </button>
         </div>
       </header>
 
-      <!-- Calendar Title with Actions -->
-      <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-        <h1 id="calendarTitle" class="calendar-title mb-0"></h1>
-        <div class="flex gap-2">
-          <button id="jumpToDate" class="btn-icon" title="Jump to Date" aria-label="Jump to Date">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </button>
-          <button id="shareDate" class="btn-icon" title="Share Calendar" aria-label="Share Calendar">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-              />
-            </svg>
-          </button>
-          <button id="printCalendar" class="btn-icon" title="Print Calendar" aria-label="Print Calendar">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
-              />
-            </svg>
-          </button>
-          <button id="exportMonth" class="btn-icon" title="Export Month Image" aria-label="Export Month Image">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-          </button>
-        </div>
+      <h1 id="calendarTitle"></h1>
+
+      <div class="actions">
+        <button id="jumpToDate" class="btn-icon" title="Jump to date">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+        </button>
+        <button id="shareDate" class="btn-icon" title="Share">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3" />
+            <circle cx="6" cy="12" r="3" />
+            <circle cx="18" cy="19" r="3" />
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+          </svg>
+        </button>
+        <button id="exportMonth" class="btn-icon" title="Export">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <polyline points="21 15 16 10 5 21" />
+          </svg>
+        </button>
       </div>
 
-      <!-- Weekday Names -->
-      <div id="weekdayNames" class="grid grid-cols-7 gap-3 sm:gap-4 text-center mb-4"></div>
-
-      <!-- Calendar Grid -->
-      <section id="calendar" class="grid grid-cols-7 gap-3 sm:gap-4 mb-8"></section>
-
-      <!-- Footer -->
-      <footer class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-gold border-opacity-10">
-        <div class="flex gap-3">
-          <button id="goToToday" class="btn-primary">Return to Today</button>
-          <button id="searchDates" class="btn-primary bg-gradient-sapphire">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            Search
-          </button>
-        </div>
-        <div class="text-sm text-pearl opacity-60 text-center">Click any date to explore Myanmar calendar details • Use ← → arrows to navigate</div>
-      </footer>
+      <div id="weekdayNames"></div>
+      <section id="calendar"></section>
     </main>
 
-    <!-- Date Details Modal -->
-    <div id="myModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
-      <div class="modal-content p-8 rounded-3xl max-w-lg w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0 flex flex-col items-center">
-        <h2 class="modal-title text-center">
-          <span id="modalDate"></span>
-        </h2>
-        <div id="modalMyanmarDate" class="flex flex-col items-center gap-3 mb-6"></div>
-        <div class="flex gap-3 w-full">
-          <button id="exportDateImage" class="btn-primary flex-1 flex items-center justify-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            Export Image
-          </button>
-          <button id="closeModal" class="btn-primary flex-1">Close</button>
+    <!-- Date Modal -->
+    <div id="myModal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <h2 class="modal-title" id="modalDate"></h2>
+        <div id="modalMyanmarDate"></div>
+        <div class="modal-buttons">
+          <button id="exportDateImage" class="btn-primary">Export</button>
         </div>
       </div>
     </div>
 
     <!-- Month Picker Modal -->
-    <div id="monthPickerModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
-      <div class="modal-content p-8 rounded-3xl max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
-        <h2 class="modal-title text-center">Select Month</h2>
-        <input type="text" id="monthSearchModal" placeholder="Search Month" class="search-input w-full mb-4" />
-        <ul id="monthListModal" class="max-h-64 overflow-y-auto mb-6"></ul>
-        <button id="closeMonthModal" class="btn-primary mx-auto block">Close</button>
+    <div id="monthPickerModal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <h2 class="modal-title">Select Month</h2>
+        <input type="text" id="monthSearchModal" placeholder="Search..." style="margin-bottom: 1rem" />
+        <ul id="monthListModal" style="max-height: 260px; overflow-y: auto; margin-bottom: 1rem"></ul>
       </div>
     </div>
 
     <!-- Year Picker Modal -->
-    <div id="yearPickerModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
-      <div class="modal-content p-8 rounded-3xl max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
-        <h2 class="modal-title text-center">Select Year</h2>
-        <input type="number" id="yearSearchModal" placeholder="Search Year" inputmode="numeric" class="search-input w-full mb-4" />
-        <ul id="yearListModal" class="max-h-64 overflow-y-auto mb-6"></ul>
-        <button id="closeYearModal" class="btn-primary mx-auto block">Close</button>
+    <div id="yearPickerModal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <h2 class="modal-title">Select Year</h2>
+        <input type="number" id="yearSearchModal" placeholder="Search..." style="margin-bottom: 1rem" />
+        <ul id="yearListModal" style="max-height: 260px; overflow-y: auto; margin-bottom: 1rem"></ul>
       </div>
     </div>
 
     <!-- Jump to Date Modal -->
-    <div id="jumpToDateModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
-      <div class="modal-content p-8 rounded-3xl max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
-        <h2 class="modal-title text-center">Jump to Date</h2>
-        <div class="flex flex-col gap-4 mb-6">
-          <input type="date" id="jumpDateInput" class="search-input w-full" />
-        </div>
-        <div class="flex gap-3 justify-center">
+    <div id="jumpToDateModal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <h2 class="modal-title">Jump to Date</h2>
+        <input type="date" id="jumpDateInput" style="margin-bottom: 1rem" />
+        <div class="modal-buttons">
           <button id="confirmJumpDate" class="btn-primary">Jump</button>
-          <button id="closeJumpModal" class="btn-primary bg-gradient-sapphire">Cancel</button>
         </div>
-      </div>
-    </div>
-
-    <!-- Search Dates Modal -->
-    <div id="searchModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
-      <div class="modal-content p-8 rounded-3xl max-w-lg w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
-        <h2 class="modal-title text-center">Search Myanmar Dates</h2>
-        <input type="text" id="searchInput" placeholder="Search by month, day, or festival..." class="search-input w-full mb-4" />
-        <div id="searchResults" class="max-h-96 overflow-y-auto mb-6">
-          <p class="text-center text-pearl opacity-60">Enter search terms to find dates</p>
-        </div>
-        <button id="closeSearchModal" class="btn-primary mx-auto block">Close</button>
       </div>
     </div>
 
     <!-- Share Modal -->
-    <div id="shareModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
-      <div class="modal-content p-8 rounded-3xl max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
-        <h2 class="modal-title text-center">Share Calendar</h2>
-        <div class="flex flex-col gap-4 mb-6">
-          <input type="text" id="shareLink" readonly class="search-input w-full" value="" />
-          <div class="flex gap-2 justify-center">
-            <button id="copyLink" class="btn-primary flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
-              </svg>
-              Copy Link
-            </button>
-            <button id="shareNative" class="btn-primary bg-gradient-sapphire flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                />
-              </svg>
-              Share
-            </button>
-          </div>
+    <div id="shareModal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <h2 class="modal-title">Share</h2>
+        <input type="text" id="shareLink" readonly style="margin-bottom: 1rem; font-size: 0.8125rem" />
+        <div class="modal-buttons">
+          <button id="copyLink" class="btn-primary">Copy Link</button>
+          <button id="shareNative" class="btn-primary">Share</button>
         </div>
-        <button id="closeShareModal" class="btn-primary mx-auto block">Close</button>
       </div>
     </div>
 
-    <!-- Export Format Modal -->
-    <div id="exportFormatModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
-      <div class="modal-content p-8 rounded-3xl max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
-        <h2 class="modal-title text-center">Export Image Format</h2>
-        <p class="text-center text-pearl opacity-70 mb-6">Choose format for social sharing</p>
-        <div class="grid grid-cols-3 gap-3 mb-6">
-          <button
-            data-format="square"
-            class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all"
-          >
-            <div class="w-12 h-12 border-2 border-gold border-opacity-40 rounded-lg"></div>
-            <span class="text-sm">Square 1:1</span>
-            <span class="text-xs text-pearl opacity-50">Instagram</span>
-          </button>
-          <button
-            data-format="portrait"
-            class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all"
-          >
-            <div class="w-10 h-12 border-2 border-gold border-opacity-40 rounded-lg"></div>
-            <span class="text-sm">Portrait 4:5</span>
-            <span class="text-xs text-pearl opacity-50">Feed Post</span>
-          </button>
-          <button
-            data-format="landscape"
-            class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all"
-          >
-            <div class="w-16 h-10 border-2 border-gold border-opacity-40 rounded-lg"></div>
-            <span class="text-sm">Landscape 16:9</span>
-            <span class="text-xs text-pearl opacity-50">Twitter/FB</span>
-          </button>
-        </div>
-        <button id="closeExportModal" class="btn-primary mx-auto block">Cancel</button>
-      </div>
-    </div>
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-8 right-8 bg-gradient-ruby text-white px-6 py-3 rounded-xl shadow-lg hidden z-50 transform transition-all duration-300">
-      <span id="toastMessage"></span>
-    </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script type="module">
       import { Mycal } from "https://unpkg.com/mycal@latest/dist/browser/index.js";
 
-      // Preload: Show loading immediately
-      window.addEventListener("load", () => {
-        // Ensure minimum loading time for smooth UX
-        const minLoadTime = 800;
-        const startTime = Date.now();
-
-        const checkReadyAndHide = () => {
-          const elapsedTime = Date.now() - startTime;
-          const remainingTime = Math.max(0, minLoadTime - elapsedTime);
-
-          setTimeout(() => {
-            // Final check before hiding
-            if (document.readyState === "complete") {
-              console.log("Myanmar Calendar loaded successfully");
-            }
-          }, remainingTime);
-        };
-
-        checkReadyAndHide();
-      });
-
-      // Hide loading screen function
-      function hideLoadingScreen() {
-        const loadingOverlay = document.getElementById("loadingOverlay");
-        const body = document.body;
-
-        // Add loaded class to body for smooth transition
-        body.classList.remove("loading");
-        body.classList.add("loaded");
-
-        // Hide loading overlay with fade out
-        setTimeout(() => {
-          loadingOverlay.classList.add("hidden");
-        }, 100);
-
-        // Remove loading overlay from DOM after animation
-        setTimeout(() => {
-          if (loadingOverlay && loadingOverlay.parentNode) {
-            loadingOverlay.remove();
-          }
-        }, 800);
-      }
-
       document.addEventListener("DOMContentLoaded", () => {
-        // Element references
         const calendarElement = document.getElementById("calendar");
         const calendarTitle = document.getElementById("calendarTitle");
         const prevMonthButton = document.getElementById("prevMonth");
         const nextMonthButton = document.getElementById("nextMonth");
         const monthPicker = document.getElementById("monthPicker");
         const yearPicker = document.getElementById("yearPicker");
-        const goToTodayButton = document.getElementById("goToToday");
         const myModal = document.getElementById("myModal");
-        const closeModal = document.getElementById("closeModal");
         const modalDate = document.getElementById("modalDate");
         const modalMyanmarDate = document.getElementById("modalMyanmarDate");
         const weekdayNamesElement = document.getElementById("weekdayNames");
 
-        // Dropdown elements
         const monthDropdown = document.getElementById("monthDropdown");
         const monthList = document.getElementById("monthList");
         const monthSearch = document.getElementById("monthSearch");
         const selectedMonthElement = document.getElementById("selectedMonth");
-
         const yearDropdown = document.getElementById("yearDropdown");
         const yearList = document.getElementById("yearList");
         const yearSearch = document.getElementById("yearSearch");
         const selectedYearElement = document.getElementById("selectedYear");
 
-        // Modal elements
         const monthPickerModal = document.getElementById("monthPickerModal");
         const monthListModal = document.getElementById("monthListModal");
         const monthSearchModal = document.getElementById("monthSearchModal");
-        const closeMonthModal = document.getElementById("closeMonthModal");
-
         const yearPickerModal = document.getElementById("yearPickerModal");
         const yearListModal = document.getElementById("yearListModal");
         const yearSearchModal = document.getElementById("yearSearchModal");
-        const closeYearModal = document.getElementById("closeYearModal");
 
         let today = new Date();
         let currentYear = today.getFullYear();
         let currentMonth = today.getMonth();
-
-        // Check if device is mobile
         let isMobile = window.innerWidth <= 640;
 
         window.addEventListener("resize", () => {
           isMobile = window.innerWidth <= 640;
         });
 
-        // Initialize selected month and year
         selectedMonthElement.textContent = getMonthName(currentMonth);
         selectedYearElement.textContent = currentYear;
 
-        // Populate month and year dropdowns
         function populateMonthDropdown() {
-          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-          monthList.innerHTML = monthNames
-            .map(
-              (month, index) => `
-                  <li class="dropdown-item ${index === currentMonth ? "selected" : ""}" data-month="${index}">
-                    ${month}
-                  </li>
-                `
-            )
-            .join("");
+          const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          monthList.innerHTML = months.map((m, i) => `<li class="dropdown-item ${i === currentMonth ? "selected" : ""}" data-month="${i}">${m}</li>`).join("");
         }
 
         function populateYearDropdown() {
           const minYear = 1885;
           const maxYear = today.getFullYear() + 100;
-          let years = "";
-          for (let year = maxYear; year >= minYear; year--) {
-            years += `
-                  <li class="dropdown-item ${year === currentYear ? "selected" : ""}" data-year="${year}">
-                    ${year}
-                  </li>
-                `;
+          let html = "";
+          for (let y = maxYear; y >= minYear; y--) {
+            html += `<li class="dropdown-item ${y === currentYear ? "selected" : ""}" data-year="${y}">${y}</li>`;
           }
-          yearList.innerHTML = years;
+          yearList.innerHTML = html;
         }
 
-        // Initialize the dropdowns
         populateMonthDropdown();
         populateYearDropdown();
 
-        // Event listeners for opening and closing dropdowns
         monthPicker.addEventListener("click", (e) => {
           e.stopPropagation();
           if (isMobile) {
@@ -2076,10 +804,6 @@
             yearDropdown.classList.add("hidden");
             monthSearch.value = "";
             filterMonthOptions();
-            const selectedOption = monthList.querySelector(`li[data-month="${currentMonth}"]`);
-            if (selectedOption) {
-              selectedOption.scrollIntoView({ block: "nearest" });
-            }
           }
         });
 
@@ -2092,24 +816,18 @@
             monthDropdown.classList.add("hidden");
             yearSearch.value = "";
             filterYearOptions();
-            const selectedOption = yearList.querySelector(`li[data-year="${currentYear}"]`);
-            if (selectedOption) {
-              selectedOption.scrollIntoView({ block: "nearest" });
-            }
           }
         });
 
-        // Close dropdowns when clicking outside
         document.addEventListener("click", () => {
           monthDropdown.classList.add("hidden");
           yearDropdown.classList.add("hidden");
         });
 
-        // Event listeners for selecting month and year
         monthList.addEventListener("click", (e) => {
           const li = e.target.closest("li[data-month]");
           if (li) {
-            currentMonth = parseInt(li.getAttribute("data-month"));
+            currentMonth = parseInt(li.dataset.month);
             selectedMonthElement.textContent = li.textContent.trim();
             monthDropdown.classList.add("hidden");
             renderCalendar(currentYear, currentMonth);
@@ -2119,160 +837,78 @@
         yearList.addEventListener("click", (e) => {
           const li = e.target.closest("li[data-year]");
           if (li) {
-            currentYear = parseInt(li.getAttribute("data-year"));
+            currentYear = parseInt(li.dataset.year);
             selectedYearElement.textContent = li.textContent.trim();
             yearDropdown.classList.add("hidden");
             renderCalendar(currentYear, currentMonth);
           }
         });
 
-        // Prevent event propagation inside the dropdowns
-        monthDropdown.addEventListener("click", (e) => {
-          e.stopPropagation();
-        });
+        monthDropdown.addEventListener("click", (e) => e.stopPropagation());
+        yearDropdown.addEventListener("click", (e) => e.stopPropagation());
 
-        yearDropdown.addEventListener("click", (e) => {
-          e.stopPropagation();
-        });
-
-        // Search functionality for month and year
         function filterMonthOptions() {
           const filter = monthSearch.value.toLowerCase();
-          const options = monthList.querySelectorAll("li");
-          options.forEach((option) => {
-            const text = option.textContent.toLowerCase();
-            option.style.display = text.includes(filter) ? "" : "none";
+          monthList.querySelectorAll("li").forEach((opt) => {
+            opt.style.display = opt.textContent.toLowerCase().includes(filter) ? "" : "none";
           });
         }
 
         function filterYearOptions() {
           const filter = yearSearch.value;
-          const options = yearList.querySelectorAll("li");
-          options.forEach((option) => {
-            const text = option.textContent;
-            option.style.display = text.includes(filter) ? "" : "none";
+          yearList.querySelectorAll("li").forEach((opt) => {
+            opt.style.display = opt.textContent.includes(filter) ? "" : "none";
           });
         }
 
         monthSearch.addEventListener("keyup", filterMonthOptions);
         yearSearch.addEventListener("keyup", filterYearOptions);
 
-        // Modal show and hide functions
         function showMonthModal() {
           monthListModal.innerHTML = monthList.innerHTML;
           monthSearchModal.value = "";
           filterMonthOptionsModal();
-
-          setTimeout(() => {
-            const selectedOption = monthListModal.querySelector(`li[data-month="${currentMonth}"]`);
-            if (selectedOption) {
-              selectedOption.scrollIntoView({ block: "nearest", behavior: "smooth" });
-            }
-          }, 0);
-
           monthPickerModal.classList.remove("hidden");
-          const modalContent = monthPickerModal.querySelector("div");
-          setTimeout(() => {
-            modalContent.classList.remove("scale-95", "opacity-0");
-            modalContent.classList.add("scale-100", "opacity-100");
-          }, 10);
-        }
-
-        function hideMonthModal() {
-          const modalContent = monthPickerModal.querySelector("div");
-          modalContent.classList.remove("scale-100", "opacity-100");
-          modalContent.classList.add("scale-95", "opacity-0");
-          setTimeout(() => {
-            monthPickerModal.classList.add("hidden");
-          }, 300);
         }
 
         function showYearModal() {
           yearListModal.innerHTML = yearList.innerHTML;
           yearSearchModal.value = "";
           filterYearOptionsModal();
-
-          setTimeout(() => {
-            const selectedOption = yearListModal.querySelector(`li[data-year="${currentYear}"]`);
-            if (selectedOption) {
-              selectedOption.scrollIntoView({ block: "nearest", behavior: "smooth" });
-            }
-          }, 0);
-
           yearPickerModal.classList.remove("hidden");
-          const modalContent = yearPickerModal.querySelector("div");
-          setTimeout(() => {
-            modalContent.classList.remove("scale-95", "opacity-0");
-            modalContent.classList.add("scale-100", "opacity-100");
-          }, 10);
         }
 
-        function hideYearModal() {
-          const modalContent = yearPickerModal.querySelector("div");
-          modalContent.classList.remove("scale-100", "opacity-100");
-          modalContent.classList.add("scale-95", "opacity-0");
-          setTimeout(() => {
-            yearPickerModal.classList.add("hidden");
-          }, 300);
-        }
-
-        // Event Listeners for Modals
-        closeMonthModal.addEventListener("click", hideMonthModal);
-        closeYearModal.addEventListener("click", hideYearModal);
-
-        monthPickerModal.addEventListener("click", (e) => {
-          if (e.target === monthPickerModal) {
-            hideMonthModal();
-          }
-        });
-
-        yearPickerModal.addEventListener("click", (e) => {
-          if (e.target === yearPickerModal) {
-            hideYearModal();
-          }
-        });
-
-        // Close modal on Escape key press
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") {
-            if (!monthPickerModal.classList.contains("hidden")) {
-              hideMonthModal();
-            }
-            if (!yearPickerModal.classList.contains("hidden")) {
-              hideYearModal();
-            }
-          }
-        });
-
-        // Filtering functions for modals
         function filterMonthOptionsModal() {
           const filter = monthSearchModal.value.toLowerCase();
-          const options = monthListModal.querySelectorAll("li");
-          options.forEach((option) => {
-            const text = option.textContent.toLowerCase();
-            option.style.display = text.includes(filter) ? "" : "none";
+          monthListModal.querySelectorAll("li").forEach((opt) => {
+            opt.style.display = opt.textContent.toLowerCase().includes(filter) ? "" : "none";
           });
         }
 
         function filterYearOptionsModal() {
           const filter = yearSearchModal.value;
-          const options = yearListModal.querySelectorAll("li");
-          options.forEach((option) => {
-            const text = option.textContent;
-            option.style.display = text.includes(filter) ? "" : "none";
+          yearListModal.querySelectorAll("li").forEach((opt) => {
+            opt.style.display = opt.textContent.includes(filter) ? "" : "none";
           });
         }
+
+        monthPickerModal.addEventListener("click", (e) => {
+          if (e.target === monthPickerModal) monthPickerModal.classList.add("hidden");
+        });
+
+        yearPickerModal.addEventListener("click", (e) => {
+          if (e.target === yearPickerModal) yearPickerModal.classList.add("hidden");
+        });
 
         monthSearchModal.addEventListener("keyup", filterMonthOptionsModal);
         yearSearchModal.addEventListener("keyup", filterYearOptionsModal);
 
-        // Handle selection in modals
         monthListModal.addEventListener("click", (e) => {
           const li = e.target.closest("li[data-month]");
           if (li) {
-            currentMonth = parseInt(li.getAttribute("data-month"));
+            currentMonth = parseInt(li.dataset.month);
             selectedMonthElement.textContent = li.textContent.trim();
-            hideMonthModal();
+            monthPickerModal.classList.add("hidden");
             renderCalendar(currentYear, currentMonth);
           }
         });
@@ -2280,163 +916,93 @@
         yearListModal.addEventListener("click", (e) => {
           const li = e.target.closest("li[data-year]");
           if (li) {
-            currentYear = parseInt(li.getAttribute("data-year"));
+            currentYear = parseInt(li.dataset.year);
             selectedYearElement.textContent = li.textContent.trim();
-            hideYearModal();
+            yearPickerModal.classList.add("hidden");
             renderCalendar(currentYear, currentMonth);
           }
         });
 
-        // Render calendar
         function renderCalendar(year, month) {
           calendarElement.innerHTML = "";
-          calendarTitle.innerText = `${getMonthName(month)} ${year}`;
+          calendarTitle.textContent = `${getMonthName(month)} ${year}`;
 
           const daysInMonth = new Date(year, month + 1, 0).getDate();
           const firstDay = new Date(year, month, 1).getDay();
 
           fillWeekdayNames();
-          fillInitialEmptyCells(firstDay);
-          fillDaysOfMonth(year, month, daysInMonth);
+          for (let i = 0; i < firstDay; i++) {
+            const empty = document.createElement("div");
+            empty.className = "calendar-cell";
+            empty.style.visibility = "hidden";
+            calendarElement.appendChild(empty);
+          }
 
-          if (year !== today.getFullYear() || month !== today.getMonth()) {
-            goToTodayButton.classList.remove("hidden");
-          } else {
-            goToTodayButton.classList.add("hidden");
+          for (let day = 1; day <= daysInMonth; day++) {
+            calendarElement.appendChild(createCalendarCell(year, month, day));
           }
 
           updateDropdownHighlighting();
         }
 
         function fillWeekdayNames() {
-          const weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-          weekdayNamesElement.innerHTML = "";
-          for (const name of weekdayNames) {
-            const cell = document.createElement("div");
-            cell.className = "weekday-name p-2";
-            cell.innerText = name;
-            weekdayNamesElement.appendChild(cell);
-          }
-        }
-
-        function fillInitialEmptyCells(firstDay) {
-          for (let i = 0; i < firstDay; i++) {
-            calendarElement.appendChild(createEmptyCell());
-          }
-        }
-
-        function fillDaysOfMonth(year, month, daysInMonth) {
-          for (let day = 1; day <= daysInMonth; day++) {
-            calendarElement.appendChild(createCalendarCell(year, month, day));
-          }
-        }
-
-        function createEmptyCell() {
-          const cell = document.createElement("div");
-          cell.className = "bg-transparent p-4 rounded-lg";
-          return cell;
+          const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+          weekdayNamesElement.innerHTML = days.map((d) => `<div class="weekday-name">${d}</div>`).join("");
         }
 
         function createCalendarCell(year, month, day) {
           const cell = document.createElement("div");
           const isToday = year === today.getFullYear() && month === today.getMonth() && day === today.getDate();
-
           cell.className = `calendar-cell ${isToday ? "today" : ""}`;
 
           const date = new Date(year, month, day);
-          const dateString = `${month + 1}/${day}/${year}`;
-          const myanmarDate = new Mycal(dateString);
+          const myanmarDate = new Mycal(`${month + 1}/${day}/${year}`);
 
           cell.innerHTML = `
-            <div class="day-number">${day}</div>
-            <div class="myanmar-date hidden lg:block">
-              <p class="text-center">${myanmarDate.month.my} ${myanmarDate.day.mp.my}</p>
-              <p class="text-center">${myanmarDate.day.fd.my}</p>
-            </div>
-          `;
+          <div class="day-number">${day}</div>
+          <div class="myanmar-date">
+            <div>${myanmarDate.month.my} ${myanmarDate.day.mp.my}</div>
+            <div>${myanmarDate.day.fd.my}</div>
+          </div>
+        `;
 
-          cell.addEventListener("click", () => {
-            showModal(myanmarDate, date.toDateString());
-          });
-
-          // Add loaded class with slight delay for stagger effect
-          setTimeout(() => {
-            cell.classList.add("loaded");
-          }, day * 10);
-
+          cell.addEventListener("click", () => showModal(myanmarDate, date.toDateString()));
           return cell;
         }
 
         function showModal(myanmarDate, dateString) {
-          modalDate.innerText = dateString;
+          modalDate.textContent = dateString;
           const dateObj = new Date(dateString);
-          const dateNumber = dateObj.getDate();
-          const monthNumber = dateObj.getMonth() + 1;
-          const yearNumber = dateObj.getFullYear();
 
-          // Chinese zodiac from instance property
           const cz = myanmarDate.chineseZodiac;
           const czText = cz?.my || cz?.mm || cz?.signInBurmese || cz?.en || "";
-
-          // Western zodiac from static method
-          const wz = Mycal.zodiac(dateNumber, monthNumber);
+          const wz = Mycal.zodiac(dateObj.getDate(), dateObj.getMonth() + 1);
           const wzText = wz?.my || wz?.mm || wz?.sign_mm || wz?.en || "";
 
+          // Show only top 4 most important details
           modalMyanmarDate.innerHTML = `
-            <p class="modal-detail text-center">${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my} ရက် ${myanmarDate.weekday.my} နေ့ ${myanmarDate.year.my}</p>
-            <p class="modal-detail text-center">${myanmarDate.maharbote} ဖွား</p>
-            <p class="modal-detail text-center">${myanmarDate.numFormat(myanmarDate.numerology)} ဂဏန်း သမား</p>
-            <p class="modal-detail text-center">${czText} နှစ်</p>
-            <p class="modal-detail text-center">${wzText} ရာသီ</p>
-          `;
+          <p class="modal-detail">${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my}</p>
+          <p class="modal-detail">${myanmarDate.year.my}</p>
+          <p class="modal-detail">${myanmarDate.weekday.my}</p>
+          <p class="modal-detail">${czText} · ${wzText}</p>
+        `;
 
           myModal.classList.remove("hidden");
-          const modalContent = myModal.querySelector("div");
-          setTimeout(() => {
-            modalContent.classList.remove("scale-95", "opacity-0");
-            modalContent.classList.add("scale-100", "opacity-100");
-          }, 10);
         }
 
-        function hideModal() {
-          const modalContent = myModal.querySelector("div");
-          modalContent.classList.remove("scale-100", "opacity-100");
-          modalContent.classList.add("scale-95", "opacity-0");
-          setTimeout(() => {
-            myModal.classList.add("hidden");
-          }, 300);
-        }
-
-        function getMonthName(month) {
-          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-          return monthNames[month];
+        function getMonthName(m) {
+          return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][m];
         }
 
         function updateDropdownHighlighting() {
-          // Update month highlighting
-          const monthOptions = monthList.querySelectorAll("li");
-          monthOptions.forEach((option) => {
-            const monthValue = parseInt(option.getAttribute("data-month"));
-            if (monthValue === currentMonth) {
-              option.classList.add("selected");
-            } else {
-              option.classList.remove("selected");
-            }
+          monthList.querySelectorAll("li").forEach((opt) => {
+            opt.classList.toggle("selected", parseInt(opt.dataset.month) === currentMonth);
           });
-
-          // Update year highlighting
-          const yearOptions = yearList.querySelectorAll("li");
-          yearOptions.forEach((option) => {
-            const yearValue = parseInt(option.getAttribute("data-year"));
-            if (yearValue === currentYear) {
-              option.classList.add("selected");
-            } else {
-              option.classList.remove("selected");
-            }
+          yearList.querySelectorAll("li").forEach((opt) => {
+            opt.classList.toggle("selected", parseInt(opt.dataset.year) === currentYear);
           });
         }
 
-        // Event Listeners for navigation buttons
         prevMonthButton.addEventListener("click", () => {
           currentMonth--;
           if (currentMonth < 0) {
@@ -2467,808 +1033,256 @@
           renderCalendar(currentYear, currentMonth);
         });
 
-        goToTodayButton.addEventListener("click", () => {
-          currentYear = today.getFullYear();
-          currentMonth = today.getMonth();
-          selectedYearElement.textContent = currentYear;
-          selectedMonthElement.textContent = getMonthName(currentMonth);
-          renderCalendar(currentYear, currentMonth);
-        });
-
-        closeModal.addEventListener("click", hideModal);
-
-        // Close modal when clicking outside the modal content
         myModal.addEventListener("click", (e) => {
-          if (e.target === myModal) {
-            hideModal();
-          }
+          if (e.target === myModal) myModal.classList.add("hidden");
         });
 
-        // Close modal on Escape key press
         document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && !myModal.classList.contains("hidden")) {
-            hideModal();
+          if (e.key === "Escape") {
+            document.querySelectorAll(".modal-overlay").forEach((m) => m.classList.add("hidden"));
           }
         });
 
-        // Initial Render
+        // Hide loading screen
+        const loadingOverlay = document.getElementById("loadingOverlay");
+        setTimeout(() => {
+          document.body.classList.remove("loading");
+          document.body.classList.add("loaded");
+          loadingOverlay.classList.add("hidden");
+          setTimeout(() => loadingOverlay.remove(), 400);
+        }, 600);
+
         renderCalendar(currentYear, currentMonth);
 
-        // ========================================
-        // ENHANCED FEATURES - BILLION DOLLAR UPGRADE
-        // ========================================
-
-        // ===== 1. UTILITY FUNCTIONS =====
-
-        // Toast notification system
-        function showToast(message, duration = 3000) {
+        function showToast(msg) {
           const toast = document.getElementById("toast");
-          const toastMessage = document.getElementById("toastMessage");
-          toastMessage.textContent = message;
-          toast.classList.remove("hidden");
-          toast.style.transform = "translateX(0)";
-
-          setTimeout(() => {
-            toast.style.transform = "translateX(400px)";
-            setTimeout(() => {
-              toast.classList.add("hidden");
-            }, 300);
-          }, duration);
+          toast.textContent = msg;
+          toast.classList.add("visible");
+          setTimeout(() => toast.classList.remove("visible"), 2500);
         }
 
-        // Modal helper functions
-        function showModalHelper(modalId) {
-          const modal = document.getElementById(modalId);
-          modal.classList.remove("hidden");
-          const content = modal.querySelector("div");
-          setTimeout(() => {
-            content.classList.remove("scale-95", "opacity-0");
-            content.classList.add("scale-100", "opacity-100");
-          }, 10);
-        }
+        // Jump to date
+        document.getElementById("jumpToDate").addEventListener("click", () => {
+          document.getElementById("jumpToDateModal").classList.remove("hidden");
+        });
 
-        function hideModalHelper(modalId) {
-          const modal = document.getElementById(modalId);
-          const content = modal.querySelector("div");
-          content.classList.remove("scale-100", "opacity-100");
-          content.classList.add("scale-95", "opacity-0");
-          setTimeout(() => {
-            modal.classList.add("hidden");
-          }, 300);
-        }
-
-        // ===== 2. KEYBOARD NAVIGATION =====
-
-        document.addEventListener("keydown", (e) => {
-          // Don't trigger if user is typing in an input
-          if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
-
-          switch (e.key) {
-            case "ArrowLeft":
-              e.preventDefault();
-              prevMonthButton.click();
-              showToast("← Previous Month");
-              break;
-            case "ArrowRight":
-              e.preventDefault();
-              nextMonthButton.click();
-              showToast("Next Month →");
-              break;
-            case "Home":
-              e.preventDefault();
-              goToTodayButton.click();
-              showToast("🏠 Returned to Today");
-              break;
-            case "j":
-            case "J":
-              if (e.ctrlKey || e.metaKey) {
-                e.preventDefault();
-                document.getElementById("jumpToDate").click();
-              }
-              break;
-            case "/":
-              e.preventDefault();
-              document.getElementById("searchDates").click();
-              break;
-            case "p":
-            case "P":
-              if (e.ctrlKey || e.metaKey) {
-                e.preventDefault();
-                document.getElementById("printCalendar").click();
-              }
-              break;
-            case "Escape":
-              // Close all modals
-              hideModalHelper("jumpToDateModal");
-              hideModalHelper("searchModal");
-              hideModalHelper("shareModal");
-              hideModalHelper("exportFormatModal");
-              break;
+        document.getElementById("confirmJumpDate").addEventListener("click", () => {
+          const input = document.getElementById("jumpDateInput");
+          const date = new Date(input.value);
+          if (!isNaN(date.getTime())) {
+            currentYear = date.getFullYear();
+            currentMonth = date.getMonth();
+            selectedYearElement.textContent = currentYear;
+            selectedMonthElement.textContent = getMonthName(currentMonth);
+            renderCalendar(currentYear, currentMonth);
+            document.getElementById("jumpToDateModal").classList.add("hidden");
+            showToast(getMonthName(currentMonth) + " " + currentYear);
           }
         });
 
-        // ===== 3. JUMP TO DATE FEATURE =====
+        document.getElementById("jumpDateInput").value = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
-        const jumpToDateButton = document.getElementById("jumpToDate");
-        const jumpToDateModal = document.getElementById("jumpToDateModal");
-        const jumpDateInput = document.getElementById("jumpDateInput");
-        const confirmJumpDate = document.getElementById("confirmJumpDate");
-        const closeJumpModal = document.getElementById("closeJumpModal");
-
-        // Set today as default
-        const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-        jumpDateInput.value = todayString;
-
-        jumpToDateButton.addEventListener("click", () => {
-          showModalHelper("jumpToDateModal");
-          jumpDateInput.focus();
+        // Share
+        document.getElementById("shareDate").addEventListener("click", () => {
+          const url = `${window.location.origin}?year=${currentYear}&month=${currentMonth + 1}`;
+          document.getElementById("shareLink").value = url;
+          document.getElementById("shareModal").classList.remove("hidden");
         });
 
-        confirmJumpDate.addEventListener("click", () => {
-          const selectedDate = new Date(jumpDateInput.value);
-          if (isNaN(selectedDate.getTime())) {
-            showToast("❌ Invalid date selected");
-            return;
-          }
-
-          currentYear = selectedDate.getFullYear();
-          currentMonth = selectedDate.getMonth();
-          selectedYearElement.textContent = currentYear;
-          selectedMonthElement.textContent = getMonthName(currentMonth);
-          renderCalendar(currentYear, currentMonth);
-          hideModalHelper("jumpToDateModal");
-          showToast(`📅 Jumped to ${getMonthName(currentMonth)} ${currentYear}`);
-        });
-
-        closeJumpModal.addEventListener("click", () => hideModalHelper("jumpToDateModal"));
-        jumpToDateModal.addEventListener("click", (e) => {
-          if (e.target === jumpToDateModal) hideModalHelper("jumpToDateModal");
-        });
-
-        // ===== 4. SHARE FUNCTIONALITY =====
-
-        const shareDateButton = document.getElementById("shareDate");
-        const shareModal = document.getElementById("shareModal");
-        const shareLink = document.getElementById("shareLink");
-        const copyLinkButton = document.getElementById("copyLink");
-        const shareNativeButton = document.getElementById("shareNative");
-        const closeShareModal = document.getElementById("closeShareModal");
-
-        shareDateButton.addEventListener("click", () => {
-          const url = `${window.location.origin}${window.location.pathname}?year=${currentYear}&month=${currentMonth + 1}`;
-          shareLink.value = url;
-          showModalHelper("shareModal");
-        });
-
-        copyLinkButton.addEventListener("click", async () => {
+        document.getElementById("copyLink").addEventListener("click", async () => {
+          const input = document.getElementById("shareLink");
           try {
-            await navigator.clipboard.writeText(shareLink.value);
-            showToast("✅ Link copied to clipboard!");
-          } catch (err) {
-            // Fallback for older browsers
-            shareLink.select();
+            await navigator.clipboard.writeText(input.value);
+            showToast("Copied");
+          } catch {
+            input.select();
             document.execCommand("copy");
-            showToast("✅ Link copied!");
+            showToast("Copied");
           }
         });
 
-        shareNativeButton.addEventListener("click", async () => {
+        document.getElementById("shareNative").addEventListener("click", async () => {
           if (navigator.share) {
             try {
-              await navigator.share({
-                title: "Myanmar Calendar",
-                text: `Check out ${getMonthName(currentMonth)} ${currentYear} on Myanmar Calendar`,
-                url: shareLink.value
-              });
-              showToast("✅ Shared successfully!");
-            } catch (err) {
-              if (err.name !== "AbortError") {
-                showToast("❌ Share failed");
-              }
-            }
-          } else {
-            showToast("ℹ️ Web Share not supported. Use Copy Link instead.");
+              await navigator.share({ title: "Myanmar Calendar", url: document.getElementById("shareLink").value });
+            } catch {}
           }
         });
 
-        closeShareModal.addEventListener("click", () => hideModalHelper("shareModal"));
         shareModal.addEventListener("click", (e) => {
-          if (e.target === shareModal) hideModalHelper("shareModal");
+          if (e.target === shareModal) shareModal.classList.add("hidden");
         });
 
-        // ===== 5. PRINT STYLESHEET =====
+        // Export month calendar
+        function exportMonthImage() {
+          showToast("Generating...");
 
-        const printButton = document.getElementById("printCalendar");
+          const canvas = document.createElement("canvas");
+          canvas.width = 1080;
+          canvas.height = 1080;
+          const ctx = canvas.getContext("2d");
 
-        printButton.addEventListener("click", () => {
-          showToast("🖨️ Preparing calendar for print...");
-          setTimeout(() => {
-            window.print();
-          }, 500);
-        });
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, 1080, 1080);
 
-        // ===== 5.5. EXPORT IMAGE FUNCTIONALITY =====
+          ctx.strokeStyle = "#d2d2d7";
+          ctx.lineWidth = 4;
+          ctx.strokeRect(40, 40, 1000, 1000);
 
-        let exportTarget = null; // 'month' or 'date'
-        let selectedExportFormat = "square";
-
-        // Export Month Button
-        const exportMonthButton = document.getElementById("exportMonth");
-        const exportDateImageButton = document.getElementById("exportDateImage");
-        const exportFormatModal = document.getElementById("exportFormatModal");
-        const closeExportModal = document.getElementById("closeExportModal");
-
-        // Show export format modal
-        function showExportFormatModal(target) {
-          exportTarget = target;
-          selectedExportFormat = "square";
-          showModalHelper("exportFormatModal");
-
-          // Update format button states
-          document.querySelectorAll(".export-format-btn").forEach((btn) => {
-            btn.classList.remove("border-gold", "bg-gold", "bg-opacity-10");
-            if (btn.dataset.format === "square") {
-              btn.classList.add("border-gold", "bg-gold", "bg-opacity-10");
-            }
-          });
-        }
-
-        exportMonthButton.addEventListener("click", () => showExportFormatModal("month"));
-        exportDateImageButton.addEventListener("click", () => showExportFormatModal("date"));
-
-        // Format selection
-        document.querySelectorAll(".export-format-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            selectedExportFormat = btn.dataset.format;
-            document.querySelectorAll(".export-format-btn").forEach((b) => {
-              b.classList.remove("border-gold", "bg-gold", "bg-opacity-10");
-            });
-            btn.classList.add("border-gold", "bg-gold", "bg-opacity-10");
-          });
-        });
-
-        // Confirm export on modal click outside or with a confirm button
-        const confirmExportButton = document.createElement("button");
-        confirmExportButton.id = "confirmExport";
-        confirmExportButton.className = "btn-primary bg-gradient-gold mx-auto block mb-3";
-        confirmExportButton.textContent = "Export Image";
-        confirmExportButton.type = "button";
-
-        // Insert confirm button before cancel
-        closeExportModal.parentNode.insertBefore(confirmExportButton, closeExportModal);
-
-        confirmExportButton.addEventListener("click", async () => {
-          hideModalHelper("exportFormatModal");
-          await exportAsImage();
-        });
-
-        closeExportModal.addEventListener("click", () => hideModalHelper("exportFormatModal"));
-        exportFormatModal.addEventListener("click", (e) => {
-          if (e.target === exportFormatModal) hideModalHelper("exportFormatModal");
-        });
-
-        // Main export function
-        async function exportAsImage() {
-          showToast("📸 Generating image...");
-
-          try {
-            // Format dimensions
-            const formats = {
-              square: { width: 1080, height: 1080 },
-              portrait: { width: 1080, height: 1350 },
-              landscape: { width: 1920, height: 1080 }
-            };
-
-            const { width, height } = formats[selectedExportFormat];
-
-            // Create export canvas
-            const canvas = document.createElement("canvas");
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext("2d");
-
-            // Draw premium Myanmar gemstone background
-            const gradient = ctx.createLinearGradient(0, 0, width, height);
-            gradient.addColorStop(0, "#1a0a0f"); // ruby dark
-            gradient.addColorStop(0.3, "#2d1419"); // ruby deep
-            gradient.addColorStop(0.6, "#0f1923"); // sapphire dark
-            gradient.addColorStop(1, "#2d5a4f"); // jade
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, width, height);
-
-            // Add decorative gold border
-            ctx.strokeStyle = "#d4af37";
-            ctx.lineWidth = 8;
-            const padding = 30;
-            ctx.strokeRect(padding, padding, width - padding * 2, height - padding * 2);
-
-            // Add inner gold border
-            ctx.lineWidth = 2;
-            ctx.strokeRect(padding + 15, padding + 15, width - (padding + 15) * 2, height - (padding + 15) * 2);
-
-            // Add corner ornaments
-            ctx.strokeStyle = "#d4af37";
-            ctx.lineWidth = 4;
-            const cornerSize = 60;
-            const cornerPadding = padding + 20;
-
-            // Top-left corner
-            ctx.beginPath();
-            ctx.moveTo(cornerPadding, cornerPadding + cornerSize);
-            ctx.lineTo(cornerPadding, cornerPadding);
-            ctx.lineTo(cornerPadding + cornerSize, cornerPadding);
-            ctx.stroke();
-
-            // Top-right corner
-            ctx.beginPath();
-            ctx.moveTo(width - cornerPadding - cornerSize, cornerPadding);
-            ctx.lineTo(width - cornerPadding, cornerPadding);
-            ctx.lineTo(width - cornerPadding, cornerPadding + cornerSize);
-            ctx.stroke();
-
-            // Bottom-left corner
-            ctx.beginPath();
-            ctx.moveTo(cornerPadding, height - cornerPadding - cornerSize);
-            ctx.lineTo(cornerPadding, height - cornerPadding);
-            ctx.lineTo(cornerPadding + cornerSize, height - cornerPadding);
-            ctx.stroke();
-
-            // Bottom-right corner
-            ctx.beginPath();
-            ctx.moveTo(width - cornerPadding - cornerSize, height - cornerPadding);
-            ctx.lineTo(width - cornerPadding, height - cornerPadding);
-            ctx.lineTo(width - cornerPadding, height - cornerPadding - cornerSize);
-            ctx.stroke();
-
-            if (exportTarget === "date") {
-              // Export date detail card
-              await exportDateCard(ctx, width, height);
-            } else {
-              // Export month calendar
-              await exportMonthCalendar(ctx, width, height);
-            }
-
-            // Download the image
-            const link = document.createElement("a");
-            const timestamp = new Date().toISOString().slice(0, 10);
-            link.download = `myanmar-calendar-${exportTarget}-${timestamp}.png`;
-            link.href = canvas.toDataURL("image/png");
-            link.click();
-
-            showToast("✅ Image exported successfully!");
-          } catch (error) {
-            console.error("Export error:", error);
-            showToast("❌ Export failed. Please try again.");
-          }
-        }
-
-        async function exportDateCard(ctx, width, height) {
-          // Get modal content
-          const modalContent = document.getElementById("modalMyanmarDate");
-          const modalDate = document.getElementById("modalDate");
-
-          // Create temporary container for rendering
-          const tempDiv = document.createElement("div");
-          tempDiv.style.position = "absolute";
-          tempDiv.style.left = "-9999px";
-          tempDiv.style.width = "800px";
-          tempDiv.style.padding = "40px";
-          tempDiv.style.background = "transparent";
-          tempDiv.style.color = "#f5f3f0";
-          tempDiv.style.fontFamily = "'Crimson Pro', 'Cormorant Garamond', serif";
-
-          // Add Myanmar date title
-          const dateTitle = document.createElement("h2");
-          dateTitle.style.fontSize = "32px";
-          dateTitle.style.fontWeight = "600";
-          dateTitle.style.textAlign = "center";
-          dateTitle.style.marginBottom = "30px";
-          dateTitle.style.color = "#d4af37";
-          dateTitle.textContent = modalDate.textContent;
-          tempDiv.appendChild(dateTitle);
-
-          // Clone Myanmar date details
-          const clonedDetails = modalContent.cloneNode(true);
-          clonedDetails.style.gap = "20px";
-          tempDiv.appendChild(clonedDetails);
-
-          document.body.appendChild(tempDiv);
-
-          // Capture the content
-          const contentCanvas = await html2canvas(tempDiv, {
-            backgroundColor: "transparent",
-            scale: 2,
-            logging: false
-          });
-
-          document.body.removeChild(tempDiv);
-
-          // Draw content on export canvas (centered)
-          const scale = Math.min((width - 200) / contentCanvas.width, (height - 250) / contentCanvas.height);
-          const drawWidth = contentCanvas.width * scale;
-          const drawHeight = contentCanvas.height * scale;
-          const x = (width - drawWidth) / 2;
-          const y = (height - drawHeight) / 2;
-
-          ctx.drawImage(contentCanvas, x, y, drawWidth, drawHeight);
-
-          // Add watermark at bottom
-          addWatermark(ctx, width, height);
-        }
-
-        async function exportMonthCalendar(ctx, width, height) {
-          // Capture the calendar grid
-          const calendarElement = document.getElementById("calendar");
-          const titleElement = document.getElementById("calendarTitle");
-
-          // Create temporary container
-          const tempDiv = document.createElement("div");
-          tempDiv.style.position = "absolute";
-          tempDiv.style.left = "-9999px";
-          tempDiv.style.width = "1400px";
-          tempDiv.style.padding = "30px";
-          tempDiv.style.background = "transparent";
-          tempDiv.style.color = "#f5f3f0";
-
-          // Add title
-          const title = document.createElement("h2");
-          title.style.fontSize = "36px";
-          title.style.fontWeight = "600";
-          title.style.textAlign = "center";
-          title.style.marginBottom = "20px";
-          title.style.color = "#d4af37";
-          title.style.fontFamily = "'Cormorant Garamond', serif";
-          title.textContent = titleElement.textContent;
-          tempDiv.appendChild(title);
-
-          // Clone calendar grid
-          const calendarClone = calendarElement.cloneNode(true);
-          calendarClone.style.display = "grid";
-          calendarClone.style.gridTemplateColumns = "repeat(7, 1fr)";
-          calendarClone.style.gap = "12px";
-          tempDiv.appendChild(calendarClone);
-
-          // Also add weekday names
-          const weekdayNames = document.getElementById("weekdayNames").cloneNode(true);
-          weekdayNames.style.display = "grid";
-          weekdayNames.style.gridTemplateColumns = "repeat(7, 1fr)";
-          weekdayNames.style.gap = "12px";
-          weekdayNames.style.marginBottom = "10px";
-          tempDiv.insertBefore(weekdayNames, calendarClone);
-
-          document.body.appendChild(tempDiv);
-
-          // Capture content
-          const contentCanvas = await html2canvas(tempDiv, {
-            backgroundColor: "transparent",
-            scale: 2,
-            logging: false
-          });
-
-          document.body.removeChild(tempDiv);
-
-          // Draw content on export canvas (centered with padding)
-          const scale = Math.min((width - 180) / contentCanvas.width, (height - 200) / contentCanvas.height);
-          const drawWidth = contentCanvas.width * scale;
-          const drawHeight = contentCanvas.height * scale;
-          const x = (width - drawWidth) / 2;
-          const y = 100;
-
-          ctx.drawImage(contentCanvas, x, y, drawWidth, drawHeight);
-
-          // Add watermark at bottom
-          addWatermark(ctx, width, height);
-        }
-
-        function addWatermark(ctx, width, height) {
-          // Add watermark text
-          ctx.font = "italic 600 24px 'Cormorant Garamond', serif";
-          ctx.fillStyle = "rgba(212, 175, 55, 0.4)";
+          ctx.fillStyle = "#1d1d1f";
+          ctx.font = "600 48px -apple-system, sans-serif";
           ctx.textAlign = "center";
-          ctx.fillText("Myanmar Calendar • aungmyokyaw.github.io/simple-mycal-html", width / 2, height - 50);
+          ctx.fillText(calendarTitle.textContent, 540, 120);
 
-          // Add decorative gemstone dots
-          ctx.fillStyle = "#d4af37";
-          const dotSize = 4;
-          const spacing = 20;
-          const totalWidth = 300;
-          const startX = (width - totalWidth) / 2;
-
-          for (let i = 0; i <= totalWidth; i += spacing) {
-            ctx.beginPath();
-            ctx.arc(startX + i, height - 75, dotSize, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
-
-        // ===== 6. SEARCH FUNCTIONALITY =====
-
-        const searchButton = document.getElementById("searchDates");
-        const searchModal = document.getElementById("searchModal");
-        const searchInput = document.getElementById("searchInput");
-        const searchResults = document.getElementById("searchResults");
-        const closeSearchModal = document.getElementById("closeSearchModal");
-
-        searchButton.addEventListener("click", () => {
-          showModalHelper("searchModal");
-          searchInput.focus();
-        });
-
-        searchInput.addEventListener("input", (e) => {
-          const query = e.target.value.toLowerCase();
-          if (query.length < 2) {
-            searchResults.innerHTML = '<p class="text-center text-pearl opacity-60">Enter at least 2 characters</p>';
-            return;
-          }
-
-          // Search through current year for Myanmar dates
-          const results = [];
-          for (let month = 0; month < 12; month++) {
-            const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
-            for (let day = 1; day <= daysInMonth; day++) {
-              const dateString = `${month + 1}/${day}/${currentYear}`;
-              const myanmarDate = new Mycal(dateString);
-              const searchText = `${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my} ${getMonthName(month)}`.toLowerCase();
-
-              if (searchText.includes(query)) {
-                results.push({
-                  date: new Date(currentYear, month, day),
-                  myanmarDate: myanmarDate,
-                  month: month,
-                  day: day
-                });
-              }
-
-              if (results.length >= 20) break;
-            }
-            if (results.length >= 20) break;
-          }
-
-          if (results.length === 0) {
-            searchResults.innerHTML = '<p class="text-center text-pearl opacity-60">No results found</p>';
-          } else {
-            searchResults.innerHTML = results
-              .map(
-                (r) => `
-              <div class="p-3 hover:bg-gold hover:bg-opacity-10 cursor-pointer rounded-lg transition-all" data-month="${r.month}" data-day="${r.day}">
-                <p class="text-gold font-semibold">${getMonthName(r.month)} ${r.day}, ${currentYear}</p>
-                <p class="text-pearl text-sm opacity-80">${r.myanmarDate.month.my} ${r.myanmarDate.day.mp.my} ${r.myanmarDate.day.fd.my}</p>
-              </div>
-            `
-              )
-              .join("");
-
-            // Add click handlers to search results
-            searchResults.querySelectorAll("div[data-month]").forEach((div) => {
-              div.addEventListener("click", () => {
-                const month = parseInt(div.getAttribute("data-month"));
-                currentMonth = month;
-                selectedMonthElement.textContent = getMonthName(currentMonth);
-                renderCalendar(currentYear, currentMonth);
-                hideModalHelper("searchModal");
-                showToast("📍 Date found!");
-              });
-            });
-          }
-        });
-
-        closeSearchModal.addEventListener("click", () => hideModalHelper("searchModal"));
-        searchModal.addEventListener("click", (e) => {
-          if (e.target === searchModal) hideModalHelper("searchModal");
-        });
-
-        // ===== 7. LOCAL STORAGE FOR PREFERENCES =====
-
-        const STORAGE_KEY = "myanmar-calendar-prefs";
-
-        function savePreferences() {
-          const prefs = {
-            lastYear: currentYear,
-            lastMonth: currentMonth
-          };
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
-        }
-
-        function loadPreferences() {
-          try {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved) {
-              const prefs = JSON.parse(saved);
-              // Don't auto-load last viewed date, keep default to today
-              // But we can use this for other preferences
-              return prefs;
-            }
-          } catch (err) {
-            console.error("Error loading preferences:", err);
-          }
-          return null;
-        }
-
-        // Save preferences when month/year changes
-        const originalRenderCalendar = renderCalendar;
-        renderCalendar = function (year, month) {
-          originalRenderCalendar(year, month);
-          savePreferences();
-        };
-
-        // ===== 8. SWIPE GESTURES FOR MOBILE =====
-
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        const calendarContainer = document.querySelector("main");
-
-        calendarContainer.addEventListener("touchstart", (e) => {
-          touchStartX = e.changedTouches[0].screenX;
-        });
-
-        calendarContainer.addEventListener("touchend", (e) => {
-          touchEndX = e.changedTouches[0].screenX;
-          handleSwipe();
-        });
-
-        function handleSwipe() {
-          const swipeThreshold = 50;
-          const difference = touchStartX - touchEndX;
-
-          if (Math.abs(difference) > swipeThreshold) {
-            if (difference > 0) {
-              // Swipe left - next month
-              nextMonthButton.click();
-            } else {
-              // Swipe right - previous month
-              prevMonthButton.click();
-            }
-          }
-        }
-
-        // ===== 9. URL PARAMETERS FOR SHARING =====
-
-        function loadFromURL() {
-          const params = new URLSearchParams(window.location.search);
-          const year = params.get("year");
-          const month = params.get("month");
-
-          if (year && month) {
-            const yearNum = parseInt(year);
-            const monthNum = parseInt(month) - 1;
-
-            if (yearNum >= 1885 && yearNum <= today.getFullYear() + 100 && monthNum >= 0 && monthNum <= 11) {
-              currentYear = yearNum;
-              currentMonth = monthNum;
-              selectedYearElement.textContent = currentYear;
-              selectedMonthElement.textContent = getMonthName(currentMonth);
-              showToast("📅 Loaded shared calendar view");
-            }
-          }
-        }
-
-        // Load shared calendar if URL params exist
-        loadFromURL();
-
-        // ===== 10. MYANMAR HOLIDAYS (Basic Implementation) =====
-
-        const myanmarHolidays = {
-          // Format: 'month-day': 'Holiday Name'
-          "1-4": "Independence Day",
-          "2-12": "Union Day",
-          "3-2": "Peasants Day",
-          "3-27": "Armed Forces Day",
-          "4-13": "Thingyan (Water Festival)",
-          "4-14": "Thingyan",
-          "4-15": "Thingyan",
-          "4-16": "Thingyan",
-          "4-17": "Myanmar New Year",
-          "5-1": "Labour Day",
-          "7-19": "Martyrs Day",
-          "12-25": "Christmas Day"
-        };
-
-        function isHoliday(month, day) {
-          const key = `${month + 1}-${day}`;
-          return myanmarHolidays[key];
-        }
-
-        // Enhance calendar cell creation to show holidays
-        const originalCreateCalendarCell = createCalendarCell;
-        createCalendarCell = function (year, month, day) {
-          const cell = originalCreateCalendarCell(year, month, day);
-          const holiday = isHoliday(month, day);
-
-          if (holiday) {
-            cell.style.background = "linear-gradient(135deg, rgba(139, 30, 63, 0.3), rgba(212, 175, 55, 0.2))";
-            cell.title = holiday;
-            const badge = document.createElement("div");
-            badge.className = "absolute top-1 right-1 w-2 h-2 bg-gold rounded-full";
-            badge.style.boxShadow = "0 0 8px var(--color-gold)";
-            cell.appendChild(badge);
-          }
-
-          return cell;
-        };
-
-        // ===== 11. CONFETTI EFFECT FOR TODAY'S DATE =====
-
-        function createConfetti() {
-          const colors = ["ruby", "sapphire", "jade", "gold"];
-          const confettiCount = 50;
-
-          for (let i = 0; i < confettiCount; i++) {
-            const confetti = document.createElement("div");
-            confetti.className = `confetti ${colors[Math.floor(Math.random() * colors.length)]}`;
-            confetti.style.left = Math.random() * 100 + "%";
-            confetti.style.animationDelay = Math.random() * 2 + "s";
-            confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
-            document.body.appendChild(confetti);
-
-            setTimeout(() => {
-              confetti.remove();
-            }, 5000);
-          }
-        }
-
-        // Trigger confetti when clicking today's date
-        const originalShowModal = showModal;
-        showModal = function (myanmarDate, dateString) {
-          const dateObj = new Date(dateString);
-          const isToday = dateObj.getFullYear() === today.getFullYear() && dateObj.getMonth() === today.getMonth() && dateObj.getDate() === today.getDate();
-
-          if (isToday) {
-            createConfetti();
-          }
-
-          originalShowModal(myanmarDate, dateString);
-        };
-
-        // Make the application responsive for mobile devices
-        function adjustForMobile() {
-          isMobile = window.innerWidth <= 640;
-        }
-
-        // Call the function on load and on window resize
-        adjustForMobile();
-        window.addEventListener("resize", adjustForMobile);
-
-        // Hide loading screen after calendar is fully rendered and ready
-        // Add a small delay to ensure smooth transition
-        setTimeout(() => {
-          hideLoadingScreen();
-        }, 500);
-
-        // ===== PWA SERVICE WORKER REGISTRATION =====
-        if ("serviceWorker" in navigator) {
-          window.addEventListener("load", () => {
-            navigator.serviceWorker
-              .register("/service-worker.js")
-              .then((registration) => {
-                console.log("✅ Service Worker registered successfully:", registration.scope);
-              })
-              .catch((error) => {
-                console.log("❌ Service Worker registration failed:", error);
-              });
+          ctx.font = "24px -apple-system, sans-serif";
+          ctx.fillStyle = "#86868b";
+          const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+          let x = 120;
+          days.forEach((d) => {
+            ctx.fillText(d, x, 200);
+            x += 144.28;
           });
+
+          ctx.fillStyle = "#1d1d1f";
+          const cells = calendarElement.querySelectorAll(".calendar-cell:not([style*='hidden'])");
+          let row = 0;
+          let col = 0;
+          cells.forEach((cell) => {
+            const dayNum = cell.querySelector(".day-number").textContent;
+            const x = 120 + col * 144;
+            const y = 280 + row * 80;
+            ctx.fillText(dayNum, x, y);
+            col++;
+            if (col > 6) {
+              col = 0;
+              row++;
+            }
+          });
+
+          ctx.font = "italic 24px -apple-system, sans-serif";
+          ctx.fillStyle = "#86868b";
+          ctx.fillText("Myanmar Calendar", 540, 1020);
+
+          const link = document.createElement("a");
+          link.download = `myanmar-calendar-${new Date().toISOString().slice(0, 10)}.png`;
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+
+          showToast("Exported");
         }
 
-        // Install PWA prompt
-        let deferredPrompt;
+        // Export date detail
+        function exportDateImage() {
+          showToast("Generating...");
 
-        window.addEventListener("beforeinstallprompt", (e) => {
-          e.preventDefault();
-          deferredPrompt = e;
+          const canvas = document.createElement("canvas");
+          canvas.width = 1080;
+          canvas.height = 1080;
+          const ctx = canvas.getContext("2d");
 
-          // Show custom install button after a delay
-          setTimeout(() => {
-            if (deferredPrompt && !window.matchMedia("(display-mode: standalone)").matches) {
-              showToast("💎 Install Myanmar Calendar as an app! Tap Share → Add to Home Screen", 8000);
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, 1080, 1080);
+
+          ctx.strokeStyle = "#d2d2d7";
+          ctx.lineWidth = 4;
+          ctx.strokeRect(40, 40, 1000, 1000);
+
+          ctx.fillStyle = "#1d1d1f";
+          ctx.font = "600 42px -apple-system, sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText(modalDate.textContent, 540, 140);
+
+          ctx.font = "28px -apple-system, sans-serif";
+          let y = 240;
+          modalMyanmarDate.querySelectorAll(".modal-detail").forEach((detail) => {
+            ctx.fillText(detail.textContent, 540, y);
+            y += 70;
+          });
+
+          ctx.font = "italic 24px -apple-system, sans-serif";
+          ctx.fillStyle = "#86868b";
+          ctx.fillText("Myanmar Calendar", 540, 1000);
+
+          const link = document.createElement("a");
+          link.download = `myanmar-calendar-date-${new Date().toISOString().slice(0, 10)}.png`;
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+
+          showToast("Exported");
+        }
+
+        document.getElementById("exportMonth").addEventListener("click", exportMonthImage);
+        document.getElementById("exportDateImage").addEventListener("click", exportDateImage);
+
+        // URL params
+        const params = new URLSearchParams(window.location.search);
+        const urlYear = params.get("year");
+        const urlMonth = params.get("month");
+        if (urlYear && urlMonth) {
+          const y = parseInt(urlYear);
+          const m = parseInt(urlMonth) - 1;
+          if (y >= 1885 && y <= today.getFullYear() + 100 && m >= 0 && m <= 11) {
+            currentYear = y;
+            currentMonth = m;
+            selectedYearElement.textContent = currentYear;
+            selectedMonthElement.textContent = getMonthName(currentMonth);
+            renderCalendar(currentYear, currentMonth);
+          }
+        }
+
+        // Keyboard nav
+        document.addEventListener("keydown", (e) => {
+          if (e.target.tagName === "INPUT") return;
+          if (e.key === "ArrowLeft") prevMonthButton.click();
+          else if (e.key === "ArrowRight") nextMonthButton.click();
+          else if (e.key === "Home") {
+            currentYear = today.getFullYear();
+            currentMonth = today.getMonth();
+            selectedYearElement.textContent = currentYear;
+            selectedMonthElement.textContent = getMonthName(currentMonth);
+            renderCalendar(currentYear, currentMonth);
+          } else if (e.key === "/") {
+            // Quick search shortcut
+            const prompt = window.prompt("Search Myanmar dates:");
+            if (prompt) {
+              const query = prompt.toLowerCase();
+              for (let m = 0; m < 12; m++) {
+                const days = new Date(currentYear, m + 1, 0).getDate();
+                for (let d = 1; d <= days; d++) {
+                  const myanmarDate = new Mycal(`${m + 1}/${d}/${currentYear}`);
+                  const text = `${myanmarDate.month.my} ${myanmarDate.day.mp.my} ${myanmarDate.day.fd.my} ${getMonthName(m)}`.toLowerCase();
+                  if (text.includes(query)) {
+                    currentMonth = m;
+                    selectedMonthElement.textContent = getMonthName(currentMonth);
+                    renderCalendar(currentYear, currentMonth);
+                    showToast(getMonthName(m) + " " + d);
+                    return;
+                  }
+                }
+              }
+              showToast("Not found");
             }
-          }, 10000);
+          }
         });
 
-        window.addEventListener("appinstalled", () => {
-          console.log("✅ PWA installed successfully");
-          deferredPrompt = null;
-          showToast("🎉 Myanmar Calendar installed successfully!");
+        // Swipe
+        let touchStartX = 0;
+        document.querySelector("main").addEventListener("touchstart", (e) => {
+          touchStartX = e.touches[0].clientX;
         });
+
+        document.querySelector("main").addEventListener("touchend", (e) => {
+          const diff = touchStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) nextMonthButton.click();
+            else prevMonthButton.click();
+          }
+        });
+
+        // PWA
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("/service-worker.js").catch(() => {});
+        }
       });
     </script>
   </body>
