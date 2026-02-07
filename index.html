@@ -35,6 +35,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -514,6 +515,27 @@
 
       .search-input::placeholder {
         color: rgba(245, 243, 240, 0.4);
+      }
+
+      /* Gradient Utility Classes */
+      .bg-gradient-ruby {
+        background: var(--gradient-ruby);
+      }
+
+      .bg-gradient-sapphire {
+        background: var(--gradient-sapphire);
+      }
+
+      .bg-gradient-gold {
+        background: var(--gradient-gold);
+      }
+
+      .border-gold {
+        border-color: var(--color-gold);
+      }
+
+      .text-pearl {
+        color: var(--color-pearl);
       }
 
       /* Responsive Adjustments - All Screen Sizes */
@@ -1183,6 +1205,7 @@
         #jumpToDate,
         #shareDate,
         #printCalendar,
+        #exportMonth,
         #searchDates {
           display: none !important;
         }
@@ -1668,6 +1691,11 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
             </svg>
           </button>
+          <button id="exportMonth" class="btn-icon" title="Export Month Image" aria-label="Export Month Image">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -1703,12 +1731,23 @@
           <span id="modalDate"></span>
         </h2>
         <div id="modalMyanmarDate" class="flex flex-col items-center gap-3 mb-6"></div>
-        <button
-          id="closeModal"
-          class="btn-primary"
-        >
-          Close
-        </button>
+        <div class="flex gap-3 w-full">
+          <button
+            id="exportDateImage"
+            class="btn-primary flex-1 flex items-center justify-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Export Image
+          </button>
+          <button
+            id="closeModal"
+            class="btn-primary flex-1"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
 
@@ -1813,6 +1852,34 @@
         </div>
         <button id="closeShareModal" class="btn-primary mx-auto block">
           Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Export Format Modal -->
+    <div id="exportFormatModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
+      <div class="modal-content p-8 rounded-3xl max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
+        <h2 class="modal-title text-center">Export Image Format</h2>
+        <p class="text-center text-pearl opacity-70 mb-6">Choose format for social sharing</p>
+        <div class="grid grid-cols-3 gap-3 mb-6">
+          <button data-format="square" class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all">
+            <div class="w-12 h-12 border-2 border-gold border-opacity-40 rounded-lg"></div>
+            <span class="text-sm">Square 1:1</span>
+            <span class="text-xs text-pearl opacity-50">Instagram</span>
+          </button>
+          <button data-format="portrait" class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all">
+            <div class="w-10 h-12 border-2 border-gold border-opacity-40 rounded-lg"></div>
+            <span class="text-sm">Portrait 4:5</span>
+            <span class="text-xs text-pearl opacity-50">Feed Post</span>
+          </button>
+          <button data-format="landscape" class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all">
+            <div class="w-16 h-10 border-2 border-gold border-opacity-40 rounded-lg"></div>
+            <span class="text-sm">Landscape 16:9</span>
+            <span class="text-xs text-pearl opacity-50">Twitter/FB</span>
+          </button>
+        </div>
+        <button id="closeExportModal" class="btn-primary mx-auto block">
+          Cancel
         </button>
       </div>
     </div>
@@ -2468,6 +2535,7 @@
               hideModalHelper('jumpToDateModal');
               hideModalHelper('searchModal');
               hideModalHelper('shareModal');
+              hideModalHelper('exportFormatModal');
               break;
           }
         });
@@ -2571,6 +2639,300 @@
             window.print();
           }, 500);
         });
+
+        // ===== 5.5. EXPORT IMAGE FUNCTIONALITY =====
+
+        let exportTarget = null; // 'month' or 'date'
+        let selectedExportFormat = 'square';
+
+        // Export Month Button
+        const exportMonthButton = document.getElementById('exportMonth');
+        const exportDateImageButton = document.getElementById('exportDateImage');
+        const exportFormatModal = document.getElementById('exportFormatModal');
+        const closeExportModal = document.getElementById('closeExportModal');
+
+        // Show export format modal
+        function showExportFormatModal(target) {
+          exportTarget = target;
+          selectedExportFormat = 'square';
+          showModalHelper('exportFormatModal');
+
+          // Update format button states
+          document.querySelectorAll('.export-format-btn').forEach(btn => {
+            btn.classList.remove('border-gold', 'bg-gold', 'bg-opacity-10');
+            if (btn.dataset.format === 'square') {
+              btn.classList.add('border-gold', 'bg-gold', 'bg-opacity-10');
+            }
+          });
+        }
+
+        exportMonthButton.addEventListener('click', () => showExportFormatModal('month'));
+        exportDateImageButton.addEventListener('click', () => showExportFormatModal('date'));
+
+        // Format selection
+        document.querySelectorAll('.export-format-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            selectedExportFormat = btn.dataset.format;
+            document.querySelectorAll('.export-format-btn').forEach(b => {
+              b.classList.remove('border-gold', 'bg-gold', 'bg-opacity-10');
+            });
+            btn.classList.add('border-gold', 'bg-gold', 'bg-opacity-10');
+          });
+        });
+
+        // Confirm export on modal click outside or with a confirm button
+        const confirmExportButton = document.createElement('button');
+        confirmExportButton.id = 'confirmExport';
+        confirmExportButton.className = 'btn-primary bg-gradient-gold mx-auto block mb-3';
+        confirmExportButton.textContent = 'Export Image';
+        confirmExportButton.type = 'button';
+
+        // Insert confirm button before cancel
+        closeExportModal.parentNode.insertBefore(confirmExportButton, closeExportModal);
+
+        confirmExportButton.addEventListener('click', async () => {
+          hideModalHelper('exportFormatModal');
+          await exportAsImage();
+        });
+
+        closeExportModal.addEventListener('click', () => hideModalHelper('exportFormatModal'));
+        exportFormatModal.addEventListener('click', (e) => {
+          if (e.target === exportFormatModal) hideModalHelper('exportFormatModal');
+        });
+
+        // Main export function
+        async function exportAsImage() {
+          showToast('📸 Generating image...');
+
+          try {
+            // Format dimensions
+            const formats = {
+              square: { width: 1080, height: 1080 },
+              portrait: { width: 1080, height: 1350 },
+              landscape: { width: 1920, height: 1080 }
+            };
+
+            const { width, height } = formats[selectedExportFormat];
+
+            // Create export canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+
+            // Draw premium Myanmar gemstone background
+            const gradient = ctx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, '#1a0a0f'); // ruby dark
+            gradient.addColorStop(0.3, '#2d1419'); // ruby deep
+            gradient.addColorStop(0.6, '#0f1923'); // sapphire dark
+            gradient.addColorStop(1, '#2d5a4f'); // jade
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Add decorative gold border
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 8;
+            const padding = 30;
+            ctx.strokeRect(padding, padding, width - padding * 2, height - padding * 2);
+
+            // Add inner gold border
+            ctx.lineWidth = 2;
+            ctx.strokeRect(padding + 15, padding + 15, width - (padding + 15) * 2, height - (padding + 15) * 2);
+
+            // Add corner ornaments
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 4;
+            const cornerSize = 60;
+            const cornerPadding = padding + 20;
+
+            // Top-left corner
+            ctx.beginPath();
+            ctx.moveTo(cornerPadding, cornerPadding + cornerSize);
+            ctx.lineTo(cornerPadding, cornerPadding);
+            ctx.lineTo(cornerPadding + cornerSize, cornerPadding);
+            ctx.stroke();
+
+            // Top-right corner
+            ctx.beginPath();
+            ctx.moveTo(width - cornerPadding - cornerSize, cornerPadding);
+            ctx.lineTo(width - cornerPadding, cornerPadding);
+            ctx.lineTo(width - cornerPadding, cornerPadding + cornerSize);
+            ctx.stroke();
+
+            // Bottom-left corner
+            ctx.beginPath();
+            ctx.moveTo(cornerPadding, height - cornerPadding - cornerSize);
+            ctx.lineTo(cornerPadding, height - cornerPadding);
+            ctx.lineTo(cornerPadding + cornerSize, height - cornerPadding);
+            ctx.stroke();
+
+            // Bottom-right corner
+            ctx.beginPath();
+            ctx.moveTo(width - cornerPadding - cornerSize, height - cornerPadding);
+            ctx.lineTo(width - cornerPadding, height - cornerPadding);
+            ctx.lineTo(width - cornerPadding, height - cornerPadding - cornerSize);
+            ctx.stroke();
+
+            if (exportTarget === 'date') {
+              // Export date detail card
+              await exportDateCard(ctx, width, height);
+            } else {
+              // Export month calendar
+              await exportMonthCalendar(ctx, width, height);
+            }
+
+            // Download the image
+            const link = document.createElement('a');
+            const timestamp = new Date().toISOString().slice(0, 10);
+            link.download = `myanmar-calendar-${exportTarget}-${timestamp}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+
+            showToast('✅ Image exported successfully!');
+          } catch (error) {
+            console.error('Export error:', error);
+            showToast('❌ Export failed. Please try again.');
+          }
+        }
+
+        async function exportDateCard(ctx, width, height) {
+          // Get modal content
+          const modalContent = document.getElementById('modalMyanmarDate');
+          const modalDate = document.getElementById('modalDate');
+
+          // Create temporary container for rendering
+          const tempDiv = document.createElement('div');
+          tempDiv.style.position = 'absolute';
+          tempDiv.style.left = '-9999px';
+          tempDiv.style.width = '800px';
+          tempDiv.style.padding = '40px';
+          tempDiv.style.background = 'transparent';
+          tempDiv.style.color = '#f5f3f0';
+          tempDiv.style.fontFamily = "'Crimson Pro', 'Cormorant Garamond', serif";
+
+          // Add Myanmar date title
+          const dateTitle = document.createElement('h2');
+          dateTitle.style.fontSize = '32px';
+          dateTitle.style.fontWeight = '600';
+          dateTitle.style.textAlign = 'center';
+          dateTitle.style.marginBottom = '30px';
+          dateTitle.style.color = '#d4af37';
+          dateTitle.textContent = modalDate.textContent;
+          tempDiv.appendChild(dateTitle);
+
+          // Clone Myanmar date details
+          const clonedDetails = modalContent.cloneNode(true);
+          clonedDetails.style.gap = '20px';
+          tempDiv.appendChild(clonedDetails);
+
+          document.body.appendChild(tempDiv);
+
+          // Capture the content
+          const contentCanvas = await html2canvas(tempDiv, {
+            backgroundColor: 'transparent',
+            scale: 2,
+            logging: false
+          });
+
+          document.body.removeChild(tempDiv);
+
+          // Draw content on export canvas (centered)
+          const scale = Math.min((width - 200) / contentCanvas.width, (height - 250) / contentCanvas.height);
+          const drawWidth = contentCanvas.width * scale;
+          const drawHeight = contentCanvas.height * scale;
+          const x = (width - drawWidth) / 2;
+          const y = (height - drawHeight) / 2;
+
+          ctx.drawImage(contentCanvas, x, y, drawWidth, drawHeight);
+
+          // Add watermark at bottom
+          addWatermark(ctx, width, height);
+        }
+
+        async function exportMonthCalendar(ctx, width, height) {
+          // Capture the calendar grid
+          const calendarElement = document.getElementById('calendar');
+          const titleElement = document.getElementById('calendarTitle');
+
+          // Create temporary container
+          const tempDiv = document.createElement('div');
+          tempDiv.style.position = 'absolute';
+          tempDiv.style.left = '-9999px';
+          tempDiv.style.width = '1400px';
+          tempDiv.style.padding = '30px';
+          tempDiv.style.background = 'transparent';
+          tempDiv.style.color = '#f5f3f0';
+
+          // Add title
+          const title = document.createElement('h2');
+          title.style.fontSize = '36px';
+          title.style.fontWeight = '600';
+          title.style.textAlign = 'center';
+          title.style.marginBottom = '20px';
+          title.style.color = '#d4af37';
+          title.style.fontFamily = "'Cormorant Garamond', serif";
+          title.textContent = titleElement.textContent;
+          tempDiv.appendChild(title);
+
+          // Clone calendar grid
+          const calendarClone = calendarElement.cloneNode(true);
+          calendarClone.style.display = 'grid';
+          calendarClone.style.gridTemplateColumns = 'repeat(7, 1fr)';
+          calendarClone.style.gap = '12px';
+          tempDiv.appendChild(calendarClone);
+
+          // Also add weekday names
+          const weekdayNames = document.getElementById('weekdayNames').cloneNode(true);
+          weekdayNames.style.display = 'grid';
+          weekdayNames.style.gridTemplateColumns = 'repeat(7, 1fr)';
+          weekdayNames.style.gap = '12px';
+          weekdayNames.style.marginBottom = '10px';
+          tempDiv.insertBefore(weekdayNames, calendarClone);
+
+          document.body.appendChild(tempDiv);
+
+          // Capture content
+          const contentCanvas = await html2canvas(tempDiv, {
+            backgroundColor: 'transparent',
+            scale: 2,
+            logging: false
+          });
+
+          document.body.removeChild(tempDiv);
+
+          // Draw content on export canvas (centered with padding)
+          const scale = Math.min((width - 180) / contentCanvas.width, (height - 200) / contentCanvas.height);
+          const drawWidth = contentCanvas.width * scale;
+          const drawHeight = contentCanvas.height * scale;
+          const x = (width - drawWidth) / 2;
+          const y = 100;
+
+          ctx.drawImage(contentCanvas, x, y, drawWidth, drawHeight);
+
+          // Add watermark at bottom
+          addWatermark(ctx, width, height);
+        }
+
+        function addWatermark(ctx, width, height) {
+          // Add watermark text
+          ctx.font = "italic 600 24px 'Cormorant Garamond', serif";
+          ctx.fillStyle = 'rgba(212, 175, 55, 0.4)';
+          ctx.textAlign = 'center';
+          ctx.fillText('Myanmar Calendar • aungmyokyaw.github.io/simple-mycal-html', width / 2, height - 50);
+
+          // Add decorative gemstone dots
+          ctx.fillStyle = '#d4af37';
+          const dotSize = 4;
+          const spacing = 20;
+          const totalWidth = 300;
+          const startX = (width - totalWidth) / 2;
+
+          for (let i = 0; i <= totalWidth; i += spacing) {
+            ctx.beginPath();
+            ctx.arc(startX + i, height - 75, dotSize, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
 
         // ===== 6. SEARCH FUNCTIONALITY =====
 
