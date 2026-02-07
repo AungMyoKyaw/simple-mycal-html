@@ -181,11 +181,12 @@
 
       .weekday-name {
         text-align: center;
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         font-weight: 500;
         color: var(--color-text-secondary);
+        opacity: 0.6;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.12em;
         padding: 0.5rem;
       }
 
@@ -221,30 +222,40 @@
 
       .calendar-cell:active {
         transform: scale(0.98);
+        opacity: 0.8;
       }
 
-      .calendar-cell.today::after {
+      .calendar-cell.today {
+        position: relative;
+      }
+
+      .calendar-cell.today::before {
         content: "";
         position: absolute;
-        bottom: 8px;
-        width: 5px;
-        height: 5px;
-        background: var(--color-accent);
-        border-radius: 50%;
+        inset: -3px;
+        border-radius: calc(var(--radius) + 2px);
+        border: 2px solid var(--color-accent);
+        opacity: 0.4;
+      }
+
+      .calendar-cell.today .day-number {
+        color: var(--color-accent);
       }
 
       .day-number {
-        font-size: 1.125rem;
+        font-size: 1.25rem;
         font-weight: 600;
         color: var(--color-text);
-        margin-bottom: 0.125rem;
+        margin-bottom: 0.25rem;
+        letter-spacing: -0.02em;
       }
 
       .myanmar-date {
-        font-size: 0.625rem;
+        font-size: 0.6rem;
         color: var(--color-text-secondary);
         text-align: center;
-        line-height: 1.3;
+        line-height: 1.2;
+        opacity: 0.7;
       }
 
       /* Dropdown */
@@ -330,13 +341,45 @@
         max-width: 360px;
         width: 100%;
         box-shadow: var(--shadow-lg);
-        animation: slideUp 0.35s var(--spring);
+        animation: slideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-bg-secondary);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        color: var(--color-text-secondary);
+        transition: all 0.2s var(--ease);
+      }
+
+      .modal-close:hover {
+        background: var(--color-border-light);
+        color: var(--color-text);
+      }
+
+      .modal-close:active {
+        transform: scale(0.9);
+      }
+
+      .modal-close svg {
+        width: 14px;
+        height: 14px;
       }
 
       @keyframes slideUp {
         from {
           opacity: 0;
-          transform: translateY(16px) scale(0.96);
+          transform: translateY(20px) scale(0.94);
         }
         to {
           opacity: 1;
@@ -351,6 +394,7 @@
         margin-bottom: 1.25rem;
         color: var(--color-text);
         letter-spacing: -0.02em;
+        padding-right: 2rem;
       }
 
       .modal-detail {
@@ -493,7 +537,7 @@
         }
 
         .weekday-name {
-          font-size: 0.65rem;
+          font-size: 0.6rem;
           padding: 0.4rem;
         }
 
@@ -590,12 +634,12 @@
         }
 
         .weekday-name {
-          font-size: 0.625rem;
+          font-size: 0.575rem;
           padding: 0.375rem 0.25rem;
         }
 
         .day-number {
-          font-size: 1rem;
+          font-size: 1.1rem;
         }
 
         .myanmar-date {
@@ -608,10 +652,9 @@
           border-radius: 6px;
         }
 
-        .calendar-cell.today::after {
-          bottom: 6px;
-          width: 4px;
-          height: 4px;
+        .calendar-cell.today::before {
+          inset: -2px;
+          border-width: 1.5px;
         }
 
         .modal-content {
@@ -679,7 +722,7 @@
         }
 
         .weekday-name {
-          font-size: 0.5625rem;
+          font-size: 0.525rem;
           padding: 0.3125rem 0.125rem;
         }
 
@@ -830,7 +873,15 @@
         border: 2.5px solid var(--color-border-light);
         border-top-color: var(--color-accent);
         border-radius: 50%;
-        animation: spin 0.8s linear infinite;
+        animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+
+      .loading-text {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        opacity: 0;
+        animation: fadeIn 0.4s var(--ease) 0.2s forwards;
       }
 
       @keyframes spin {
@@ -843,6 +894,7 @@
   <body class="loading">
     <div class="loading-overlay" id="loadingOverlay">
       <div class="loading-spinner"></div>
+      <div class="loading-text">Myanmar Calendar</div>
     </div>
 
     <main>
@@ -924,6 +976,11 @@
     <!-- Date Modal -->
     <div id="myModal" class="modal-overlay hidden">
       <div class="modal-content">
+        <button class="modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
         <h2 class="modal-title" id="modalDate"></h2>
         <div id="modalMyanmarDate"></div>
         <div class="modal-buttons">
@@ -935,6 +992,11 @@
     <!-- Month Picker Modal -->
     <div id="monthPickerModal" class="modal-overlay hidden">
       <div class="modal-content">
+        <button class="modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
         <h2 class="modal-title">Select Month</h2>
         <input type="text" id="monthSearchModal" placeholder="Search..." style="margin-bottom: 1rem" />
         <ul id="monthListModal" style="max-height: 260px; overflow-y: auto; margin-bottom: 1rem"></ul>
@@ -944,6 +1006,11 @@
     <!-- Year Picker Modal -->
     <div id="yearPickerModal" class="modal-overlay hidden">
       <div class="modal-content">
+        <button class="modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
         <h2 class="modal-title">Select Year</h2>
         <input type="number" id="yearSearchModal" placeholder="Search..." style="margin-bottom: 1rem" />
         <ul id="yearListModal" style="max-height: 260px; overflow-y: auto; margin-bottom: 1rem"></ul>
@@ -953,6 +1020,11 @@
     <!-- Jump to Date Modal -->
     <div id="jumpToDateModal" class="modal-overlay hidden">
       <div class="modal-content">
+        <button class="modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
         <h2 class="modal-title">Jump to Date</h2>
         <input type="date" id="jumpDateInput" style="margin-bottom: 1rem" />
         <div class="modal-buttons">
@@ -964,8 +1036,13 @@
     <!-- Share Modal -->
     <div id="shareModal" class="modal-overlay hidden">
       <div class="modal-content">
-        <h2 class="modal-title">Share</h2>
-        <input type="text" id="shareLink" readonly style="margin-bottom: 1rem; font-size: 0.8125rem" />
+        <button class="modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+        <h2 class="modal-title">Share Calendar</h2>
+        <input type="text" id="shareLink" readonly style="margin-bottom: 1.5rem; font-size: 0.875rem; padding: 0.75rem 0.875rem; text-align: center; font-family: monospace" />
         <div class="modal-buttons">
           <button id="copyLink" class="btn-primary">Copy Link</button>
           <button id="shareNative" class="btn-primary">Share</button>
@@ -1174,15 +1251,15 @@
           const firstDay = new Date(year, month, 1).getDay();
 
           fillWeekdayNames();
-          for (let i = 0; i < firstDay; i++) {
-            const empty = document.createElement("div");
-            empty.className = "calendar-cell";
-            empty.style.visibility = "hidden";
-            calendarElement.appendChild(empty);
-          }
 
+          // No empty cells - cleaner grid that starts on correct day
           for (let day = 1; day <= daysInMonth; day++) {
-            calendarElement.appendChild(createCalendarCell(year, month, day));
+            const cell = createCalendarCell(year, month, day);
+            // Add margin for first day offset
+            if (day === 1) {
+              cell.style.gridColumnStart = firstDay + 1;
+            }
+            calendarElement.appendChild(cell);
           }
 
           updateDropdownHighlighting();
@@ -1280,6 +1357,13 @@
           if (e.target === myModal) myModal.classList.add("hidden");
         });
 
+        // Close button handlers
+        document.querySelectorAll(".modal-close").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            btn.closest(".modal-overlay").classList.add("hidden");
+          });
+        });
+
         document.addEventListener("keydown", (e) => {
           if (e.key === "Escape") {
             document.querySelectorAll(".modal-overlay").forEach((m) => m.classList.add("hidden"));
@@ -1361,40 +1445,74 @@
           showToast("Generating...");
 
           const canvas = document.createElement("canvas");
-          canvas.width = 1080;
-          canvas.height = 1080;
+          canvas.width = 1200;
+          canvas.height = 1200;
           const ctx = canvas.getContext("2d");
 
-          ctx.fillStyle = "#ffffff";
-          ctx.fillRect(0, 0, 1080, 1080);
+          // Background with subtle gradient
+          const gradient = ctx.createLinearGradient(0, 0, 0, 1200);
+          gradient.addColorStop(0, "#ffffff");
+          gradient.addColorStop(1, "#fafafa");
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, 1200, 1200);
 
-          ctx.strokeStyle = "#d2d2d7";
-          ctx.lineWidth = 4;
-          ctx.strokeRect(40, 40, 1000, 1000);
+          // Elegant border
+          ctx.strokeStyle = "#e5e5ea";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(60, 60, 1080, 1080);
 
+          // Title
           ctx.fillStyle = "#1d1d1f";
-          ctx.font = "600 48px -apple-system, sans-serif";
+          ctx.font = "600 56px -apple-system, sans-serif";
           ctx.textAlign = "center";
-          ctx.fillText(calendarTitle.textContent, 540, 120);
+          ctx.fillText(calendarTitle.textContent, 600, 140);
 
-          ctx.font = "24px -apple-system, sans-serif";
-          ctx.fillStyle = "#86868b";
+          // Weekday names - more subtle
+          ctx.font = "500 22px -apple-system, sans-serif";
+          ctx.fillStyle = "rgba(134, 134, 139, 0.7)";
           const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-          let x = 120;
+          let x = 150;
           days.forEach((d) => {
-            ctx.fillText(d, x, 200);
-            x += 144.28;
+            ctx.fillText(d, x, 220);
+            x += 158;
           });
 
+          // Calendar days
           ctx.fillStyle = "#1d1d1f";
-          const cells = calendarElement.querySelectorAll(".calendar-cell:not([style*='hidden'])");
+          const cells = calendarElement.querySelectorAll(".calendar-cell");
           let row = 0;
           let col = 0;
           cells.forEach((cell) => {
             const dayNum = cell.querySelector(".day-number").textContent;
-            const x = 120 + col * 144;
-            const y = 280 + row * 80;
+            const x = 150 + col * 158;
+            const y = 300 + row * 85;
+
+            // Highlight today
+            if (cell.classList.contains("today")) {
+              ctx.beginPath();
+              ctx.arc(x, y - 15, 32, 0, Math.PI * 2);
+              ctx.strokeStyle = "rgba(0, 122, 255, 0.25)";
+              ctx.lineWidth = 3;
+              ctx.stroke();
+              ctx.fillStyle = "#007aff";
+            } else {
+              ctx.fillStyle = "#1d1d1f";
+            }
+
+            ctx.font = "600 40px -apple-system, sans-serif";
             ctx.fillText(dayNum, x, y);
+
+            // Myanmar date
+            const myanmarText = cell.querySelector(".myanmar-date");
+            if (myanmarText) {
+              ctx.font = "16px -apple-system, sans-serif";
+              ctx.fillStyle = "rgba(134, 134, 139, 0.7)";
+              const lines = myanmarText.querySelectorAll("div");
+              lines.forEach((line, i) => {
+                ctx.fillText(line.textContent, x, y + 28 + i * 20);
+              });
+            }
+
             col++;
             if (col > 6) {
               col = 0;
@@ -1402,9 +1520,10 @@
             }
           });
 
-          ctx.font = "italic 24px -apple-system, sans-serif";
-          ctx.fillStyle = "#86868b";
-          ctx.fillText("Myanmar Calendar", 540, 1020);
+          // Footer
+          ctx.font = "italic 20px -apple-system, sans-serif";
+          ctx.fillStyle = "rgba(134, 134, 139, 0.5)";
+          ctx.fillText("Myanmar Calendar", 600, 1140);
 
           const link = document.createElement("a");
           link.download = `myanmar-calendar-${new Date().toISOString().slice(0, 10)}.png`;
@@ -1423,27 +1542,47 @@
           canvas.height = 1080;
           const ctx = canvas.getContext("2d");
 
-          ctx.fillStyle = "#ffffff";
+          // Background with subtle gradient
+          const gradient = ctx.createLinearGradient(0, 0, 0, 1080);
+          gradient.addColorStop(0, "#ffffff");
+          gradient.addColorStop(1, "#fafafa");
+          ctx.fillStyle = gradient;
           ctx.fillRect(0, 0, 1080, 1080);
 
-          ctx.strokeStyle = "#d2d2d7";
-          ctx.lineWidth = 4;
-          ctx.strokeRect(40, 40, 1000, 1000);
+          // Elegant border
+          ctx.strokeStyle = "#e5e5ea";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(50, 50, 980, 980);
 
+          // Date title
           ctx.fillStyle = "#1d1d1f";
-          ctx.font = "600 42px -apple-system, sans-serif";
+          ctx.font = "600 48px -apple-system, sans-serif";
           ctx.textAlign = "center";
-          ctx.fillText(modalDate.textContent, 540, 140);
+          ctx.fillText(modalDate.textContent, 540, 150);
 
-          ctx.font = "28px -apple-system, sans-serif";
-          let y = 240;
-          modalMyanmarDate.querySelectorAll(".modal-detail").forEach((detail) => {
+          // Myanmar date details
+          ctx.font = "500 26px -apple-system, sans-serif";
+          let y = 260;
+          const details = modalMyanmarDate.querySelectorAll(".modal-detail");
+          const spacing = 95;
+
+          details.forEach((detail, index) => {
+            ctx.fillStyle = "#1d1d1f";
             ctx.fillText(detail.textContent, 540, y);
-            y += 70;
+            y += spacing;
           });
 
-          ctx.font = "italic 24px -apple-system, sans-serif";
-          ctx.fillStyle = "#86868b";
+          // Divider
+          ctx.strokeStyle = "#e5e5ea";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(200, y + 30);
+          ctx.lineTo(880, y + 30);
+          ctx.stroke();
+
+          // Footer
+          ctx.font = "italic 20px -apple-system, sans-serif";
+          ctx.fillStyle = "rgba(134, 134, 139, 0.5)";
           ctx.fillText("Myanmar Calendar", 540, 1000);
 
           const link = document.createElement("a");
