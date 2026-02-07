@@ -30,9 +30,12 @@
     <meta name="apple-mobile-web-app-title" content="Myanmar Calendar" />
 
     <!-- Premium Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -42,8 +45,8 @@
         theme: {
           extend: {
             fontFamily: {
-              'serif': ['Crimson Pro', 'Cormorant Garamond', 'serif'],
-              'sans': ['DM Sans', 'sans-serif'],
+              serif: ["Crimson Pro", "Cormorant Garamond", "serif"],
+              sans: ["DM Sans", "sans-serif"]
             }
           }
         }
@@ -77,10 +80,9 @@
         --gradient-ruby: linear-gradient(135deg, var(--color-ruby-deep) 0%, var(--color-ruby) 100%);
         --gradient-sapphire: linear-gradient(135deg, var(--color-sapphire-dark) 0%, var(--color-sapphire) 100%);
         --gradient-gold: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-bright) 100%);
-        --gradient-mesh: radial-gradient(at 0% 0%, var(--color-ruby-dark) 0px, transparent 50%),
-                         radial-gradient(at 100% 0%, var(--color-sapphire-dark) 0px, transparent 50%),
-                         radial-gradient(at 100% 100%, var(--color-jade) 0px, transparent 50%),
-                         radial-gradient(at 0% 100%, var(--color-ruby-deep) 0px, transparent 50%);
+        --gradient-mesh:
+          radial-gradient(at 0% 0%, var(--color-ruby-dark) 0px, transparent 50%), radial-gradient(at 100% 0%, var(--color-sapphire-dark) 0px, transparent 50%),
+          radial-gradient(at 100% 100%, var(--color-jade) 0px, transparent 50%), radial-gradient(at 0% 100%, var(--color-ruby-deep) 0px, transparent 50%);
       }
 
       * {
@@ -90,7 +92,7 @@
       }
 
       body {
-        font-family: 'DM Sans', sans-serif;
+        font-family: "DM Sans", sans-serif;
         background: var(--color-obsidian);
         color: var(--color-pearl);
         min-height: 100vh;
@@ -100,7 +102,7 @@
 
       /* Animated Background Mesh */
       body::before {
-        content: '';
+        content: "";
         position: fixed;
         top: 0;
         left: 0;
@@ -114,14 +116,21 @@
       }
 
       @keyframes meshShift {
-        0%, 100% { transform: scale(1) rotate(0deg) translate(0, 0); }
-        33% { transform: scale(1.05) rotate(2deg) translate(10px, 10px); }
-        66% { transform: scale(1.1) rotate(-2deg) translate(-10px, 10px); }
+        0%,
+        100% {
+          transform: scale(1) rotate(0deg) translate(0, 0);
+        }
+        33% {
+          transform: scale(1.05) rotate(2deg) translate(10px, 10px);
+        }
+        66% {
+          transform: scale(1.1) rotate(-2deg) translate(-10px, 10px);
+        }
       }
 
       /* Grain Texture Overlay */
       body::after {
-        content: '';
+        content: "";
         position: fixed;
         top: 0;
         left: 0;
@@ -158,14 +167,15 @@
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px) saturate(180%);
         border: 1px solid var(--glass-border);
-        box-shadow: var(--glass-shadow),
-                    0 0 0 1px rgba(212, 175, 55, 0.05) inset,
-                    0 0 60px rgba(212, 175, 55, 0.05);
+        box-shadow:
+          var(--glass-shadow),
+          0 0 0 1px rgba(212, 175, 55, 0.05) inset,
+          0 0 60px rgba(212, 175, 55, 0.05);
       }
 
       /* Elegant Title with Gold Accent */
       .calendar-title {
-        font-family: 'Crimson Pro', serif;
+        font-family: "Crimson Pro", serif;
         font-weight: 600;
         font-size: 2.5rem;
         letter-spacing: 0.02em;
@@ -180,12 +190,17 @@
       }
 
       @keyframes shimmer {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.85; }
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.85;
+        }
       }
 
       .calendar-title::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -8px;
         left: 50%;
@@ -212,7 +227,7 @@
       }
 
       .btn-primary::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -100%;
@@ -277,7 +292,7 @@
       }
 
       .picker-button::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
@@ -286,7 +301,9 @@
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.1);
         transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
+        transition:
+          width 0.6s,
+          height 0.6s;
       }
 
       .picker-button:hover::after {
@@ -332,16 +349,30 @@
       }
 
       /* Stagger animation for calendar cells */
-      .calendar-cell:nth-child(1) { animation-delay: 0.05s; }
-      .calendar-cell:nth-child(2) { animation-delay: 0.1s; }
-      .calendar-cell:nth-child(3) { animation-delay: 0.15s; }
-      .calendar-cell:nth-child(4) { animation-delay: 0.2s; }
-      .calendar-cell:nth-child(5) { animation-delay: 0.25s; }
-      .calendar-cell:nth-child(6) { animation-delay: 0.3s; }
-      .calendar-cell:nth-child(7) { animation-delay: 0.35s; }
+      .calendar-cell:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .calendar-cell:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .calendar-cell:nth-child(3) {
+        animation-delay: 0.15s;
+      }
+      .calendar-cell:nth-child(4) {
+        animation-delay: 0.2s;
+      }
+      .calendar-cell:nth-child(5) {
+        animation-delay: 0.25s;
+      }
+      .calendar-cell:nth-child(6) {
+        animation-delay: 0.3s;
+      }
+      .calendar-cell:nth-child(7) {
+        animation-delay: 0.35s;
+      }
 
       .calendar-cell::before {
-        content: '';
+        content: "";
         position: absolute;
         top: -2px;
         left: -2px;
@@ -361,19 +392,21 @@
       .calendar-cell:hover {
         transform: scale(1.02);
         border-color: var(--color-gold);
-        box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3),
-                    0 0 0 1px rgba(212, 175, 55, 0.2) inset;
+        box-shadow:
+          0 12px 30px rgba(212, 175, 55, 0.3),
+          0 0 0 1px rgba(212, 175, 55, 0.2) inset;
       }
 
       .calendar-cell.today {
         background: var(--gradient-ruby);
         border-color: var(--color-gold);
-        box-shadow: 0 8px 25px rgba(139, 30, 63, 0.4),
-                    0 0 0 2px rgba(212, 175, 55, 0.3) inset;
+        box-shadow:
+          0 8px 25px rgba(139, 30, 63, 0.4),
+          0 0 0 2px rgba(212, 175, 55, 0.3) inset;
       }
 
       .calendar-cell.today::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 8px;
         right: 8px;
@@ -386,12 +419,19 @@
       }
 
       @keyframes pulse {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.6; transform: scale(1.2); }
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(1.2);
+        }
       }
 
       .day-number {
-        font-family: 'Crimson Pro', serif;
+        font-family: "Crimson Pro", serif;
         font-size: 2rem;
         font-weight: 600;
         color: var(--color-gold);
@@ -409,7 +449,7 @@
 
       /* Weekday Names */
       .weekday-name {
-        font-family: 'Crimson Pro', serif;
+        font-family: "Crimson Pro", serif;
         font-weight: 500;
         font-size: 0.875rem;
         letter-spacing: 0.1em;
@@ -429,14 +469,15 @@
         background: var(--gradient-sapphire);
         border: 2px solid var(--color-gold);
         border-radius: 24px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                    0 0 0 1px rgba(212, 175, 55, 0.2) inset;
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(212, 175, 55, 0.2) inset;
         position: relative;
         overflow: hidden;
       }
 
       .modal-content::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
@@ -447,7 +488,7 @@
       }
 
       .modal-title {
-        font-family: 'Crimson Pro', serif;
+        font-family: "Crimson Pro", serif;
         font-size: 1.75rem;
         font-weight: 600;
         color: var(--color-gold);
@@ -1302,10 +1343,18 @@
         }
       }
 
-      .confetti.ruby { background: var(--color-ruby-bright); }
-      .confetti.sapphire { background: var(--color-sapphire-bright); }
-      .confetti.jade { background: var(--color-jade-bright); }
-      .confetti.gold { background: var(--color-gold); }
+      .confetti.ruby {
+        background: var(--color-ruby-bright);
+      }
+      .confetti.sapphire {
+        background: var(--color-sapphire-bright);
+      }
+      .confetti.jade {
+        background: var(--color-jade-bright);
+      }
+      .confetti.gold {
+        background: var(--color-gold);
+      }
 
       /* Utility Classes */
       .text-gold {
@@ -1358,8 +1407,13 @@
       }
 
       @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
       }
 
       /* Gemstone Spinner */
@@ -1440,13 +1494,20 @@
       }
 
       @keyframes pulse-glow {
-        0%, 100% { transform: scale(1); opacity: 0.6; }
-        50% { transform: scale(1.5); opacity: 1; }
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        50% {
+          transform: scale(1.5);
+          opacity: 1;
+        }
       }
 
       /* Loading Text */
       .loading-text {
-        font-family: 'Crimson Pro', serif;
+        font-family: "Crimson Pro", serif;
         font-size: 1.5rem;
         font-weight: 600;
         background: var(--gradient-gold);
@@ -1458,8 +1519,13 @@
       }
 
       @keyframes shimmer-text {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.6; }
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.6;
+        }
       }
 
       .loading-subtext {
@@ -1488,9 +1554,18 @@
       }
 
       @keyframes progress {
-        0% { width: 0%; transform: translateX(0); }
-        50% { width: 100%; transform: translateX(0); }
-        100% { width: 100%; transform: translateX(200px); }
+        0% {
+          width: 0%;
+          transform: translateX(0);
+        }
+        50% {
+          width: 100%;
+          transform: translateX(0);
+        }
+        100% {
+          width: 100%;
+          transform: translateX(200px);
+        }
       }
 
       /* Page Transition Fade In */
@@ -1502,18 +1577,14 @@
       body.loaded main {
         opacity: 1;
         transform: scale(1);
-        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        transition:
+          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       /* Skeleton Loading for Calendar Cells */
       .skeleton-cell {
-        background: linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.02) 25%,
-          rgba(255, 255, 255, 0.05) 50%,
-          rgba(255, 255, 255, 0.02) 75%
-        );
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 25%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 75%);
         background-size: 200% 100%;
         animation: skeleton-loading 1.5s ease-in-out infinite;
         border-radius: 16px;
@@ -1521,8 +1592,12 @@
       }
 
       @keyframes skeleton-loading {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
       }
 
       /* Fade in calendar cells when loaded */
@@ -1613,11 +1688,7 @@
       <!-- Header Navigation -->
       <header class="flex flex-col sm:flex-row justify-center items-center mb-8 gap-6">
         <div class="flex items-center gap-4">
-          <button
-            id="prevMonth"
-            class="btn-icon"
-            aria-label="Previous Month"
-          >
+          <button id="prevMonth" class="btn-icon" aria-label="Previous Month">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
@@ -1631,12 +1702,7 @@
               </svg>
             </div>
             <div id="monthDropdown" class="dropdown-menu absolute mt-3 w-56 z-20 hidden">
-              <input
-                type="text"
-                id="monthSearch"
-                placeholder="Search Month"
-                class="search-input w-full"
-              />
+              <input type="text" id="monthSearch" placeholder="Search Month" class="search-input w-full" />
               <ul id="monthList" class="max-h-64 overflow-y-auto"></ul>
             </div>
           </div>
@@ -1649,22 +1715,12 @@
               </svg>
             </div>
             <div id="yearDropdown" class="dropdown-menu absolute mt-3 w-56 z-20 hidden">
-              <input
-                type="number"
-                id="yearSearch"
-                placeholder="Search Year"
-                inputmode="numeric"
-                class="search-input w-full"
-              />
+              <input type="number" id="yearSearch" placeholder="Search Year" inputmode="numeric" class="search-input w-full" />
               <ul id="yearList" class="max-h-64 overflow-y-auto"></ul>
             </div>
           </div>
 
-          <button
-            id="nextMonth"
-            class="btn-icon"
-            aria-label="Next Month"
-          >
+          <button id="nextMonth" class="btn-icon" aria-label="Next Month">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
@@ -1683,17 +1739,32 @@
           </button>
           <button id="shareDate" class="btn-icon" title="Share Calendar" aria-label="Share Calendar">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+              />
             </svg>
           </button>
           <button id="printCalendar" class="btn-icon" title="Print Calendar" aria-label="Print Calendar">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+              />
             </svg>
           </button>
           <button id="exportMonth" class="btn-icon" title="Export Month Image" aria-label="Export Month Image">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
             </svg>
           </button>
         </div>
@@ -1708,9 +1779,7 @@
       <!-- Footer -->
       <footer class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-gold border-opacity-10">
         <div class="flex gap-3">
-          <button id="goToToday" class="btn-primary">
-            Return to Today
-          </button>
+          <button id="goToToday" class="btn-primary">Return to Today</button>
           <button id="searchDates" class="btn-primary bg-gradient-sapphire">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -1718,9 +1787,7 @@
             Search
           </button>
         </div>
-        <div class="text-sm text-pearl opacity-60 text-center">
-          Click any date to explore Myanmar calendar details • Use ← → arrows to navigate
-        </div>
+        <div class="text-sm text-pearl opacity-60 text-center">Click any date to explore Myanmar calendar details • Use ← → arrows to navigate</div>
       </footer>
     </main>
 
@@ -1732,21 +1799,18 @@
         </h2>
         <div id="modalMyanmarDate" class="flex flex-col items-center gap-3 mb-6"></div>
         <div class="flex gap-3 w-full">
-          <button
-            id="exportDateImage"
-            class="btn-primary flex-1 flex items-center justify-center gap-2"
-          >
+          <button id="exportDateImage" class="btn-primary flex-1 flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
             </svg>
             Export Image
           </button>
-          <button
-            id="closeModal"
-            class="btn-primary flex-1"
-          >
-            Close
-          </button>
+          <button id="closeModal" class="btn-primary flex-1">Close</button>
         </div>
       </div>
     </div>
@@ -1755,19 +1819,9 @@
     <div id="monthPickerModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
       <div class="modal-content p-8 rounded-3xl max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
         <h2 class="modal-title text-center">Select Month</h2>
-        <input
-          type="text"
-          id="monthSearchModal"
-          placeholder="Search Month"
-          class="search-input w-full mb-4"
-        />
+        <input type="text" id="monthSearchModal" placeholder="Search Month" class="search-input w-full mb-4" />
         <ul id="monthListModal" class="max-h-64 overflow-y-auto mb-6"></ul>
-        <button
-          id="closeMonthModal"
-          class="btn-primary mx-auto block"
-        >
-          Close
-        </button>
+        <button id="closeMonthModal" class="btn-primary mx-auto block">Close</button>
       </div>
     </div>
 
@@ -1775,20 +1829,9 @@
     <div id="yearPickerModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
       <div class="modal-content p-8 rounded-3xl max-w-md w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
         <h2 class="modal-title text-center">Select Year</h2>
-        <input
-          type="number"
-          id="yearSearchModal"
-          placeholder="Search Year"
-          inputmode="numeric"
-          class="search-input w-full mb-4"
-        />
+        <input type="number" id="yearSearchModal" placeholder="Search Year" inputmode="numeric" class="search-input w-full mb-4" />
         <ul id="yearListModal" class="max-h-64 overflow-y-auto mb-6"></ul>
-        <button
-          id="closeYearModal"
-          class="btn-primary mx-auto block"
-        >
-          Close
-        </button>
+        <button id="closeYearModal" class="btn-primary mx-auto block">Close</button>
       </div>
     </div>
 
@@ -1800,12 +1843,8 @@
           <input type="date" id="jumpDateInput" class="search-input w-full" />
         </div>
         <div class="flex gap-3 justify-center">
-          <button id="confirmJumpDate" class="btn-primary">
-            Jump
-          </button>
-          <button id="closeJumpModal" class="btn-primary bg-gradient-sapphire">
-            Cancel
-          </button>
+          <button id="confirmJumpDate" class="btn-primary">Jump</button>
+          <button id="closeJumpModal" class="btn-primary bg-gradient-sapphire">Cancel</button>
         </div>
       </div>
     </div>
@@ -1814,18 +1853,11 @@
     <div id="searchModal" class="modal-overlay fixed inset-0 flex items-center justify-center hidden z-50">
       <div class="modal-content p-8 rounded-3xl max-w-lg w-full mx-4 transform transition-all duration-300 ease-out scale-95 opacity-0">
         <h2 class="modal-title text-center">Search Myanmar Dates</h2>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search by month, day, or festival..."
-          class="search-input w-full mb-4"
-        />
+        <input type="text" id="searchInput" placeholder="Search by month, day, or festival..." class="search-input w-full mb-4" />
         <div id="searchResults" class="max-h-96 overflow-y-auto mb-6">
           <p class="text-center text-pearl opacity-60">Enter search terms to find dates</p>
         </div>
-        <button id="closeSearchModal" class="btn-primary mx-auto block">
-          Close
-        </button>
+        <button id="closeSearchModal" class="btn-primary mx-auto block">Close</button>
       </div>
     </div>
 
@@ -1838,21 +1870,29 @@
           <div class="flex gap-2 justify-center">
             <button id="copyLink" class="btn-primary flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
               </svg>
               Copy Link
             </button>
             <button id="shareNative" class="btn-primary bg-gradient-sapphire flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                />
               </svg>
               Share
             </button>
           </div>
         </div>
-        <button id="closeShareModal" class="btn-primary mx-auto block">
-          Close
-        </button>
+        <button id="closeShareModal" class="btn-primary mx-auto block">Close</button>
       </div>
     </div>
 
@@ -1862,25 +1902,32 @@
         <h2 class="modal-title text-center">Export Image Format</h2>
         <p class="text-center text-pearl opacity-70 mb-6">Choose format for social sharing</p>
         <div class="grid grid-cols-3 gap-3 mb-6">
-          <button data-format="square" class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all">
+          <button
+            data-format="square"
+            class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all"
+          >
             <div class="w-12 h-12 border-2 border-gold border-opacity-40 rounded-lg"></div>
             <span class="text-sm">Square 1:1</span>
             <span class="text-xs text-pearl opacity-50">Instagram</span>
           </button>
-          <button data-format="portrait" class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all">
+          <button
+            data-format="portrait"
+            class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all"
+          >
             <div class="w-10 h-12 border-2 border-gold border-opacity-40 rounded-lg"></div>
             <span class="text-sm">Portrait 4:5</span>
             <span class="text-xs text-pearl opacity-50">Feed Post</span>
           </button>
-          <button data-format="landscape" class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all">
+          <button
+            data-format="landscape"
+            class="export-format-btn flex flex-col items-center gap-2 p-4 rounded-xl border border-gold border-opacity-20 hover:border-opacity-40 hover:bg-gold hover:bg-opacity-5 transition-all"
+          >
             <div class="w-16 h-10 border-2 border-gold border-opacity-40 rounded-lg"></div>
             <span class="text-sm">Landscape 16:9</span>
             <span class="text-xs text-pearl opacity-50">Twitter/FB</span>
           </button>
         </div>
-        <button id="closeExportModal" class="btn-primary mx-auto block">
-          Cancel
-        </button>
+        <button id="closeExportModal" class="btn-primary mx-auto block">Cancel</button>
       </div>
     </div>
 
@@ -1893,7 +1940,7 @@
       import { Mycal } from "https://unpkg.com/mycal@latest/dist/browser/index.js";
 
       // Preload: Show loading immediately
-      window.addEventListener('load', () => {
+      window.addEventListener("load", () => {
         // Ensure minimum loading time for smooth UX
         const minLoadTime = 800;
         const startTime = Date.now();
@@ -1904,8 +1951,8 @@
 
           setTimeout(() => {
             // Final check before hiding
-            if (document.readyState === 'complete') {
-              console.log('Myanmar Calendar loaded successfully');
+            if (document.readyState === "complete") {
+              console.log("Myanmar Calendar loaded successfully");
             }
           }, remainingTime);
         };
@@ -1915,16 +1962,16 @@
 
       // Hide loading screen function
       function hideLoadingScreen() {
-        const loadingOverlay = document.getElementById('loadingOverlay');
+        const loadingOverlay = document.getElementById("loadingOverlay");
         const body = document.body;
 
         // Add loaded class to body for smooth transition
-        body.classList.remove('loading');
-        body.classList.add('loaded');
+        body.classList.remove("loading");
+        body.classList.add("loaded");
 
         // Hide loading overlay with fade out
         setTimeout(() => {
-          loadingOverlay.classList.add('hidden');
+          loadingOverlay.classList.add("hidden");
         }, 100);
 
         // Remove loading overlay from DOM after animation
@@ -2294,7 +2341,7 @@
           const cell = document.createElement("div");
           const isToday = year === today.getFullYear() && month === today.getMonth() && day === today.getDate();
 
-          cell.className = `calendar-cell ${isToday ? 'today' : ''}`;
+          cell.className = `calendar-cell ${isToday ? "today" : ""}`;
 
           const date = new Date(year, month, day);
           const dateString = `${month + 1}/${day}/${year}`;
@@ -2314,7 +2361,7 @@
 
           // Add loaded class with slight delay for stagger effect
           setTimeout(() => {
-            cell.classList.add('loaded');
+            cell.classList.add("loaded");
           }, day * 10);
 
           return cell;
@@ -2455,16 +2502,16 @@
 
         // Toast notification system
         function showToast(message, duration = 3000) {
-          const toast = document.getElementById('toast');
-          const toastMessage = document.getElementById('toastMessage');
+          const toast = document.getElementById("toast");
+          const toastMessage = document.getElementById("toastMessage");
           toastMessage.textContent = message;
-          toast.classList.remove('hidden');
-          toast.style.transform = 'translateX(0)';
+          toast.classList.remove("hidden");
+          toast.style.transform = "translateX(0)";
 
           setTimeout(() => {
-            toast.style.transform = 'translateX(400px)';
+            toast.style.transform = "translateX(400px)";
             setTimeout(() => {
-              toast.classList.add('hidden');
+              toast.classList.add("hidden");
             }, 300);
           }, duration);
         }
@@ -2472,95 +2519,95 @@
         // Modal helper functions
         function showModalHelper(modalId) {
           const modal = document.getElementById(modalId);
-          modal.classList.remove('hidden');
-          const content = modal.querySelector('div');
+          modal.classList.remove("hidden");
+          const content = modal.querySelector("div");
           setTimeout(() => {
-            content.classList.remove('scale-95', 'opacity-0');
-            content.classList.add('scale-100', 'opacity-100');
+            content.classList.remove("scale-95", "opacity-0");
+            content.classList.add("scale-100", "opacity-100");
           }, 10);
         }
 
         function hideModalHelper(modalId) {
           const modal = document.getElementById(modalId);
-          const content = modal.querySelector('div');
-          content.classList.remove('scale-100', 'opacity-100');
-          content.classList.add('scale-95', 'opacity-0');
+          const content = modal.querySelector("div");
+          content.classList.remove("scale-100", "opacity-100");
+          content.classList.add("scale-95", "opacity-0");
           setTimeout(() => {
-            modal.classList.add('hidden');
+            modal.classList.add("hidden");
           }, 300);
         }
 
         // ===== 2. KEYBOARD NAVIGATION =====
 
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener("keydown", (e) => {
           // Don't trigger if user is typing in an input
-          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+          if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
 
-          switch(e.key) {
-            case 'ArrowLeft':
+          switch (e.key) {
+            case "ArrowLeft":
               e.preventDefault();
               prevMonthButton.click();
-              showToast('← Previous Month');
+              showToast("← Previous Month");
               break;
-            case 'ArrowRight':
+            case "ArrowRight":
               e.preventDefault();
               nextMonthButton.click();
-              showToast('Next Month →');
+              showToast("Next Month →");
               break;
-            case 'Home':
+            case "Home":
               e.preventDefault();
               goToTodayButton.click();
-              showToast('🏠 Returned to Today');
+              showToast("🏠 Returned to Today");
               break;
-            case 'j':
-            case 'J':
+            case "j":
+            case "J":
               if (e.ctrlKey || e.metaKey) {
                 e.preventDefault();
-                document.getElementById('jumpToDate').click();
+                document.getElementById("jumpToDate").click();
               }
               break;
-            case '/':
+            case "/":
               e.preventDefault();
-              document.getElementById('searchDates').click();
+              document.getElementById("searchDates").click();
               break;
-            case 'p':
-            case 'P':
+            case "p":
+            case "P":
               if (e.ctrlKey || e.metaKey) {
                 e.preventDefault();
-                document.getElementById('printCalendar').click();
+                document.getElementById("printCalendar").click();
               }
               break;
-            case 'Escape':
+            case "Escape":
               // Close all modals
-              hideModalHelper('jumpToDateModal');
-              hideModalHelper('searchModal');
-              hideModalHelper('shareModal');
-              hideModalHelper('exportFormatModal');
+              hideModalHelper("jumpToDateModal");
+              hideModalHelper("searchModal");
+              hideModalHelper("shareModal");
+              hideModalHelper("exportFormatModal");
               break;
           }
         });
 
         // ===== 3. JUMP TO DATE FEATURE =====
 
-        const jumpToDateButton = document.getElementById('jumpToDate');
-        const jumpToDateModal = document.getElementById('jumpToDateModal');
-        const jumpDateInput = document.getElementById('jumpDateInput');
-        const confirmJumpDate = document.getElementById('confirmJumpDate');
-        const closeJumpModal = document.getElementById('closeJumpModal');
+        const jumpToDateButton = document.getElementById("jumpToDate");
+        const jumpToDateModal = document.getElementById("jumpToDateModal");
+        const jumpDateInput = document.getElementById("jumpDateInput");
+        const confirmJumpDate = document.getElementById("confirmJumpDate");
+        const closeJumpModal = document.getElementById("closeJumpModal");
 
         // Set today as default
-        const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
         jumpDateInput.value = todayString;
 
-        jumpToDateButton.addEventListener('click', () => {
-          showModalHelper('jumpToDateModal');
+        jumpToDateButton.addEventListener("click", () => {
+          showModalHelper("jumpToDateModal");
           jumpDateInput.focus();
         });
 
-        confirmJumpDate.addEventListener('click', () => {
+        confirmJumpDate.addEventListener("click", () => {
           const selectedDate = new Date(jumpDateInput.value);
           if (isNaN(selectedDate.getTime())) {
-            showToast('❌ Invalid date selected');
+            showToast("❌ Invalid date selected");
             return;
           }
 
@@ -2569,72 +2616,72 @@
           selectedYearElement.textContent = currentYear;
           selectedMonthElement.textContent = getMonthName(currentMonth);
           renderCalendar(currentYear, currentMonth);
-          hideModalHelper('jumpToDateModal');
+          hideModalHelper("jumpToDateModal");
           showToast(`📅 Jumped to ${getMonthName(currentMonth)} ${currentYear}`);
         });
 
-        closeJumpModal.addEventListener('click', () => hideModalHelper('jumpToDateModal'));
-        jumpToDateModal.addEventListener('click', (e) => {
-          if (e.target === jumpToDateModal) hideModalHelper('jumpToDateModal');
+        closeJumpModal.addEventListener("click", () => hideModalHelper("jumpToDateModal"));
+        jumpToDateModal.addEventListener("click", (e) => {
+          if (e.target === jumpToDateModal) hideModalHelper("jumpToDateModal");
         });
 
         // ===== 4. SHARE FUNCTIONALITY =====
 
-        const shareDateButton = document.getElementById('shareDate');
-        const shareModal = document.getElementById('shareModal');
-        const shareLink = document.getElementById('shareLink');
-        const copyLinkButton = document.getElementById('copyLink');
-        const shareNativeButton = document.getElementById('shareNative');
-        const closeShareModal = document.getElementById('closeShareModal');
+        const shareDateButton = document.getElementById("shareDate");
+        const shareModal = document.getElementById("shareModal");
+        const shareLink = document.getElementById("shareLink");
+        const copyLinkButton = document.getElementById("copyLink");
+        const shareNativeButton = document.getElementById("shareNative");
+        const closeShareModal = document.getElementById("closeShareModal");
 
-        shareDateButton.addEventListener('click', () => {
+        shareDateButton.addEventListener("click", () => {
           const url = `${window.location.origin}${window.location.pathname}?year=${currentYear}&month=${currentMonth + 1}`;
           shareLink.value = url;
-          showModalHelper('shareModal');
+          showModalHelper("shareModal");
         });
 
-        copyLinkButton.addEventListener('click', async () => {
+        copyLinkButton.addEventListener("click", async () => {
           try {
             await navigator.clipboard.writeText(shareLink.value);
-            showToast('✅ Link copied to clipboard!');
+            showToast("✅ Link copied to clipboard!");
           } catch (err) {
             // Fallback for older browsers
             shareLink.select();
-            document.execCommand('copy');
-            showToast('✅ Link copied!');
+            document.execCommand("copy");
+            showToast("✅ Link copied!");
           }
         });
 
-        shareNativeButton.addEventListener('click', async () => {
+        shareNativeButton.addEventListener("click", async () => {
           if (navigator.share) {
             try {
               await navigator.share({
-                title: 'Myanmar Calendar',
+                title: "Myanmar Calendar",
                 text: `Check out ${getMonthName(currentMonth)} ${currentYear} on Myanmar Calendar`,
                 url: shareLink.value
               });
-              showToast('✅ Shared successfully!');
+              showToast("✅ Shared successfully!");
             } catch (err) {
-              if (err.name !== 'AbortError') {
-                showToast('❌ Share failed');
+              if (err.name !== "AbortError") {
+                showToast("❌ Share failed");
               }
             }
           } else {
-            showToast('ℹ️ Web Share not supported. Use Copy Link instead.');
+            showToast("ℹ️ Web Share not supported. Use Copy Link instead.");
           }
         });
 
-        closeShareModal.addEventListener('click', () => hideModalHelper('shareModal'));
-        shareModal.addEventListener('click', (e) => {
-          if (e.target === shareModal) hideModalHelper('shareModal');
+        closeShareModal.addEventListener("click", () => hideModalHelper("shareModal"));
+        shareModal.addEventListener("click", (e) => {
+          if (e.target === shareModal) hideModalHelper("shareModal");
         });
 
         // ===== 5. PRINT STYLESHEET =====
 
-        const printButton = document.getElementById('printCalendar');
+        const printButton = document.getElementById("printCalendar");
 
-        printButton.addEventListener('click', () => {
-          showToast('🖨️ Preparing calendar for print...');
+        printButton.addEventListener("click", () => {
+          showToast("🖨️ Preparing calendar for print...");
           setTimeout(() => {
             window.print();
           }, 500);
@@ -2643,66 +2690,66 @@
         // ===== 5.5. EXPORT IMAGE FUNCTIONALITY =====
 
         let exportTarget = null; // 'month' or 'date'
-        let selectedExportFormat = 'square';
+        let selectedExportFormat = "square";
 
         // Export Month Button
-        const exportMonthButton = document.getElementById('exportMonth');
-        const exportDateImageButton = document.getElementById('exportDateImage');
-        const exportFormatModal = document.getElementById('exportFormatModal');
-        const closeExportModal = document.getElementById('closeExportModal');
+        const exportMonthButton = document.getElementById("exportMonth");
+        const exportDateImageButton = document.getElementById("exportDateImage");
+        const exportFormatModal = document.getElementById("exportFormatModal");
+        const closeExportModal = document.getElementById("closeExportModal");
 
         // Show export format modal
         function showExportFormatModal(target) {
           exportTarget = target;
-          selectedExportFormat = 'square';
-          showModalHelper('exportFormatModal');
+          selectedExportFormat = "square";
+          showModalHelper("exportFormatModal");
 
           // Update format button states
-          document.querySelectorAll('.export-format-btn').forEach(btn => {
-            btn.classList.remove('border-gold', 'bg-gold', 'bg-opacity-10');
-            if (btn.dataset.format === 'square') {
-              btn.classList.add('border-gold', 'bg-gold', 'bg-opacity-10');
+          document.querySelectorAll(".export-format-btn").forEach((btn) => {
+            btn.classList.remove("border-gold", "bg-gold", "bg-opacity-10");
+            if (btn.dataset.format === "square") {
+              btn.classList.add("border-gold", "bg-gold", "bg-opacity-10");
             }
           });
         }
 
-        exportMonthButton.addEventListener('click', () => showExportFormatModal('month'));
-        exportDateImageButton.addEventListener('click', () => showExportFormatModal('date'));
+        exportMonthButton.addEventListener("click", () => showExportFormatModal("month"));
+        exportDateImageButton.addEventListener("click", () => showExportFormatModal("date"));
 
         // Format selection
-        document.querySelectorAll('.export-format-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
+        document.querySelectorAll(".export-format-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
             selectedExportFormat = btn.dataset.format;
-            document.querySelectorAll('.export-format-btn').forEach(b => {
-              b.classList.remove('border-gold', 'bg-gold', 'bg-opacity-10');
+            document.querySelectorAll(".export-format-btn").forEach((b) => {
+              b.classList.remove("border-gold", "bg-gold", "bg-opacity-10");
             });
-            btn.classList.add('border-gold', 'bg-gold', 'bg-opacity-10');
+            btn.classList.add("border-gold", "bg-gold", "bg-opacity-10");
           });
         });
 
         // Confirm export on modal click outside or with a confirm button
-        const confirmExportButton = document.createElement('button');
-        confirmExportButton.id = 'confirmExport';
-        confirmExportButton.className = 'btn-primary bg-gradient-gold mx-auto block mb-3';
-        confirmExportButton.textContent = 'Export Image';
-        confirmExportButton.type = 'button';
+        const confirmExportButton = document.createElement("button");
+        confirmExportButton.id = "confirmExport";
+        confirmExportButton.className = "btn-primary bg-gradient-gold mx-auto block mb-3";
+        confirmExportButton.textContent = "Export Image";
+        confirmExportButton.type = "button";
 
         // Insert confirm button before cancel
         closeExportModal.parentNode.insertBefore(confirmExportButton, closeExportModal);
 
-        confirmExportButton.addEventListener('click', async () => {
-          hideModalHelper('exportFormatModal');
+        confirmExportButton.addEventListener("click", async () => {
+          hideModalHelper("exportFormatModal");
           await exportAsImage();
         });
 
-        closeExportModal.addEventListener('click', () => hideModalHelper('exportFormatModal'));
-        exportFormatModal.addEventListener('click', (e) => {
-          if (e.target === exportFormatModal) hideModalHelper('exportFormatModal');
+        closeExportModal.addEventListener("click", () => hideModalHelper("exportFormatModal"));
+        exportFormatModal.addEventListener("click", (e) => {
+          if (e.target === exportFormatModal) hideModalHelper("exportFormatModal");
         });
 
         // Main export function
         async function exportAsImage() {
-          showToast('📸 Generating image...');
+          showToast("📸 Generating image...");
 
           try {
             // Format dimensions
@@ -2715,22 +2762,22 @@
             const { width, height } = formats[selectedExportFormat];
 
             // Create export canvas
-            const canvas = document.createElement('canvas');
+            const canvas = document.createElement("canvas");
             canvas.width = width;
             canvas.height = height;
-            const ctx = canvas.getContext('2d');
+            const ctx = canvas.getContext("2d");
 
             // Draw premium Myanmar gemstone background
             const gradient = ctx.createLinearGradient(0, 0, width, height);
-            gradient.addColorStop(0, '#1a0a0f'); // ruby dark
-            gradient.addColorStop(0.3, '#2d1419'); // ruby deep
-            gradient.addColorStop(0.6, '#0f1923'); // sapphire dark
-            gradient.addColorStop(1, '#2d5a4f'); // jade
+            gradient.addColorStop(0, "#1a0a0f"); // ruby dark
+            gradient.addColorStop(0.3, "#2d1419"); // ruby deep
+            gradient.addColorStop(0.6, "#0f1923"); // sapphire dark
+            gradient.addColorStop(1, "#2d5a4f"); // jade
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, width, height);
 
             // Add decorative gold border
-            ctx.strokeStyle = '#d4af37';
+            ctx.strokeStyle = "#d4af37";
             ctx.lineWidth = 8;
             const padding = 30;
             ctx.strokeRect(padding, padding, width - padding * 2, height - padding * 2);
@@ -2740,7 +2787,7 @@
             ctx.strokeRect(padding + 15, padding + 15, width - (padding + 15) * 2, height - (padding + 15) * 2);
 
             // Add corner ornaments
-            ctx.strokeStyle = '#d4af37';
+            ctx.strokeStyle = "#d4af37";
             ctx.lineWidth = 4;
             const cornerSize = 60;
             const cornerPadding = padding + 20;
@@ -2773,7 +2820,7 @@
             ctx.lineTo(width - cornerPadding, height - cornerPadding - cornerSize);
             ctx.stroke();
 
-            if (exportTarget === 'date') {
+            if (exportTarget === "date") {
               // Export date detail card
               await exportDateCard(ctx, width, height);
             } else {
@@ -2782,54 +2829,54 @@
             }
 
             // Download the image
-            const link = document.createElement('a');
+            const link = document.createElement("a");
             const timestamp = new Date().toISOString().slice(0, 10);
             link.download = `myanmar-calendar-${exportTarget}-${timestamp}.png`;
-            link.href = canvas.toDataURL('image/png');
+            link.href = canvas.toDataURL("image/png");
             link.click();
 
-            showToast('✅ Image exported successfully!');
+            showToast("✅ Image exported successfully!");
           } catch (error) {
-            console.error('Export error:', error);
-            showToast('❌ Export failed. Please try again.');
+            console.error("Export error:", error);
+            showToast("❌ Export failed. Please try again.");
           }
         }
 
         async function exportDateCard(ctx, width, height) {
           // Get modal content
-          const modalContent = document.getElementById('modalMyanmarDate');
-          const modalDate = document.getElementById('modalDate');
+          const modalContent = document.getElementById("modalMyanmarDate");
+          const modalDate = document.getElementById("modalDate");
 
           // Create temporary container for rendering
-          const tempDiv = document.createElement('div');
-          tempDiv.style.position = 'absolute';
-          tempDiv.style.left = '-9999px';
-          tempDiv.style.width = '800px';
-          tempDiv.style.padding = '40px';
-          tempDiv.style.background = 'transparent';
-          tempDiv.style.color = '#f5f3f0';
+          const tempDiv = document.createElement("div");
+          tempDiv.style.position = "absolute";
+          tempDiv.style.left = "-9999px";
+          tempDiv.style.width = "800px";
+          tempDiv.style.padding = "40px";
+          tempDiv.style.background = "transparent";
+          tempDiv.style.color = "#f5f3f0";
           tempDiv.style.fontFamily = "'Crimson Pro', 'Cormorant Garamond', serif";
 
           // Add Myanmar date title
-          const dateTitle = document.createElement('h2');
-          dateTitle.style.fontSize = '32px';
-          dateTitle.style.fontWeight = '600';
-          dateTitle.style.textAlign = 'center';
-          dateTitle.style.marginBottom = '30px';
-          dateTitle.style.color = '#d4af37';
+          const dateTitle = document.createElement("h2");
+          dateTitle.style.fontSize = "32px";
+          dateTitle.style.fontWeight = "600";
+          dateTitle.style.textAlign = "center";
+          dateTitle.style.marginBottom = "30px";
+          dateTitle.style.color = "#d4af37";
           dateTitle.textContent = modalDate.textContent;
           tempDiv.appendChild(dateTitle);
 
           // Clone Myanmar date details
           const clonedDetails = modalContent.cloneNode(true);
-          clonedDetails.style.gap = '20px';
+          clonedDetails.style.gap = "20px";
           tempDiv.appendChild(clonedDetails);
 
           document.body.appendChild(tempDiv);
 
           // Capture the content
           const contentCanvas = await html2canvas(tempDiv, {
-            backgroundColor: 'transparent',
+            backgroundColor: "transparent",
             scale: 2,
             logging: false
           });
@@ -2851,49 +2898,49 @@
 
         async function exportMonthCalendar(ctx, width, height) {
           // Capture the calendar grid
-          const calendarElement = document.getElementById('calendar');
-          const titleElement = document.getElementById('calendarTitle');
+          const calendarElement = document.getElementById("calendar");
+          const titleElement = document.getElementById("calendarTitle");
 
           // Create temporary container
-          const tempDiv = document.createElement('div');
-          tempDiv.style.position = 'absolute';
-          tempDiv.style.left = '-9999px';
-          tempDiv.style.width = '1400px';
-          tempDiv.style.padding = '30px';
-          tempDiv.style.background = 'transparent';
-          tempDiv.style.color = '#f5f3f0';
+          const tempDiv = document.createElement("div");
+          tempDiv.style.position = "absolute";
+          tempDiv.style.left = "-9999px";
+          tempDiv.style.width = "1400px";
+          tempDiv.style.padding = "30px";
+          tempDiv.style.background = "transparent";
+          tempDiv.style.color = "#f5f3f0";
 
           // Add title
-          const title = document.createElement('h2');
-          title.style.fontSize = '36px';
-          title.style.fontWeight = '600';
-          title.style.textAlign = 'center';
-          title.style.marginBottom = '20px';
-          title.style.color = '#d4af37';
+          const title = document.createElement("h2");
+          title.style.fontSize = "36px";
+          title.style.fontWeight = "600";
+          title.style.textAlign = "center";
+          title.style.marginBottom = "20px";
+          title.style.color = "#d4af37";
           title.style.fontFamily = "'Cormorant Garamond', serif";
           title.textContent = titleElement.textContent;
           tempDiv.appendChild(title);
 
           // Clone calendar grid
           const calendarClone = calendarElement.cloneNode(true);
-          calendarClone.style.display = 'grid';
-          calendarClone.style.gridTemplateColumns = 'repeat(7, 1fr)';
-          calendarClone.style.gap = '12px';
+          calendarClone.style.display = "grid";
+          calendarClone.style.gridTemplateColumns = "repeat(7, 1fr)";
+          calendarClone.style.gap = "12px";
           tempDiv.appendChild(calendarClone);
 
           // Also add weekday names
-          const weekdayNames = document.getElementById('weekdayNames').cloneNode(true);
-          weekdayNames.style.display = 'grid';
-          weekdayNames.style.gridTemplateColumns = 'repeat(7, 1fr)';
-          weekdayNames.style.gap = '12px';
-          weekdayNames.style.marginBottom = '10px';
+          const weekdayNames = document.getElementById("weekdayNames").cloneNode(true);
+          weekdayNames.style.display = "grid";
+          weekdayNames.style.gridTemplateColumns = "repeat(7, 1fr)";
+          weekdayNames.style.gap = "12px";
+          weekdayNames.style.marginBottom = "10px";
           tempDiv.insertBefore(weekdayNames, calendarClone);
 
           document.body.appendChild(tempDiv);
 
           // Capture content
           const contentCanvas = await html2canvas(tempDiv, {
-            backgroundColor: 'transparent',
+            backgroundColor: "transparent",
             scale: 2,
             logging: false
           });
@@ -2916,12 +2963,12 @@
         function addWatermark(ctx, width, height) {
           // Add watermark text
           ctx.font = "italic 600 24px 'Cormorant Garamond', serif";
-          ctx.fillStyle = 'rgba(212, 175, 55, 0.4)';
-          ctx.textAlign = 'center';
-          ctx.fillText('Myanmar Calendar • aungmyokyaw.github.io/simple-mycal-html', width / 2, height - 50);
+          ctx.fillStyle = "rgba(212, 175, 55, 0.4)";
+          ctx.textAlign = "center";
+          ctx.fillText("Myanmar Calendar • aungmyokyaw.github.io/simple-mycal-html", width / 2, height - 50);
 
           // Add decorative gemstone dots
-          ctx.fillStyle = '#d4af37';
+          ctx.fillStyle = "#d4af37";
           const dotSize = 4;
           const spacing = 20;
           const totalWidth = 300;
@@ -2936,18 +2983,18 @@
 
         // ===== 6. SEARCH FUNCTIONALITY =====
 
-        const searchButton = document.getElementById('searchDates');
-        const searchModal = document.getElementById('searchModal');
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
-        const closeSearchModal = document.getElementById('closeSearchModal');
+        const searchButton = document.getElementById("searchDates");
+        const searchModal = document.getElementById("searchModal");
+        const searchInput = document.getElementById("searchInput");
+        const searchResults = document.getElementById("searchResults");
+        const closeSearchModal = document.getElementById("closeSearchModal");
 
-        searchButton.addEventListener('click', () => {
-          showModalHelper('searchModal');
+        searchButton.addEventListener("click", () => {
+          showModalHelper("searchModal");
           searchInput.focus();
         });
 
-        searchInput.addEventListener('input', (e) => {
+        searchInput.addEventListener("input", (e) => {
           const query = e.target.value.toLowerCase();
           if (query.length < 2) {
             searchResults.innerHTML = '<p class="text-center text-pearl opacity-60">Enter at least 2 characters</p>';
@@ -2980,41 +3027,44 @@
           if (results.length === 0) {
             searchResults.innerHTML = '<p class="text-center text-pearl opacity-60">No results found</p>';
           } else {
-            searchResults.innerHTML = results.map(r => `
+            searchResults.innerHTML = results
+              .map(
+                (r) => `
               <div class="p-3 hover:bg-gold hover:bg-opacity-10 cursor-pointer rounded-lg transition-all" data-month="${r.month}" data-day="${r.day}">
                 <p class="text-gold font-semibold">${getMonthName(r.month)} ${r.day}, ${currentYear}</p>
                 <p class="text-pearl text-sm opacity-80">${r.myanmarDate.month.my} ${r.myanmarDate.day.mp.my} ${r.myanmarDate.day.fd.my}</p>
               </div>
-            `).join('');
+            `
+              )
+              .join("");
 
             // Add click handlers to search results
-            searchResults.querySelectorAll('div[data-month]').forEach(div => {
-              div.addEventListener('click', () => {
-                const month = parseInt(div.getAttribute('data-month'));
+            searchResults.querySelectorAll("div[data-month]").forEach((div) => {
+              div.addEventListener("click", () => {
+                const month = parseInt(div.getAttribute("data-month"));
                 currentMonth = month;
                 selectedMonthElement.textContent = getMonthName(currentMonth);
                 renderCalendar(currentYear, currentMonth);
-                hideModalHelper('searchModal');
-                showToast('📍 Date found!');
+                hideModalHelper("searchModal");
+                showToast("📍 Date found!");
               });
             });
           }
         });
 
-        closeSearchModal.addEventListener('click', () => hideModalHelper('searchModal'));
-        searchModal.addEventListener('click', (e) => {
-          if (e.target === searchModal) hideModalHelper('searchModal');
+        closeSearchModal.addEventListener("click", () => hideModalHelper("searchModal"));
+        searchModal.addEventListener("click", (e) => {
+          if (e.target === searchModal) hideModalHelper("searchModal");
         });
 
         // ===== 7. LOCAL STORAGE FOR PREFERENCES =====
 
-        const STORAGE_KEY = 'myanmar-calendar-prefs';
+        const STORAGE_KEY = "myanmar-calendar-prefs";
 
         function savePreferences() {
           const prefs = {
             lastYear: currentYear,
-            lastMonth: currentMonth,
-            favorites: getFavorites()
+            lastMonth: currentMonth
           };
           localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
         }
@@ -3029,27 +3079,14 @@
               return prefs;
             }
           } catch (err) {
-            console.error('Error loading preferences:', err);
+            console.error("Error loading preferences:", err);
           }
           return null;
         }
 
-        function getFavorites() {
-          try {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved) {
-              const prefs = JSON.parse(saved);
-              return prefs.favorites || [];
-            }
-          } catch (err) {
-            console.error('Error getting favorites:', err);
-          }
-          return [];
-        }
-
         // Save preferences when month/year changes
         const originalRenderCalendar = renderCalendar;
-        renderCalendar = function(year, month) {
+        renderCalendar = function (year, month) {
           originalRenderCalendar(year, month);
           savePreferences();
         };
@@ -3059,13 +3096,13 @@
         let touchStartX = 0;
         let touchEndX = 0;
 
-        const calendarContainer = document.querySelector('main');
+        const calendarContainer = document.querySelector("main");
 
-        calendarContainer.addEventListener('touchstart', (e) => {
+        calendarContainer.addEventListener("touchstart", (e) => {
           touchStartX = e.changedTouches[0].screenX;
         });
 
-        calendarContainer.addEventListener('touchend', (e) => {
+        calendarContainer.addEventListener("touchend", (e) => {
           touchEndX = e.changedTouches[0].screenX;
           handleSwipe();
         });
@@ -3089,20 +3126,19 @@
 
         function loadFromURL() {
           const params = new URLSearchParams(window.location.search);
-          const year = params.get('year');
-          const month = params.get('month');
+          const year = params.get("year");
+          const month = params.get("month");
 
           if (year && month) {
             const yearNum = parseInt(year);
             const monthNum = parseInt(month) - 1;
 
-            if (yearNum >= 1885 && yearNum <= today.getFullYear() + 100 &&
-                monthNum >= 0 && monthNum <= 11) {
+            if (yearNum >= 1885 && yearNum <= today.getFullYear() + 100 && monthNum >= 0 && monthNum <= 11) {
               currentYear = yearNum;
               currentMonth = monthNum;
               selectedYearElement.textContent = currentYear;
               selectedMonthElement.textContent = getMonthName(currentMonth);
-              showToast('📅 Loaded shared calendar view');
+              showToast("📅 Loaded shared calendar view");
             }
           }
         }
@@ -3114,18 +3150,18 @@
 
         const myanmarHolidays = {
           // Format: 'month-day': 'Holiday Name'
-          '1-4': 'Independence Day',
-          '2-12': 'Union Day',
-          '3-2': 'Peasants Day',
-          '3-27': 'Armed Forces Day',
-          '4-13': 'Thingyan (Water Festival)',
-          '4-14': 'Thingyan',
-          '4-15': 'Thingyan',
-          '4-16': 'Thingyan',
-          '4-17': 'Myanmar New Year',
-          '5-1': 'Labour Day',
-          '7-19': 'Martyrs Day',
-          '12-25': 'Christmas Day'
+          "1-4": "Independence Day",
+          "2-12": "Union Day",
+          "3-2": "Peasants Day",
+          "3-27": "Armed Forces Day",
+          "4-13": "Thingyan (Water Festival)",
+          "4-14": "Thingyan",
+          "4-15": "Thingyan",
+          "4-16": "Thingyan",
+          "4-17": "Myanmar New Year",
+          "5-1": "Labour Day",
+          "7-19": "Martyrs Day",
+          "12-25": "Christmas Day"
         };
 
         function isHoliday(month, day) {
@@ -3135,16 +3171,16 @@
 
         // Enhance calendar cell creation to show holidays
         const originalCreateCalendarCell = createCalendarCell;
-        createCalendarCell = function(year, month, day) {
+        createCalendarCell = function (year, month, day) {
           const cell = originalCreateCalendarCell(year, month, day);
           const holiday = isHoliday(month, day);
 
           if (holiday) {
-            cell.style.background = 'linear-gradient(135deg, rgba(139, 30, 63, 0.3), rgba(212, 175, 55, 0.2))';
+            cell.style.background = "linear-gradient(135deg, rgba(139, 30, 63, 0.3), rgba(212, 175, 55, 0.2))";
             cell.title = holiday;
-            const badge = document.createElement('div');
-            badge.className = 'absolute top-1 right-1 w-2 h-2 bg-gold rounded-full';
-            badge.style.boxShadow = '0 0 8px var(--color-gold)';
+            const badge = document.createElement("div");
+            badge.className = "absolute top-1 right-1 w-2 h-2 bg-gold rounded-full";
+            badge.style.boxShadow = "0 0 8px var(--color-gold)";
             cell.appendChild(badge);
           }
 
@@ -3154,15 +3190,15 @@
         // ===== 11. CONFETTI EFFECT FOR TODAY'S DATE =====
 
         function createConfetti() {
-          const colors = ['ruby', 'sapphire', 'jade', 'gold'];
+          const colors = ["ruby", "sapphire", "jade", "gold"];
           const confettiCount = 50;
 
           for (let i = 0; i < confettiCount; i++) {
-            const confetti = document.createElement('div');
+            const confetti = document.createElement("div");
             confetti.className = `confetti ${colors[Math.floor(Math.random() * colors.length)]}`;
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.animationDelay = Math.random() * 2 + 's';
-            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            confetti.style.left = Math.random() * 100 + "%";
+            confetti.style.animationDelay = Math.random() * 2 + "s";
+            confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
             document.body.appendChild(confetti);
 
             setTimeout(() => {
@@ -3173,11 +3209,9 @@
 
         // Trigger confetti when clicking today's date
         const originalShowModal = showModal;
-        showModal = function(myanmarDate, dateString) {
+        showModal = function (myanmarDate, dateString) {
           const dateObj = new Date(dateString);
-          const isToday = dateObj.getFullYear() === today.getFullYear() &&
-                          dateObj.getMonth() === today.getMonth() &&
-                          dateObj.getDate() === today.getDate();
+          const isToday = dateObj.getFullYear() === today.getFullYear() && dateObj.getMonth() === today.getMonth() && dateObj.getDate() === today.getDate();
 
           if (isToday) {
             createConfetti();
@@ -3185,34 +3219,6 @@
 
           originalShowModal(myanmarDate, dateString);
         };
-
-        // ===== 12. PARALLAX MOUSE EFFECT =====
-
-        let mouseX = 0;
-        let mouseY = 0;
-        let currentX = 0;
-        let currentY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-          mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
-          mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
-        });
-
-        function animateParallax() {
-          currentX += (mouseX - currentX) * 0.05;
-          currentY += (mouseY - currentY) * 0.05;
-
-          const meshBg = document.querySelector('body::before');
-          if (meshBg) {
-            document.body.style.setProperty('--parallax-x', `${currentX}px`);
-            document.body.style.setProperty('--parallax-y', `${currentY}px`);
-          }
-
-          requestAnimationFrame(animateParallax);
-        }
-
-        // Start parallax animation
-        animateParallax();
 
         // Make the application responsive for mobile devices
         function adjustForMobile() {
@@ -3230,14 +3236,15 @@
         }, 500);
 
         // ===== PWA SERVICE WORKER REGISTRATION =====
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js')
+        if ("serviceWorker" in navigator) {
+          window.addEventListener("load", () => {
+            navigator.serviceWorker
+              .register("/service-worker.js")
               .then((registration) => {
-                console.log('✅ Service Worker registered successfully:', registration.scope);
+                console.log("✅ Service Worker registered successfully:", registration.scope);
               })
               .catch((error) => {
-                console.log('❌ Service Worker registration failed:', error);
+                console.log("❌ Service Worker registration failed:", error);
               });
           });
         }
@@ -3245,22 +3252,22 @@
         // Install PWA prompt
         let deferredPrompt;
 
-        window.addEventListener('beforeinstallprompt', (e) => {
+        window.addEventListener("beforeinstallprompt", (e) => {
           e.preventDefault();
           deferredPrompt = e;
 
           // Show custom install button after a delay
           setTimeout(() => {
-            if (deferredPrompt && !window.matchMedia('(display-mode: standalone)').matches) {
-              showToast('💎 Install Myanmar Calendar as an app! Tap Share → Add to Home Screen', 8000);
+            if (deferredPrompt && !window.matchMedia("(display-mode: standalone)").matches) {
+              showToast("💎 Install Myanmar Calendar as an app! Tap Share → Add to Home Screen", 8000);
             }
           }, 10000);
         });
 
-        window.addEventListener('appinstalled', () => {
-          console.log('✅ PWA installed successfully');
+        window.addEventListener("appinstalled", () => {
+          console.log("✅ PWA installed successfully");
           deferredPrompt = null;
-          showToast('🎉 Myanmar Calendar installed successfully!');
+          showToast("🎉 Myanmar Calendar installed successfully!");
         });
       });
     </script>

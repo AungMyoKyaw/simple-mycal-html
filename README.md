@@ -11,6 +11,7 @@
 ## Features
 
 ### Design & Aesthetics
+
 - **Premium Neo-Traditional Luxury Theme** inspired by Myanmar gemstones (ruby, sapphire, jade, gold)
 - **Glassmorphism UI** with backdrop blur and elegant borders
 - **Animated Background Mesh** with subtle color shifts
@@ -20,6 +21,7 @@
 - **Responsive Design** - Ultra-wide (280px) to 4K displays with extensive breakpoints
 
 ### Calendar Functionality
+
 - **Myanmar Date Conversion** using the [mycal](https://github.com/AungMyoKyaw/mycal) library (ES modules)
 - **Traditional Calendar Details**:
   - Myanmar month and day
@@ -31,6 +33,7 @@
 - **Date Range**: 1885 to current year + 100
 
 ### Navigation & Interaction
+
 - **Month/Year Pickers** with dropdown menus and modals
 - **Keyboard Shortcuts**:
   - `←` / `→` - Navigate months
@@ -45,12 +48,14 @@
 - **Click Any Date** - View detailed Myanmar calendar information
 
 ### Progressive Web App (PWA)
+
 - **Installable** - Add to home screen on mobile and desktop
 - **Offline Support** - Works without internet connection
 - **Standalone Mode** - Runs in a dedicated window like a native app
 - **Service Worker** - Caches resources for offline functionality
 
 ### Additional Features
+
 - **Share Calendar** - Copy link or use native share API
 - **Print Friendly** - Optimized print stylesheet
 - **URL Parameters** - Share calendar views with `?year=2025&month=1`
